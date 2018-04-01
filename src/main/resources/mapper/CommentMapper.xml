@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.classmates.dao.CommentMapper">
-  <resultMap id="BaseResultMap" type="com.classmates.bean.Comment">
-    <result column="id" jdbcType="INTEGER" property="id" />
+<mapper namespace="com.strangeman.classmates.dao.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.strangeman.classmates.bean.Comment">
+    <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="classmate_id" jdbcType="VARCHAR" property="classmateId" />
     <result column="member_id" jdbcType="VARCHAR" property="memberId" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.classmates.bean.Comment">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.strangeman.classmates.bean.Comment">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -74,7 +74,7 @@
   <sql id="Blob_Column_List">
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.classmates.bean.CommentExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.strangeman.classmates.bean.CommentExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -90,7 +90,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.classmates.bean.CommentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.strangeman.classmates.bean.CommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -104,19 +104,19 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.classmates.bean.CommentExample">
+  <delete id="deleteByExample" parameterType="com.strangeman.classmates.bean.CommentExample">
     delete from comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.classmates.bean.Comment">
+  <insert id="insert" parameterType="com.strangeman.classmates.bean.Comment">
     insert into comment (id, classmate_id, member_id, 
       create_time, content)
-    values (#{id,jdbcType=INTEGER}, #{classmateId,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{classmateId,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.classmates.bean.Comment">
+  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.Comment">
     insert into comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -137,7 +137,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="classmateId != null">
         #{classmateId,jdbcType=VARCHAR},
@@ -153,7 +153,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.classmates.bean.CommentExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.strangeman.classmates.bean.CommentExample" resultType="java.lang.Long">
     select count(*) from comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -163,7 +163,7 @@
     update comment
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.classmateId != null">
         classmate_id = #{record.classmateId,jdbcType=VARCHAR},
@@ -184,7 +184,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update comment
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       classmate_id = #{record.classmateId,jdbcType=VARCHAR},
       member_id = #{record.memberId,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR},
@@ -195,7 +195,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update comment
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       classmate_id = #{record.classmateId,jdbcType=VARCHAR},
       member_id = #{record.memberId,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR}

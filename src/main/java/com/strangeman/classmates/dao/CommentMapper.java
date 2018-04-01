@@ -2,9 +2,8 @@ package com.strangeman.classmates.dao;
 
 import com.strangeman.classmates.bean.Comment;
 import com.strangeman.classmates.bean.CommentExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface CommentMapper {
     long countByExample(CommentExample example);

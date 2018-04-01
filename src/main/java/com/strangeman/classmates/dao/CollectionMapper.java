@@ -2,9 +2,8 @@ package com.strangeman.classmates.dao;
 
 import com.strangeman.classmates.bean.Collection;
 import com.strangeman.classmates.bean.CollectionExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface CollectionMapper {
     long countByExample(CollectionExample example);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.classmates.dao.ClassmateMapper">
-  <resultMap id="BaseResultMap" type="com.classmates.bean.Classmate">
-    <result column="id" jdbcType="INTEGER" property="id" />
+<mapper namespace="com.strangeman.classmates.dao.ClassmateMapper">
+  <resultMap id="BaseResultMap" type="com.strangeman.classmates.bean.Classmate">
+    <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="school" jdbcType="VARCHAR" property="school" />
     <result column="clazz" jdbcType="VARCHAR" property="clazz" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -12,7 +12,7 @@
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="last_modify_time" jdbcType="VARCHAR" property="lastModifyTime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.classmates.bean.ClassmateWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.strangeman.classmates.bean.ClassmateWithBLOBs">
     <result column="photo_wall" jdbcType="LONGVARCHAR" property="photoWall" />
     <result column="customize_filed" jdbcType="LONGVARCHAR" property="customizeFiled" />
   </resultMap>
@@ -80,7 +80,7 @@
   <sql id="Blob_Column_List">
     photo_wall, customize_filed
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.classmates.bean.ClassmateExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.strangeman.classmates.bean.ClassmateExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -96,7 +96,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.classmates.bean.ClassmateExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.strangeman.classmates.bean.ClassmateExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -110,23 +110,23 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.classmates.bean.ClassmateExample">
+  <delete id="deleteByExample" parameterType="com.strangeman.classmates.bean.ClassmateExample">
     delete from classmate
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.classmates.bean.ClassmateWithBLOBs">
+  <insert id="insert" parameterType="com.strangeman.classmates.bean.ClassmateWithBLOBs">
     insert into classmate (id, school, clazz, 
       name, owner_id, cover, 
       permission, create_time, last_modify_time, 
       photo_wall, customize_filed)
-    values (#{id,jdbcType=INTEGER}, #{school,jdbcType=VARCHAR}, #{clazz,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{clazz,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{ownerId,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, 
       #{permission,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=VARCHAR}, 
       #{photoWall,jdbcType=LONGVARCHAR}, #{customizeFiled,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.classmates.bean.ClassmateWithBLOBs">
+  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.ClassmateWithBLOBs">
     insert into classmate
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -165,7 +165,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="school != null">
         #{school,jdbcType=VARCHAR},
@@ -199,7 +199,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.classmates.bean.ClassmateExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.strangeman.classmates.bean.ClassmateExample" resultType="java.lang.Long">
     select count(*) from classmate
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -209,7 +209,7 @@
     update classmate
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.school != null">
         school = #{record.school,jdbcType=VARCHAR},
@@ -248,7 +248,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update classmate
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       school = #{record.school,jdbcType=VARCHAR},
       clazz = #{record.clazz,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
@@ -265,7 +265,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update classmate
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       school = #{record.school,jdbcType=VARCHAR},
       clazz = #{record.clazz,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},

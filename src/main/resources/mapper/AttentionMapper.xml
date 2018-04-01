@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.classmates.dao.AttentionMapper">
-  <resultMap id="BaseResultMap" type="com.classmates.bean.Attention">
-    <result column="id" jdbcType="INTEGER" property="id" />
+<mapper namespace="com.strangeman.classmates.dao.AttentionMapper">
+  <resultMap id="BaseResultMap" type="com.strangeman.classmates.bean.Attention">
+    <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="fan_id" jdbcType="VARCHAR" property="fanId" />
     <result column="attention_id" jdbcType="VARCHAR" property="attentionId" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     id, fan_id, attention_id, create_time, last_modify_time, delete_flag
   </sql>
-  <select id="selectByExample" parameterType="com.classmates.bean.AttentionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.strangeman.classmates.bean.AttentionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -84,21 +84,21 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.classmates.bean.AttentionExample">
+  <delete id="deleteByExample" parameterType="com.strangeman.classmates.bean.AttentionExample">
     delete from attention
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.classmates.bean.Attention">
+  <insert id="insert" parameterType="com.strangeman.classmates.bean.Attention">
     insert into attention (id, fan_id, attention_id, 
       create_time, last_modify_time, delete_flag
       )
-    values (#{id,jdbcType=INTEGER}, #{fanId,jdbcType=VARCHAR}, #{attentionId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{fanId,jdbcType=VARCHAR}, #{attentionId,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.classmates.bean.Attention">
+  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.Attention">
     insert into attention
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -122,7 +122,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="fanId != null">
         #{fanId,jdbcType=VARCHAR},
@@ -141,7 +141,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.classmates.bean.AttentionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.strangeman.classmates.bean.AttentionExample" resultType="java.lang.Long">
     select count(*) from attention
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -151,7 +151,7 @@
     update attention
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.fanId != null">
         fan_id = #{record.fanId,jdbcType=VARCHAR},
@@ -175,7 +175,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update attention
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       fan_id = #{record.fanId,jdbcType=VARCHAR},
       attention_id = #{record.attentionId,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR},

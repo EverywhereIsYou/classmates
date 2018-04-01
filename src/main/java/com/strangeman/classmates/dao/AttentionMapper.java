@@ -2,9 +2,8 @@ package com.strangeman.classmates.dao;
 
 import com.strangeman.classmates.bean.Attention;
 import com.strangeman.classmates.bean.AttentionExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface AttentionMapper {
     long countByExample(AttentionExample example);

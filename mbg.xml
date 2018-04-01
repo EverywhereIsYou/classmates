@@ -20,18 +20,18 @@
         </javaTypeResolver>
 
         <!-- JavaBean的生成位置 -->
-        <javaModelGenerator targetPackage="com.strangeman.classmates.bean" targetProject=".\classmates-service\src\main\java">
+        <javaModelGenerator targetPackage="com.strangeman.classmates.bean" targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!-- Mapper文件的生成位置 -->
-        <sqlMapGenerator targetPackage="mapper"  targetProject=".\classmates-service\src\main\resources">
+        <sqlMapGenerator targetPackage="mapper"  targetProject=".\src\main\resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- Dao接口的生成位置 -->
-        <javaClientGenerator targetPackage="com.strangeman.classmates.dao"  targetProject=".\classmates-service\src\main\java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.strangeman.classmates.dao"  targetProject=".\src\main\java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 

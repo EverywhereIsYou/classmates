@@ -2,9 +2,8 @@ package com.strangeman.classmates.dao;
 
 import com.strangeman.classmates.bean.Message;
 import com.strangeman.classmates.bean.MessageExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface MessageMapper {
     long countByExample(MessageExample example);

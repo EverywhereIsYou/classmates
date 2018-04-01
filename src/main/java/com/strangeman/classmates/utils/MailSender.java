@@ -10,7 +10,7 @@ public class MailSender {
     private static final String emailSuffix="，请在5分钟内填写，过期无效。";
 
     public static int sendMail(String targetAddress){
-        int randomVeriNum=StringFactory.getRandomVeriNum();
+        int randomVeriNum=DataFactory.getRandomVeriNum();
 
         Properties prop=new Properties();
         prop.setProperty("mail.smtp.host","smtp.qq.com");

@@ -2,9 +2,8 @@ package com.strangeman.classmates.dao;
 
 import com.strangeman.classmates.bean.User;
 import com.strangeman.classmates.bean.UserExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     long countByExample(UserExample example);

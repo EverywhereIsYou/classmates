@@ -1,11 +1,11 @@
 package com.strangeman.classmates.bean;
 
 public class Paper {
-    private Integer id;
+    private String id;
 
-    private Integer classmateId;
+    private String classmateId;
 
-    private Integer authorId;
+    private String authorId;
 
     private String name;
 
@@ -39,36 +39,28 @@ public class Paper {
 
     private Integer permission;
 
-    private String favThingToDo;
-
-    private String specialInClass;
-
-    private String wordToMe;
-
-    private String customizeFiled;
-
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
-    public Integer getClassmateId() {
+    public String getClassmateId() {
         return classmateId;
     }
 
-    public void setClassmateId(Integer classmateId) {
-        this.classmateId = classmateId;
+    public void setClassmateId(String classmateId) {
+        this.classmateId = classmateId == null ? null : classmateId.trim();
     }
 
-    public Integer getAuthorId() {
+    public String getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId == null ? null : authorId.trim();
     }
 
     public String getName() {
@@ -197,37 +189,5 @@ public class Paper {
 
     public void setPermission(Integer permission) {
         this.permission = permission;
-    }
-
-    public String getFavThingToDo() {
-        return favThingToDo;
-    }
-
-    public void setFavThingToDo(String favThingToDo) {
-        this.favThingToDo = favThingToDo;
-    }
-
-    public String getSpecialInClass() {
-        return specialInClass;
-    }
-
-    public void setSpecialInClass(String specialInClass) {
-        this.specialInClass = specialInClass;
-    }
-
-    public String getWordToMe() {
-        return wordToMe;
-    }
-
-    public void setWordToMe(String wordToMe) {
-        this.wordToMe = wordToMe;
-    }
-
-    public String getCustomizeFiled() {
-        return customizeFiled;
-    }
-
-    public void setCustomizeFiled(String customizeFiled) {
-        this.customizeFiled = customizeFiled;
     }
 }

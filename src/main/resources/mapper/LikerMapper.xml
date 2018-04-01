@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.classmates.dao.LikerMapper">
-  <resultMap id="BaseResultMap" type="com.classmates.bean.Liker">
-    <result column="id" jdbcType="INTEGER" property="id" />
+<mapper namespace="com.strangeman.classmates.dao.LikerMapper">
+  <resultMap id="BaseResultMap" type="com.strangeman.classmates.bean.Liker">
+    <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="owner_id" jdbcType="VARCHAR" property="ownerId" />
     <result column="content_type" jdbcType="VARCHAR" property="contentType" />
     <result column="content_id" jdbcType="VARCHAR" property="contentId" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     id, owner_id, content_type, content_id
   </sql>
-  <select id="selectByExample" parameterType="com.classmates.bean.LikerExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.strangeman.classmates.bean.LikerExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -82,19 +82,19 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.classmates.bean.LikerExample">
+  <delete id="deleteByExample" parameterType="com.strangeman.classmates.bean.LikerExample">
     delete from liker
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.classmates.bean.Liker">
+  <insert id="insert" parameterType="com.strangeman.classmates.bean.Liker">
     insert into liker (id, owner_id, content_type, 
       content_id)
-    values (#{id,jdbcType=INTEGER}, #{ownerId,jdbcType=VARCHAR}, #{contentType,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{ownerId,jdbcType=VARCHAR}, #{contentType,jdbcType=VARCHAR}, 
       #{contentId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.classmates.bean.Liker">
+  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.Liker">
     insert into liker
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -112,7 +112,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="ownerId != null">
         #{ownerId,jdbcType=VARCHAR},
@@ -125,7 +125,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.classmates.bean.LikerExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.strangeman.classmates.bean.LikerExample" resultType="java.lang.Long">
     select count(*) from liker
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -135,7 +135,7 @@
     update liker
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.ownerId != null">
         owner_id = #{record.ownerId,jdbcType=VARCHAR},
@@ -153,7 +153,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update liker
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       owner_id = #{record.ownerId,jdbcType=VARCHAR},
       content_type = #{record.contentType,jdbcType=VARCHAR},
       content_id = #{record.contentId,jdbcType=VARCHAR}

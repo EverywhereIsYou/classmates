@@ -1,7 +1,7 @@
 package com.strangeman.classmates.bean;
 
 public class Classmate {
-    private Integer id;
+    private String id;
 
     private String school;
 
@@ -19,16 +19,12 @@ public class Classmate {
 
     private String lastModifyTime;
 
-    private String photoWall;
-
-    private String customizeFiled;
-
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     public String getSchool() {
@@ -93,21 +89,5 @@ public class Classmate {
 
     public void setLastModifyTime(String lastModifyTime) {
         this.lastModifyTime = lastModifyTime == null ? null : lastModifyTime.trim();
-    }
-
-    public String getPhotoWall() {
-        return photoWall;
-    }
-
-    public void setPhotoWall(String photoWall) {
-        this.photoWall = photoWall;
-    }
-
-    public String getCustomizeFiled() {
-        return customizeFiled;
-    }
-
-    public void setCustomizeFiled(String customizeFiled) {
-        this.customizeFiled = customizeFiled;
     }
 }

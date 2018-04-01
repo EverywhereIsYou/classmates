@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.classmates.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.classmates.bean.User">
-    <result column="id" jdbcType="INTEGER" property="id" />
+<mapper namespace="com.strangeman.classmates.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.strangeman.classmates.bean.User">
+    <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="work_id" jdbcType="VARCHAR" property="workId" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="role" jdbcType="VARCHAR" property="role" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     id, work_id, pwd, role, create_time, last_modify_time
   </sql>
-  <select id="selectByExample" parameterType="com.classmates.bean.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.strangeman.classmates.bean.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -84,21 +84,21 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.classmates.bean.UserExample">
+  <delete id="deleteByExample" parameterType="com.strangeman.classmates.bean.UserExample">
     delete from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.classmates.bean.User">
+  <insert id="insert" parameterType="com.strangeman.classmates.bean.User">
     insert into user (id, work_id, pwd, 
       role, create_time, last_modify_time
       )
-    values (#{id,jdbcType=INTEGER}, #{workId,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
       #{role,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.classmates.bean.User">
+  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -122,7 +122,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="workId != null">
         #{workId,jdbcType=VARCHAR},
@@ -141,7 +141,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.classmates.bean.UserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.strangeman.classmates.bean.UserExample" resultType="java.lang.Long">
     select count(*) from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -151,7 +151,7 @@
     update user
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.workId != null">
         work_id = #{record.workId,jdbcType=VARCHAR},
@@ -175,7 +175,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       work_id = #{record.workId,jdbcType=VARCHAR},
       pwd = #{record.pwd,jdbcType=VARCHAR},
       role = #{record.role,jdbcType=VARCHAR},

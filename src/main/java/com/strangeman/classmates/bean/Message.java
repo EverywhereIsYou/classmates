@@ -1,7 +1,7 @@
 package com.strangeman.classmates.bean;
 
 public class Message {
-    private Integer id;
+    private String id;
 
     private String from;
 
@@ -13,12 +13,12 @@ public class Message {
 
     private String content;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     public String getFrom() {

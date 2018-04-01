@@ -1,7 +1,7 @@
 package com.strangeman.classmates.bean;
 
 public class Collection {
-    private Integer id;
+    private String id;
 
     private String ownerId;
 
@@ -9,12 +9,12 @@ public class Collection {
 
     private String contentId;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     public String getOwnerId() {

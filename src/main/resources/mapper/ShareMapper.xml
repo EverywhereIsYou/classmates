@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.classmates.dao.ShareMapper">
-  <resultMap id="BaseResultMap" type="com.classmates.bean.Share">
-    <result column="id" jdbcType="INTEGER" property="id" />
+<mapper namespace="com.strangeman.classmates.dao.ShareMapper">
+  <resultMap id="BaseResultMap" type="com.strangeman.classmates.bean.Share">
+    <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="owner_id" jdbcType="VARCHAR" property="ownerId" />
     <result column="share_type" jdbcType="VARCHAR" property="shareType" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.classmates.bean.ShareWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.strangeman.classmates.bean.ShareWithBLOBs">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="collector_id" jdbcType="LONGVARCHAR" property="collectorId" />
     <result column="liker_id" jdbcType="LONGVARCHAR" property="likerId" />
@@ -76,7 +76,7 @@
   <sql id="Blob_Column_List">
     content, collector_id, liker_id
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.classmates.bean.ShareExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.strangeman.classmates.bean.ShareExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -92,7 +92,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.classmates.bean.ShareExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.strangeman.classmates.bean.ShareExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -106,21 +106,21 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.classmates.bean.ShareExample">
+  <delete id="deleteByExample" parameterType="com.strangeman.classmates.bean.ShareExample">
     delete from share
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.classmates.bean.ShareWithBLOBs">
+  <insert id="insert" parameterType="com.strangeman.classmates.bean.ShareWithBLOBs">
     insert into share (id, owner_id, share_type, 
       create_time, content, collector_id, 
       liker_id)
-    values (#{id,jdbcType=INTEGER}, #{ownerId,jdbcType=VARCHAR}, #{shareType,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{ownerId,jdbcType=VARCHAR}, #{shareType,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{collectorId,jdbcType=LONGVARCHAR}, 
       #{likerId,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.classmates.bean.ShareWithBLOBs">
+  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.ShareWithBLOBs">
     insert into share
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -147,7 +147,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="ownerId != null">
         #{ownerId,jdbcType=VARCHAR},
@@ -169,7 +169,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.classmates.bean.ShareExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.strangeman.classmates.bean.ShareExample" resultType="java.lang.Long">
     select count(*) from share
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -179,7 +179,7 @@
     update share
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.ownerId != null">
         owner_id = #{record.ownerId,jdbcType=VARCHAR},
@@ -206,7 +206,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update share
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       owner_id = #{record.ownerId,jdbcType=VARCHAR},
       share_type = #{record.shareType,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR},
@@ -219,7 +219,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update share
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       owner_id = #{record.ownerId,jdbcType=VARCHAR},
       share_type = #{record.shareType,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR}

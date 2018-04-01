@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.classmates.dao.MessageMapper">
-  <resultMap id="BaseResultMap" type="com.classmates.bean.Message">
-    <result column="id" jdbcType="INTEGER" property="id" />
+<mapper namespace="com.strangeman.classmates.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.strangeman.classmates.bean.Message">
+    <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="from" jdbcType="VARCHAR" property="from" />
     <result column="to" jdbcType="VARCHAR" property="to" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="read_flag" jdbcType="INTEGER" property="readFlag" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.classmates.bean.Message">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.strangeman.classmates.bean.Message">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -75,7 +75,7 @@
   <sql id="Blob_Column_List">
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.classmates.bean.MessageExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.strangeman.classmates.bean.MessageExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -91,7 +91,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.classmates.bean.MessageExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.strangeman.classmates.bean.MessageExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -105,21 +105,21 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.classmates.bean.MessageExample">
+  <delete id="deleteByExample" parameterType="com.strangeman.classmates.bean.MessageExample">
     delete from message
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.classmates.bean.Message">
+  <insert id="insert" parameterType="com.strangeman.classmates.bean.Message">
     insert into message (id, from, to, 
       create_time, read_flag, content
       )
-    values (#{id,jdbcType=INTEGER}, #{from,jdbcType=VARCHAR}, #{to,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{from,jdbcType=VARCHAR}, #{to,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{readFlag,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.classmates.bean.Message">
+  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.Message">
     insert into message
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -143,7 +143,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="from != null">
         #{from,jdbcType=VARCHAR},
@@ -162,7 +162,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.classmates.bean.MessageExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.strangeman.classmates.bean.MessageExample" resultType="java.lang.Long">
     select count(*) from message
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -172,7 +172,7 @@
     update message
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.from != null">
         from = #{record.from,jdbcType=VARCHAR},
@@ -196,7 +196,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update message
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       from = #{record.from,jdbcType=VARCHAR},
       to = #{record.to,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR},
@@ -208,7 +208,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update message
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       from = #{record.from,jdbcType=VARCHAR},
       to = #{record.to,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR},
