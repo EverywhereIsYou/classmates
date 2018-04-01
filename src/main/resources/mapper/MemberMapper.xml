@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.classmates.dao.MemberMapper">
+    <resultMap id="BaseResultMap" type="com.classmates.bean.Member">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="pwd" jdbcType="VARCHAR" property="pwd"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="birthday" jdbcType="VARCHAR" property="birthday"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="hometown" jdbcType="VARCHAR" property="hometown"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="qq" jdbcType="VARCHAR" property="qq"/>
+        <result column="wechat" jdbcType="VARCHAR" property="wechat"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="last_modify_time" jdbcType="VARCHAR" property="lastModifyTime"/>
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.classmates.bean.Member">
+        <result column="remark" jdbcType="LONGVARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, nickname, real_name, email, phone, pwd, sex, birthday, address, hometown, avatar,
+        qq, wechat, create_time, last_modify_time, delete_flag
+    </sql>
+    <sql id="Blob_Column_List">
+    remark
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.classmates.bean.MemberExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.classmates.bean.MemberExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.classmates.bean.MemberExample">
+        delete from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.classmates.bean.Member">
+        insert into member (id, nickname, real_name,
+        email, phone, pwd,
+        sex, birthday, address,
+        hometown, avatar, qq,
+        wechat, create_time, last_modify_time,
+        delete_flag, remark)
+        values (#{id,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+        #{hometown,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR},
+        #{wechat,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=VARCHAR},
+        #{deleteFlag,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.classmates.bean.Member">
+        insert into member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="realName != null">
+                real_name,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="pwd != null">
+                pwd,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="hometown != null">
+                hometown,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+            <if test="qq != null">
+                qq,
+            </if>
+            <if test="wechat != null">
+                wechat,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="lastModifyTime != null">
+                last_modify_time,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="hometown != null">
+                #{hometown,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat != null">
+                #{wechat,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyTime != null">
+                #{lastModifyTime,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.classmates.bean.MemberExample" resultType="java.lang.Long">
+        select count(*) from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update member
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.nickname != null">
+                nickname = #{record.nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realName != null">
+                real_name = #{record.realName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null">
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pwd != null">
+                pwd = #{record.pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sex != null">
+                sex = #{record.sex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.birthday != null">
+                birthday = #{record.birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="record.address != null">
+                address = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hometown != null">
+                hometown = #{record.hometown,jdbcType=VARCHAR},
+            </if>
+            <if test="record.avatar != null">
+                avatar = #{record.avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qq != null">
+                qq = #{record.qq,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wechat != null">
+                wechat = #{record.wechat,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastModifyTime != null">
+                last_modify_time = #{record.lastModifyTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deleteFlag != null">
+                delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update member
+        set id = #{record.id,jdbcType=INTEGER},
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+        real_name = #{record.realName,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=VARCHAR},
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+        address = #{record.address,jdbcType=VARCHAR},
+        hometown = #{record.hometown,jdbcType=VARCHAR},
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+        qq = #{record.qq,jdbcType=VARCHAR},
+        wechat = #{record.wechat,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+        last_modify_time = #{record.lastModifyTime,jdbcType=VARCHAR},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+        remark = #{record.remark,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update member
+        set id = #{record.id,jdbcType=INTEGER},
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+        real_name = #{record.realName,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=VARCHAR},
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+        address = #{record.address,jdbcType=VARCHAR},
+        hometown = #{record.hometown,jdbcType=VARCHAR},
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+        qq = #{record.qq,jdbcType=VARCHAR},
+        wechat = #{record.wechat,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+        last_modify_time = #{record.lastModifyTime,jdbcType=VARCHAR},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+</mapper>

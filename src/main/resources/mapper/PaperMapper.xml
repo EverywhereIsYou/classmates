@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.classmates.dao.PaperMapper">
+  <resultMap id="BaseResultMap" type="com.classmates.bean.Paper">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="classmate_id" jdbcType="INTEGER" property="classmateId" />
+    <result column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="wechat" jdbcType="VARCHAR" property="wechat" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="fav_movie" jdbcType="VARCHAR" property="favMovie" />
+    <result column="fav_singer" jdbcType="VARCHAR" property="favSinger" />
+    <result column="fav_book" jdbcType="VARCHAR" property="favBook" />
+    <result column="fav_travel_place" jdbcType="VARCHAR" property="favTravelPlace" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="permission" jdbcType="INTEGER" property="permission" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.classmates.bean.PaperWithBLOBs">
+    <result column="fav_thing_to_do" jdbcType="LONGVARCHAR" property="favThingToDo" />
+    <result column="special_in_class" jdbcType="LONGVARCHAR" property="specialInClass" />
+    <result column="word_to_me" jdbcType="LONGVARCHAR" property="wordToMe" />
+    <result column="customize_filed" jdbcType="LONGVARCHAR" property="customizeFiled" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, classmate_id, author_id, name, nickname, sex, birthday, address, phone, email, 
+    qq, wechat, photo, fav_movie, fav_singer, fav_book, fav_travel_place, create_time, 
+    permission
+  </sql>
+  <sql id="Blob_Column_List">
+    fav_thing_to_do, special_in_class, word_to_me, customize_filed
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.classmates.bean.PaperExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from paper
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.classmates.bean.PaperExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from paper
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.classmates.bean.PaperExample">
+    delete from paper
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.classmates.bean.PaperWithBLOBs">
+    insert into paper (id, classmate_id, author_id, 
+      name, nickname, sex, 
+      birthday, address, phone, 
+      email, qq, wechat, 
+      photo, fav_movie, fav_singer, 
+      fav_book, fav_travel_place, create_time, 
+      permission, fav_thing_to_do, special_in_class, 
+      word_to_me, customize_filed)
+    values (#{id,jdbcType=INTEGER}, #{classmateId,jdbcType=INTEGER}, #{authorId,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{favMovie,jdbcType=VARCHAR}, #{favSinger,jdbcType=VARCHAR}, 
+      #{favBook,jdbcType=VARCHAR}, #{favTravelPlace,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{permission,jdbcType=INTEGER}, #{favThingToDo,jdbcType=LONGVARCHAR}, #{specialInClass,jdbcType=LONGVARCHAR}, 
+      #{wordToMe,jdbcType=LONGVARCHAR}, #{customizeFiled,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.classmates.bean.PaperWithBLOBs">
+    insert into paper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="classmateId != null">
+        classmate_id,
+      </if>
+      <if test="authorId != null">
+        author_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="wechat != null">
+        wechat,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="favMovie != null">
+        fav_movie,
+      </if>
+      <if test="favSinger != null">
+        fav_singer,
+      </if>
+      <if test="favBook != null">
+        fav_book,
+      </if>
+      <if test="favTravelPlace != null">
+        fav_travel_place,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="favThingToDo != null">
+        fav_thing_to_do,
+      </if>
+      <if test="specialInClass != null">
+        special_in_class,
+      </if>
+      <if test="wordToMe != null">
+        word_to_me,
+      </if>
+      <if test="customizeFiled != null">
+        customize_filed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="classmateId != null">
+        #{classmateId,jdbcType=INTEGER},
+      </if>
+      <if test="authorId != null">
+        #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="favMovie != null">
+        #{favMovie,jdbcType=VARCHAR},
+      </if>
+      <if test="favSinger != null">
+        #{favSinger,jdbcType=VARCHAR},
+      </if>
+      <if test="favBook != null">
+        #{favBook,jdbcType=VARCHAR},
+      </if>
+      <if test="favTravelPlace != null">
+        #{favTravelPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=INTEGER},
+      </if>
+      <if test="favThingToDo != null">
+        #{favThingToDo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="specialInClass != null">
+        #{specialInClass,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="wordToMe != null">
+        #{wordToMe,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="customizeFiled != null">
+        #{customizeFiled,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.classmates.bean.PaperExample" resultType="java.lang.Long">
+    select count(*) from paper
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update paper
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.classmateId != null">
+        classmate_id = #{record.classmateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.authorId != null">
+        author_id = #{record.authorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null">
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechat != null">
+        wechat = #{record.wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null">
+        photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favMovie != null">
+        fav_movie = #{record.favMovie,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favSinger != null">
+        fav_singer = #{record.favSinger,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favBook != null">
+        fav_book = #{record.favBook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favTravelPlace != null">
+        fav_travel_place = #{record.favTravelPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.permission != null">
+        permission = #{record.permission,jdbcType=INTEGER},
+      </if>
+      <if test="record.favThingToDo != null">
+        fav_thing_to_do = #{record.favThingToDo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.specialInClass != null">
+        special_in_class = #{record.specialInClass,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.wordToMe != null">
+        word_to_me = #{record.wordToMe,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.customizeFiled != null">
+        customize_filed = #{record.customizeFiled,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update paper
+    set id = #{record.id,jdbcType=INTEGER},
+      classmate_id = #{record.classmateId,jdbcType=INTEGER},
+      author_id = #{record.authorId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      wechat = #{record.wechat,jdbcType=VARCHAR},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      fav_movie = #{record.favMovie,jdbcType=VARCHAR},
+      fav_singer = #{record.favSinger,jdbcType=VARCHAR},
+      fav_book = #{record.favBook,jdbcType=VARCHAR},
+      fav_travel_place = #{record.favTravelPlace,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      permission = #{record.permission,jdbcType=INTEGER},
+      fav_thing_to_do = #{record.favThingToDo,jdbcType=LONGVARCHAR},
+      special_in_class = #{record.specialInClass,jdbcType=LONGVARCHAR},
+      word_to_me = #{record.wordToMe,jdbcType=LONGVARCHAR},
+      customize_filed = #{record.customizeFiled,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update paper
+    set id = #{record.id,jdbcType=INTEGER},
+      classmate_id = #{record.classmateId,jdbcType=INTEGER},
+      author_id = #{record.authorId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      wechat = #{record.wechat,jdbcType=VARCHAR},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      fav_movie = #{record.favMovie,jdbcType=VARCHAR},
+      fav_singer = #{record.favSinger,jdbcType=VARCHAR},
+      fav_book = #{record.favBook,jdbcType=VARCHAR},
+      fav_travel_place = #{record.favTravelPlace,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      permission = #{record.permission,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
