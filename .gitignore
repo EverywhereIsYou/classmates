@@ -20,6 +20,8 @@ bin
 */lib/*
 .metadata/
 
+TestController.java
+
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup

@@ -4,8 +4,11 @@ import com.strangeman.classmates.bean.Member;
 import com.strangeman.classmates.bean.MemberExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface MemberMapper {
+    String table_name="member";
+
     long countByExample(MemberExample example);
 
     int deleteByExample(MemberExample example);
@@ -23,4 +26,9 @@ public interface MemberMapper {
     int updateByExampleWithBLOBs(@Param("record") Member record, @Param("example") MemberExample example);
 
     int updateByExample(@Param("record") Member record, @Param("example") MemberExample example);
+
+    @Select("select count(*) from "
+            + table_name
+            + " where phone=#{username} or email=#{username}")
+    int selectByUsername(@Param("username") String username);
 }
