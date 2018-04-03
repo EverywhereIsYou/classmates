@@ -29,12 +29,3 @@ $("#regest").click(function () {
         }
     });
 });
-
-$("#getDynamicCode").click(function () {
-    var username=$("#username").val();
-    $.ajax({
-        type: 'POST',
-        url: "/codeService/dynamicCode",
-        data: {"username":username}
-    });
-});

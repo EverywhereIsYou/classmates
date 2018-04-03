@@ -22,6 +22,10 @@ public class CodeController {
     @RequestMapping("/graphicCode")
     @ResponseBody
     public void graphicCode(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        response.setDateHeader("expires",-1);
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+
         GraphicVeriCode code=new GraphicVeriCode();
         request.getSession().setAttribute("graphicCode",code.getText());
         ImageIO.write(code.getImage(),"JPEG",response.getOutputStream());

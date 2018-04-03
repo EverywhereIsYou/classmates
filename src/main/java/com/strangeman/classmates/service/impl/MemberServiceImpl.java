@@ -28,6 +28,23 @@ public class MemberServiceImpl implements MemberService{
     }
 
     public boolean hasExist(String username) {
-        return memberMapper.selectByUsername(username)>0;
+        return memberMapper.selectByUsername(username)!=null;
+    }
+
+    public Member login(String username, String password) {
+        Member member=memberMapper.selectByUsername(username);
+
+        if(member!=null){
+            if(member.getPwd().equals(password)){
+                log.info("user:"+username+" login successfully");
+                return member;
+            }
+            else{
+                log.info("user:"+username+" password error");
+                return null;
+            }
+        }
+
+        return null;
     }
 }

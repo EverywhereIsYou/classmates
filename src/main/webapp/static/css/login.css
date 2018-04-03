@@ -126,7 +126,7 @@ input {
     text-indent: 1.5em;
 }
 
-#user {
+#username {
     background-image: url("/static/images/user.png");
     background-repeat: no-repeat;
     background-size: 20px 20px;

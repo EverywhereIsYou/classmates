@@ -64,4 +64,30 @@ public class MemberController {
     public String register(){
         return "register";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public ResultInfo login(String username,String password,String graphicCode,HttpServletRequest request){
+        ResultInfo result;
+
+        if(graphicCode!=null&&graphicCode.equals(request.getSession().getAttribute("graphicCode"))){
+            Member member=memberService.login(username,password);
+            if(member==null){
+                result=ResultInfo.fail("用户名或密码不正确");
+            }
+            else{
+                result=ResultInfo.success("登录成功").add("member",member);
+            }
+        }
+        else {
+            result=ResultInfo.fail("验证码错误");
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String login(){
+        return "login";
+    }
 }

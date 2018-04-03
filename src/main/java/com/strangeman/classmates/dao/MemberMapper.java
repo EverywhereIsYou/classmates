@@ -27,8 +27,8 @@ public interface MemberMapper {
 
     int updateByExample(@Param("record") Member record, @Param("example") MemberExample example);
 
-    @Select("select count(*) from "
+    @Select("select * from "
             + table_name
             + " where phone=#{username} or email=#{username}")
-    int selectByUsername(@Param("username") String username);
+    Member selectByUsername(@Param("username") String username);
 }

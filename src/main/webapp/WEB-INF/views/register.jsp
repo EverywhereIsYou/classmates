@@ -33,7 +33,9 @@
         <div class="col-sm-4">
             <div class="input-group">
                 <input type="text" name="dynamicCode" class="form-control" placeholder="" id="dynamicCode">
-                <div class="input-group-addon"><a href="#" id="getDynamicCode">获取验证码</a></div>
+                <span class="input-group-btn">
+                    <button class="btn" type="button" id="getDynamicCode" onclick="getDCode()">获取验证码</button>
+                </span>
             </div>
         </div>
     </div>
@@ -58,7 +60,7 @@
             <div class="input-group">
                 <input type="text" name="graphicCode" class="form-control" placeholder="" id="graphicCode">
                 <div class="input-group-addon">
-                    <img src="" id="verification">
+                    <img src="<c:url value="/codeService/graphicCode" />" id="verification">
                 </div>
             </div>
         </div>
@@ -88,14 +90,45 @@
 <script src="/static/js/register.js"></script>
 
 <script>
-    $(function () {
-        $("#verification").attr("src", "<c:url value="/codeService/graphicCode" />");
-    });
-
     $("#verification").click(function () {
         var timeNow = new Date().getTime();
         $("#verification").attr("src", "<c:url value="/codeService/graphicCode?date=" />" + timeNow);
     });
+
+    $("#back").click(function(){
+        $(location).attr('href',"<c:url value="/login" />");
+    });
+
+    function getDCode() {
+        setTime();
+
+        var username=$("#username").val();
+        $.ajax({
+            type: 'POST',
+            url: "/codeService/dynamicCode",
+            data: {"username":username}
+        });
+    }
+
+    var countDown=60;
+    function setTime() {
+        var get_code_btn=$("#getDynamicCode");
+
+        if(countDown<=0){
+            get_code_btn.attr("disabled",false);
+            get_code_btn.text("获取验证码");
+            countDown = 60;
+        }
+        else {
+            get_code_btn.attr("disabled","disabled");
+            get_code_btn.text("重新发送(" + countDown + "s)");
+            countDown--;
+
+            setTimeout(function () {
+                setTime();
+            },1000);
+        }
+    }
 </script>
 
 </body>

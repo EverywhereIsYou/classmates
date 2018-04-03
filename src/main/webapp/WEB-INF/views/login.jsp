@@ -24,26 +24,26 @@
             </a>
         </header>
 
-        <form class="form-horizontal">
+        <form class="form-horizontal" id="form_login">
 
             <div class="form-group">
                 <div class="col-xs-10 col-xs-offset-1 text">
-                    <input type="email" name="" class="form-control" id="user" placeholder="手机/邮箱">
+                    <input type="email" name="username" class="form-control" id="username" placeholder="手机/邮箱">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-xs-10 col-xs-offset-1 text">
-                    <input type="password" name="" class="form-control" id="password" placeholder="密码">
+                    <input type="password" name="password" class="form-control" id="password" placeholder="密码">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-xs-10 col-xs-offset-1 text">
                     <div class="input-group">
-                        <input type="text" name="" class="form-control verification" placeholder="验证码">
+                        <input type="text" name="graphicCode" class="form-control verification" placeholder="验证码" id="graphicCode">
                         <div class="input-group-addon">
-                            <img src="" id="verification">
+                            <img src="<c:url value="/codeService/graphicCode" />" id="verification">
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
 
             <div class="form-group">
                 <div>
-                    <a class="col-xs-3 col-xs-offset-1" id="p-one" href="#">立即注册</a>
+                    <a class="col-xs-3 col-xs-offset-1" id="p-one" href="<c:url value="/register" />">立即注册</a>
                     <a class="col-xs-3 col-xs-push-4" id="p-two" href="#">忘记密码</a>
                 </div>
             </div>
@@ -91,13 +91,25 @@
         $("input").blur(function () {
             $(this).removeClass("glowing");
         });
-
-        $("#verification").attr("src", "<c:url value="/codeService/graphicCode" />");
-
     });
     $("#verification").click(function () {
         var timeNow = new Date().getTime();
         $("#verification").attr("src", "<c:url value="/codeService/graphicCode?date=" />" + timeNow);
+    });
+
+    $("#login").click(function () {
+        $.ajax({
+            type: 'POST',
+            url: "/login",
+            data: $("#form_login").serialize(),
+            error: function (request) {
+                console.log(request);
+            },
+            success: function (data) {
+                console.log(data);
+                window.location.href = "#";
+            }
+        });
     });
 
 </script>
