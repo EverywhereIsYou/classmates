@@ -21,7 +21,7 @@ public class MailSender {
         Authenticator authenticator=new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("312764843@qq.com","onodbcbjhsdecaed");
+                return new PasswordAuthentication("312764843@qq.com","zpazrmayvmfzbiah");
             }
         };
 
