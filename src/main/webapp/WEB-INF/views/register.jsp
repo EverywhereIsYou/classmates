@@ -66,7 +66,7 @@
 
     <div class="form-group">
         <div class="col-sm-4 col-sm-push-4">
-            <button class="btn" id="regest"><span>立即注册</span></button>
+            <button class="btn" id="regist"><span>立即注册</span></button>
         </div>
     </div>
 
@@ -89,12 +89,12 @@
 
 <script>
     $(function () {
-        $("#verification").attr("src", "<c:url value="codeService/graphicCode" />");
+        $("#verification").attr("src", "<c:url value="/codeService/graphicCode" />");
     });
 
     $("#verification").click(function () {
         var timeNow = new Date().getTime();
-        $("#verification").attr("src", "<c:url value="codeService/graphicCode?date=" />" + timeNow);
+        $("#verification").attr("src", "<c:url value="/codeService/graphicCode?date=" />" + timeNow);
     });
 </script>
 

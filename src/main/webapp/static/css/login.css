@@ -1,0 +1,241 @@
+body {
+    background-image: url("/static/images/login_background.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100% cover;
+    overflow: auto;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    /*透视效果*/
+    perspective: 1000;
+    -moz-perspective: 1000;
+    -o-perspective: 1000;
+    -webkit-perspective: 1000; /* Safari 和 Chrome */
+    perspective-origin: 50% 50%;
+    -moz-perspective-origin: 50% 50%;
+    -o-perspective-origin: 50% 50%;
+    -webkit-perspective-origin: 50% 50%;
+}
+
+.wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 410px;
+    height: 450px;
+    margin-top: -225px;
+    margin-left: -205px;
+    background-color: white;
+    border-radius: 5px;
+    cursor: default;
+    opacity: 0;
+    text-align: center;
+
+    /*初始效果*/
+    -o-transform-origin: 50% 50%; /*Opare*/
+    -moz-transform-origin: 50% 50%; /*Firefox*/
+    -webkit-transform-origin: 50% 50%; /*Safari和Chrome*/
+    -ms-transform-origin: 50% 50%; /*IE9*/
+    transform-origin: 50% 50%; /*标准*/
+    -o-transform: rotateX(20deg);
+    -moz-transform: rotateX(20deg);
+    -webkit-transform: rotateX(20deg);
+    -ms-transform: rotateX(20deg);
+    transform: rotateX(20deg);
+    -o-transition: opacity 1s ease, -o-transform 1s ease;
+    -moz-transition: opacity 1s ease, -moz-transform 1s ease;
+    -webkit-transition: opacity 1s ease, -webkit-transform 1s ease;
+    -ms-transition: opacity 1s ease, -ms-transform 1s ease;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/*过渡到这个效果*/
+.wrapper-gif {
+    opacity: 0.9;
+    -o-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+}
+
+.main-gif {
+
+}
+
+/*@keyframes opacity{
+	from{
+	-webkit-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -moz-transform: rotateX(20deg);
+    -moz-transform: rotateZ(5deg);
+    -webkit-transform: rotateX(20deg);
+    -webkit-transform: rotateZ(5deg);
+    -ms-transform: rotateX(20deg);
+    -ms-transform: rotateZ(5deg);
+    transform: rotateX(20deg);
+    transform: rotateZ(5deg);
+	}
+	to{
+	-webkit-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -moz-transform: rotateX(0deg);
+    -moz-transform: rotateZ(0deg);
+    -webkit-transform: rotateX(0deg);
+    -webkit-transform: rotateZ(0deg);
+    -ms-transform: rotateX(0deg);
+    -ms-transform: rotateZ(0deg);
+    transform: rotateX(0deg);
+    transform: rotateZ(0deg);
+	}
+}*/
+/*头部图片*/
+header {
+    width: 100%;
+    height: 100px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+#line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #5f4d93, #e67777);
+    background: -moz-linear-gradient(to right, #5f4d93, #e67777);
+    background: -o-linear-gradient(to right, #5f4d93, #e67777);
+    background: -webkit-linear-gradient(to right, #5f4d93, #e67777);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5f4d93', endColorstr='#e67777', GradientType=1); /*IE9*/
+    position: absolute;
+    top: 80px;
+    z-index: -1;
+}
+
+#logo {
+    width: 100px;
+    height: 100px;
+}
+
+input {
+    width: 100%;
+    text-indent: 1.5em;
+}
+
+#user {
+    background-image: url("/static/images/user.png");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 5px 5px;
+}
+
+#password {
+    background-image: url("/static/images/password.png");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 5px 5px;
+}
+
+/*输入框获得焦点*/
+.glowing:focus {
+    border-color: #c16b7f;
+    -moz-box-shadow: 0 0 10px #c16b7f;
+    -webkit-box-shadow: 0 0 10px #c16b7f;
+    box-shadow: 0 0 10px #c16b7f;
+}
+
+/*输入框右边按钮*/
+.input-group-addon {
+    padding: 0 0;
+    background-color: #c16b7f;
+    border: 0px;
+}
+
+/*验证码图片*/
+#verification {
+    width: 100px;
+    height: 34px;
+}
+
+.verification {
+    background-image: url("/static/images/verification.png");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 5px 5px;
+}
+
+/*登录、下载按钮*/
+#login, #download {
+    width: 100%;
+    color: white;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+    font-size: 1.2em;
+    font-weight: 700;
+    background: linear-gradient(to right, #5f4d93, #e67777);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5f4d93', endColorstr='#e67777', GradientType=1); /*IE9*/
+    border: 0px;
+    -moz-box-shadow: 0 0 5px #c16b7f;
+    -webkit-box-shadow: 0 0 5px #c16b7f;
+    box-shadow: 0 0 5px #c16b7f;
+}
+
+#download {
+    height: 30px;
+    font-size: 1em;
+    margin-top: 25px;
+}
+
+#p-one {
+    color: #5f4d93;
+}
+
+#p-one:hover {
+    color: #5f4d93;
+}
+
+#p-two {
+    color: #e67777;
+}
+
+#p-two:hover {
+    color: #e67777;
+}
+
+/*页脚*/
+footer {
+    text-align: center;
+    position: absolute;
+    margin: 0px auto;
+    width: 100%;
+    bottom: 0px;
+}
+
+footer p {
+    color: white;
+    opacity: 0.8;
+}
+
+footer a {
+    color: #e67777;
+    opacity: 0.8;
+    text-decoration: none;
+    border-bottom: 1px dashed #e67777;
+}
+
+footer a:hover {
+    color: #e67777;
+    opacity: 1;
+    text-decoration: none;
+    border-bottom: 1px dashed #e67777;
+}
+
+footer a:active {
+    color: #e67777;
+    opacity: 1;
+    text-decoration: none;
+    border-bottom: 1px dashed #e67777;
+}
