@@ -7,14 +7,23 @@
 	<title>无标题文档</title>
 
 	<link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../static/css/myclassmate.css">
 </head>
 
 <body>
 	
-	
+	<div class="wrapper" id="wrapper"></div>
+	<div class="creat" id="creat"></div>
 
 	<script src="../../../static/js/jquery-3.2.1.js"></script>
 	<script src="../../../static/js/bootstrap.min.js"></script>
 
+	<script>
+		
+		$(document).ready(function abc(){
+			$("#wrapper").css("height",$(window).height()+100+"px");
+			$("#creat").css("border-left",$(window).width()+"px solid rgba(0,0,0,0)");
+		})
+	</script>
 </body>
 </html>

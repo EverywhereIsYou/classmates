@@ -24,7 +24,7 @@
             </a>
         </header>
 
-        <form class="form-horizontal" id="form_login">
+        <form class="form-horizontal" id="form_login" autocomplete="off">
 
             <div class="form-group">
                 <div class="col-xs-10 col-xs-offset-1 text">
@@ -111,6 +111,7 @@
             }
         });
     });
+
 
 </script>
 </body>
