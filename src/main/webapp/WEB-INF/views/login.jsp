@@ -8,8 +8,8 @@
 
     <title>登录</title>
 
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
+    <link rel="stylesheet" href="<c:url value="/static/css/login.css" />">
 
 </head>
 
@@ -20,7 +20,7 @@
         <header>
             <div id="line"></div>
             <a href="#">
-                <img src="/static/images/logo2.png" alt="图片" id="logo" class="img-responsive center-block">
+                <img src="<c:url value="/static/images/logo2.png" />" alt="图片" id="logo" class="img-responsive center-block">
             </a>
         </header>
 
@@ -51,7 +51,7 @@
 
             <div class="form-group">
                 <div class="col-xs-10 col-xs-offset-1">
-                    <button class="btn" id="login">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+                    <button class="btn" id="login" type="button">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
                 </div>
             </div>
 
@@ -78,8 +78,8 @@
 </footer>
 
 
-<script src="/static/js/jquery-3.2.1.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
+<script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
+<script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
 
 <script>
     $(function () {
@@ -98,6 +98,8 @@
     });
 
     $("#login").click(function () {
+        // TODO 点击登录按钮之后，按钮应变为不可点击状态。
+
         $.ajax({
             type: 'POST',
             url: "/login",
@@ -106,8 +108,7 @@
                 console.log(request);
             },
             success: function (data) {
-                console.log(data);
-                window.location.href = "#";
+                $(location).attr("href","<c:url value="/member/welcome" />");
             }
         });
     });

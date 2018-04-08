@@ -1,6 +1,7 @@
 package com.strangeman.classmates.controller;
 
 import com.strangeman.classmates.bean.Member;
+import com.strangeman.classmates.service.AttentionService;
 import com.strangeman.classmates.service.MemberService;
 import com.strangeman.classmates.utils.MyStringUtil;
 import com.strangeman.classmates.utils.ResultInfo;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private AttentionService attentionService;
 
     @ResponseBody
     @RequestMapping(value = "/register",method = RequestMethod.POST)
@@ -76,7 +79,10 @@ public class MemberController {
                 result=ResultInfo.fail("用户名或密码不正确");
             }
             else{
-                result=ResultInfo.success("登录成功").add("member",member);
+                member.setPwd("");
+
+                result=ResultInfo.success("登录成功");
+                request.getSession().setAttribute("member",member);
             }
         }
         else {
@@ -89,5 +95,30 @@ public class MemberController {
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String login(){
         return "login";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/member/welcome",method = RequestMethod.POST)
+    public ResultInfo welcome(HttpServletRequest request){
+        ResultInfo result;
+
+        if(request.getSession().getAttribute("member")==null){
+            result=ResultInfo.fail("请重新登录");
+        }
+        else {
+            String userId=((Member)request.getSession().getAttribute("member")).getId();
+            int fans=attentionService.countFans(userId);
+            int attentions=attentionService.countAttentions(userId);
+
+            result=ResultInfo.success("").add("member",request.getSession().getAttribute("member"))
+                    .add("fans",fans).add("attentions",attentions);
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/member/welcome",method = RequestMethod.GET)
+    public String welcome(){
+        return "member/welcome";
     }
 }

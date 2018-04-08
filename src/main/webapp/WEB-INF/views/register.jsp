@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>注册</title>
 
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+    <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/register.css" />">
 
 </head>
 
@@ -16,7 +16,7 @@
 
 <header>
     <div id="line"></div>
-    <img src="/static/images/logo2.png" alt="图片" id="logo" class="img-responsive center-block">
+    <img src="<c:url value="/static/images/logo2.png" />" alt="图片" id="logo" class="img-responsive center-block">
 </header>
 
 <form class="form-horizontal" id="fm">
@@ -68,7 +68,7 @@
 
     <div class="form-group">
         <div class="col-sm-4 col-sm-push-4">
-            <button class="btn" id="regist"><span>立即注册</span></button>
+            <button class="btn" id="register"><span>立即注册</span></button>
         </div>
     </div>
 
@@ -84,32 +84,64 @@
     <p>Copyright © 2018 <a href="#">Standingbyme</a>. All Rights Reserved.</p>
 </footer>
 
-<script src="/static/js/jquery-3.2.1.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
-
-<script src="/static/js/register.js"></script>
+<script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
+<script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
 
 <script>
+    $("input").focus(function () {
+        $(this).addClass("glowing");
+    });
+    $("input").blur(function () {
+        $(this).removeClass("glowing");
+    });
+
+    $("footer a").focus(function () {
+        $(this).css("text-decoration", "none");
+        $(this).css("color", "#e67777");
+    });
+
+    $("form a").focus(function () {
+        $(this).css("text-decoration", "none");
+        $(this).css("color", "white");
+    });
+
     $("#verification").click(function () {
         var timeNow = new Date().getTime();
         $("#verification").attr("src", "<c:url value="/codeService/graphicCode?date=" />" + timeNow);
+    });
+
+    $("#register").click(function () {
+        // TODO 点击注册按钮之后，按钮应变为不可点击状态
+
+        $.ajax({
+            type: 'POST',
+            url: "<c:url value="/register" />",
+            data: $("#fm").serialize(),
+            error: function (request) {
+
+            },
+            success: function (data) {
+                // TODO 注册之后对结果的响应
+                alert(data.statusCode);
+            }
+        });
     });
 
     $("#back").click(function(){
         $(location).attr('href',"<c:url value="/login" />");
     });
 
+    //获取动态验证码，并进入获取倒计时
     function getDCode() {
         setTime();
 
         var username=$("#username").val();
         $.ajax({
             type: 'POST',
-            url: "/codeService/dynamicCode",
+            url: "<c:url value="/codeService/dynamicCode" />",
             data: {"username":username}
         });
     }
-
     var countDown=60;
     function setTime() {
         var get_code_btn=$("#getDynamicCode");
