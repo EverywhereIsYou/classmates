@@ -111,18 +111,31 @@
     });
 
     $("#register").click(function () {
-        // TODO 点击注册按钮之后，按钮应变为不可点击状态
+        $("#register").attr("disabled",true);
 
         $.ajax({
             type: 'POST',
             url: "<c:url value="/register" />",
             data: $("#fm").serialize(),
             error: function (request) {
+                // TODO 错误提示信息
+                alert("register error");
 
+                $("#register").attr("disabled",false);
             },
             success: function (data) {
-                // TODO 注册之后对结果的响应
-                alert(data.statusCode);
+                if(data.statusCode===200){
+                    // TODO 注册成功之后的提示信息
+                    alert("register successfully");
+
+                    $(location).attr("href","<c:url value="/login" />");
+                }
+                else {
+                    // TODO 注册失败之后的提示信息
+                    alert("register failed");
+
+                    $("#register").attr("disabled",false);
+                }
             }
         });
     });

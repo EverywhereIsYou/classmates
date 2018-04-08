@@ -98,17 +98,28 @@
     });
 
     $("#login").click(function () {
-        // TODO 点击登录按钮之后，按钮应变为不可点击状态。
+        $("#login").attr("disabled",true);
 
         $.ajax({
             type: 'POST',
             url: "/login",
             data: $("#form_login").serialize(),
             error: function (request) {
-                console.log(request);
+                // TODO 错误提示信息
+                alert("login error");
+
+                $("#login").attr("disabled",false);
             },
             success: function (data) {
-                $(location).attr("href","<c:url value="/member/welcome" />");
+                if(data.statusCode===200){
+                    $(location).attr("href","<c:url value="/member/welcome" />");
+                }
+                else {
+                    // TODO 登录失败信息显示
+                    alert("login failed");
+
+                    $("#login").attr("disabled",false);
+                }
             }
         });
     });
