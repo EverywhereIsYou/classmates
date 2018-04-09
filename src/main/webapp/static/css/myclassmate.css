@@ -8,7 +8,9 @@ body{
 	background-size: 100% 100% cover;
 }
 .header{
-	padding-top: 250px;
+	padding-top: 18%;
+	padding-left: 100px;
+	padding-right: 100px;
 }
 #wrapper{
 	width: 100%;
@@ -24,21 +26,27 @@ body{
 	right: 15px;
 }
 h1,h3{
-	width: 80%;
+	width: 100%;
 	color: white;
 	position: relative;
-	/*left: 10%;*/
-	/*top: 250px;*/
+	line-height: 1.3em;
+}
+#classmate-wrapper h1{opacity: 0.8;}
+.my-classmate h3,h4{
+	color: white;
+	opacity: 0.6;
 }
 
 #liner{
 	height: 2px;
-	width: 80%;
+	width: 100%;
 	background-color: white;
+	opacity: 0.6;
 	position: relative;
 	/*left: 10%;*/
 	/*top: 300px;*/
 }
+
 .mousedown{
 	width: 50px;
 	height: 50px;
@@ -67,7 +75,7 @@ h1,h3{
 	border-bottom: 1px solid white;
 }
 
-.creat{
+.create{
 	height: 100px;
 	background-color: rgba(95,77,147,0.6);
 }
@@ -79,5 +87,62 @@ h1,h3{
 #classmate-cover-1{
 	width: 270px;
 	height: 270px;
-	border-radius: 175px;
+}
+.classmate-cover{
+	width: 300px;
+}
+
+/*屏幕宽度小于1000px,改变同学录封面大小;*/
+@media screen and (max-width: 1000px){
+	#classmate-cover-1{
+		width: 170px;
+		height: 170px;
+	}
+	.classmate-cover{
+		width: 200px;
+	}
+}
+/*屏幕宽度小于630px,改变同学录封面大小;*/
+@media screen and (max-width: 630px){
+	#classmate-cover-1{
+		width: 100px;
+		height: 100px;
+	}
+	.classmate-cover{
+		width: 130px;
+	}
+}
+
+/*页脚*/
+footer {
+    text-align: center;
+    margin: 0px auto;
+    width: 100%;
+    height: 140px;
+    position: relative;
+    padding-top: 100px;
+    bottom: 0px;
+}
+footer p {
+    color: #fff;
+    margin-bottom: 0;
+    opacity: 0.6;
+}
+footer a {
+    color: #f0f0f0;
+    opacity: 0.8;
+    text-decoration: none;
+    border-bottom: 1px dashed #f0f0f0;
+}
+footer a:hover {
+    color: #fff;
+    opacity: 1;
+    text-decoration: none;
+    border-bottom: 1px dashed #fff;
+}
+footer a:active {
+    color: #fff;
+    opacity: 1;
+    text-decoration: none;
+    border-bottom: 1px dashed #fff;
 }

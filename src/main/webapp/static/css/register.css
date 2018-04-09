@@ -54,7 +54,7 @@ form a:hover {
 }
 
 /*立即注册、返回登陆按钮*/
-#regist {
+#register {
     width: 100%;
     color: white;
     font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
@@ -144,25 +144,21 @@ footer {
     width: 100%;
     bottom: 0px;
 }
-
 footer p {
     color: #7f7f7f;
 }
-
 footer a {
     color: #e67777;
     opacity: 0.8;
     text-decoration: none;
     border-bottom: 1px dashed #e67777;
 }
-
 footer a:hover {
     color: #e67777;
     opacity: 1;
     text-decoration: none;
     border-bottom: 1px dashed #e67777;
 }
-
 footer a:active {
     color: #e67777;
     opacity: 1;
