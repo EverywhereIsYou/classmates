@@ -4,20 +4,80 @@
 }
 body{
 	background-image: url("../images/bg.jpg");
-	background-size:cover;
 	background-repeat: no-repeat;
+	background-size: 100% 100% cover;
+}
+.header{
+	padding-top: 250px;
 }
 #wrapper{
 	width: 100%;
-	height: 1500px;
 	background-color: #5f4d93;
 	opacity: 0.6;
 }
 
-#creat{
-	width: 100%;
+#menu{
+	width: 40px;
+	height: 40px;
+	position: fixed;
+	top: 5px;
+	right: 15px;
+}
+h1,h3{
+	width: 80%;
+	color: white;
+	position: relative;
+	/*left: 10%;*/
+	/*top: 250px;*/
+}
+
+#liner{
+	height: 2px;
+	width: 80%;
+	background-color: white;
+	position: relative;
+	/*left: 10%;*/
+	/*top: 300px;*/
+}
+.mousedown{
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	margin-left: -25px;
+	border: 2px solid white;
+	border-radius: 25px;
+}
+#mousedown{
+	color: white;
+	font-size: 1.7em;
+	position: absolute;
+	top: 24%;
+	left: 24%;
+}
+.new-classmate{
+	width: 250px;
+	position: absolute;
+	top: 95%;
+	padding-top: 80px;
+}
+.new-classmate a{
+	text-decoration: none;
+	border-bottom: 1px solid white;
+}
+
+.creat{
 	height: 100px;
 	background-color: rgba(95,77,147,0.6);
-	/*border-left: 1px solid red;*/
-	border-bottom: 100px solid rgba(95,77,147,1);
+}
+
+.my-classmate{
+	height: 270px;
+}
+
+#classmate-cover-1{
+	width: 270px;
+	height: 270px;
+	border-radius: 175px;
 }

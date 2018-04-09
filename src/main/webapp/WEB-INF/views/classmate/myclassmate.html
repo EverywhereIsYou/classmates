@@ -11,19 +11,71 @@
 </head>
 
 <body>
-	
-	<div class="wrapper" id="wrapper"></div>
-	<div class="creat" id="creat"></div>
+		<div class="wrapper" id="wrapper">
+			<a href="#"><img src="../../../static/images/menu.png" alt="图片" id="menu"></a>
+			<div class="container header">
+				<h1>我的同学录</h1>
+				<div id="liner"></div>
+				<h3>如果你无法简洁的表达你的想法，那只说明你还不够了解它。
+  					-- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。
+  					-- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。
+  					-- 阿尔伯特·爱因斯坦</h3>
+  				<a href="#new-classmate"><div class="mousedown"><span class="glyphicon glyphicon-menu-down" id="mousedown"></span></div></a>
+
+  				<div class="new-classmate" id="new-classmate"><a href="#"><h3><u>＋创建新的同学录</u></h3></a></div>
+			</div>
+
+		</div>
+		<div class="creat" id="creat1"></div>
+		<div class="my-classmate" id="my-classmate-1">
+			<div class="container">
+				<img src="../../../static/images/classmate_cover.jpg" alt="图片" id="classmate-cover-1" >
+			</div>
+		</div>
+		<div class="creat" id="creat2"></div>
+		<div class="my-classmate" id="my-classmate-2"></div>
+		<div class="creat" id="creat3"></div>
+		<div class="my-classmate" id="my-classmate-3"></div>
+		<div class="creat" id="creat4"></div>
+		<div class="my-classmate" id="my-classmate-4"></div>
+		<div class="creat" id="creat5"></div>
+		<div class="my-classmate" id="my-classmate-5"></div>
 
 	<script src="../../../static/js/jquery-3.2.1.js"></script>
 	<script src="../../../static/js/bootstrap.min.js"></script>
 
 	<script>
-		
-		$(document).ready(function abc(){
+		function getwidth(){
 			$("#wrapper").css("height",$(window).height()+100+"px");
-			$("#creat").css("border-left",$(window).width()+"px solid rgba(0,0,0,0)");
-		})
+			$("#wrapper").css("width",$(window).width()+"px");
+
+			$(".creat").css("width",$(window).width()+"px");
+			$(".my-classmate").css("width",$(window).width()+"px");
+
+			$("#creat1").css("border-left",$(window).width()+"px solid rgba(0,0,0,0)");
+			$("#creat1").css("border-bottom","100px solid rgba(95,77,147,1)");
+			$("#my-classmate-1").css("background-color","rgba(95,77,147,1)");
+
+			$("#creat2").css("border-right",$(window).width()+"px solid rgba(95,77,147,1)");
+			$("#creat2").css("border-bottom","100px solid rgba(126,87,143,1)");
+			$("#my-classmate-2").css("background-color","rgba(126,87,143,1)");
+
+			$("#creat3").css("border-left",$(window).width()+"px solid rgba(126,87,143,1)");
+			$("#creat3").css("border-bottom","100px solid rgba(161,97,138,1)");
+			$("#my-classmate-3").css("background-color","rgba(161,97,138,1)");
+
+			$("#creat4").css("border-right",$(window).width()+"px solid rgba(161,97,138,1)");
+			$("#creat4").css("border-bottom","100px solid rgba(203,111,133,1)");
+			$("#my-classmate-4").css("background-color","rgba(203,111,133,1)");
+
+			$("#creat5").css("border-left",$(window).width()+"px solid rgba(203,111,133,1)");
+			$("#creat5").css("border-bottom","100px solid rgba(227,118,130,1)");
+			$("#my-classmate-5").css("background-color","rgba(227,118,130,1)");
+			}
+		$(getwidth());
+		$(window).resize(function(){
+			getwidth();
+		});
 	</script>
 </body>
 </html>
