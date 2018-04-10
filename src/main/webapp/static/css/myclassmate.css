@@ -3,10 +3,88 @@
 	padding: 0;
 }
 body{
-	background-image: url("../images/bg.jpg");
+	background-image: url("/static/images/bg.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% 100% cover;
 }
+#menu{
+	width: 40px;
+	height: 40px;
+	position: fixed;
+	top: 5px;
+	right: 15px;
+}
+#menu-wrapper{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: rgba(250,250,250,0.5);
+	z-index: 1;
+	display: none;
+}
+#close{
+	width: 30px;
+	height: 30px;
+	float: right;
+	margin-right: 10px;
+	margin-top: 10px;
+	opacity: 0.8;
+}
+#close:hover{opacity: 1;}
+#menu-content{
+	width: 300px;
+	height: 400px;
+	position: absolute;
+	top: 50%;
+	margin-top: -200px;
+	left: 50%;
+	margin-left: -150px;
+	background-color: #5f4d93;
+	border-radius: 4px;
+}
+
+/*渐入效果*/
+.menu-content-in{
+    animation: menu-content-in 0.7s;
+}
+	@keyframes menu-content-in{
+		from{
+			opacity: 0;
+			margin-top: -300px;
+		} 
+		to{
+			opacity: 1;
+			margin-top: -200px;
+		}
+	}
+
+#menu-content ul{
+	text-align: center;
+}
+#menu-content ul li{
+	list-style: none;
+	
+}
+#menu-content ul li a{
+	display: block;
+	text-decoration: none;
+	font-size: 1.5em;
+	font-weight: 550;
+	line-height: 3em;
+	color: white;
+}
+#menu-content ul li:hover{
+	background-color: #40317a;
+}
+#menu-liner{
+	width: 250px;
+	height: 1px;
+	margin-left: 25px;
+	background-color: white;
+	opacity: 0.3;
+}
+#menu-first{margin-top: 50px;}
+
 .header{
 	padding-top: 18%;
 	padding-left: 100px;
@@ -18,13 +96,6 @@ body{
 	opacity: 0.6;
 }
 
-#menu{
-	width: 40px;
-	height: 40px;
-	position: fixed;
-	top: 5px;
-	right: 15px;
-}
 h1,h3{
 	width: 100%;
 	color: white;
@@ -37,6 +108,7 @@ h1,h3{
 	opacity: 0.6;
 }
 
+/*画线*/
 #liner{
 	height: 2px;
 	width: 100%;
@@ -47,6 +119,7 @@ h1,h3{
 	/*top: 300px;*/
 }
 
+/*提示向下滚动的图标*/
 .mousedown{
 	width: 50px;
 	height: 50px;
@@ -64,6 +137,8 @@ h1,h3{
 	top: 24%;
 	left: 24%;
 }
+
+/*创建新的同学录*/
 .new-classmate{
 	width: 250px;
 	position: absolute;
@@ -75,11 +150,12 @@ h1,h3{
 	border-bottom: 1px solid white;
 }
 
+/*同学录之间的三角形*/
 .create{
 	height: 100px;
 	background-color: rgba(95,77,147,0.6);
 }
-
+/*同学录统一高度*/
 .my-classmate{
 	height: 270px;
 }
@@ -113,7 +189,7 @@ h1,h3{
 	}
 }
 
-/*页脚*/
+/*注脚*/
 footer {
     text-align: center;
     margin: 0px auto;

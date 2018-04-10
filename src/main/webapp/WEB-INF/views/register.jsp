@@ -19,7 +19,7 @@
     <img src="<c:url value="/static/images/logo2.png" />" alt="图片" id="logo" class="img-responsive center-block">
 </header>
 
-<form class="form-horizontal" id="fm">
+<form class="form-horizontal" id="fm" autocomplete="off">
 
     <div class="form-group">
         <label class="col-sm-4 control-label">手机/邮箱：</label>

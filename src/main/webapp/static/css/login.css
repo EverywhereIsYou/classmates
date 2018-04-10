@@ -63,38 +63,6 @@ body {
     transform: rotateX(0deg);
 }
 
-.main-gif {
-
-}
-
-/*@keyframes opacity{
-	from{
-	-webkit-transform-origin: 50% 50%;
-    -ms-transform-origin: 50% 50%;
-    transform-origin: 50% 50%;
-    -moz-transform: rotateX(20deg);
-    -moz-transform: rotateZ(5deg);
-    -webkit-transform: rotateX(20deg);
-    -webkit-transform: rotateZ(5deg);
-    -ms-transform: rotateX(20deg);
-    -ms-transform: rotateZ(5deg);
-    transform: rotateX(20deg);
-    transform: rotateZ(5deg);
-	}
-	to{
-	-webkit-transform-origin: 50% 50%;
-    -ms-transform-origin: 50% 50%;
-    transform-origin: 50% 50%;
-    -moz-transform: rotateX(0deg);
-    -moz-transform: rotateZ(0deg);
-    -webkit-transform: rotateX(0deg);
-    -webkit-transform: rotateZ(0deg);
-    -ms-transform: rotateX(0deg);
-    -ms-transform: rotateZ(0deg);
-    transform: rotateX(0deg);
-    transform: rotateZ(0deg);
-	}
-}*/
 /*头部图片*/
 header {
     width: 100%;
