@@ -1,5 +1,7 @@
 package com.strangeman.classmates.bean;
 
+import java.util.List;
+
 public class Classmate {
     private String id;
 
@@ -18,6 +20,14 @@ public class Classmate {
     private String createTime;
 
     private String lastModifyTime;
+
+    private String photoWall;
+
+    private String customizeFiled;
+
+    private List<Paper> papers;
+
+    private List<Comment> comments;
 
     public String getId() {
         return id;
@@ -89,5 +99,37 @@ public class Classmate {
 
     public void setLastModifyTime(String lastModifyTime) {
         this.lastModifyTime = lastModifyTime == null ? null : lastModifyTime.trim();
+    }
+
+    public String getPhotoWall() {
+        return photoWall;
+    }
+
+    public void setPhotoWall(String photoWall) {
+        this.photoWall = photoWall == null ? null : photoWall.trim();
+    }
+
+    public String getCustomizeFiled() {
+        return customizeFiled;
+    }
+
+    public void setCustomizeFiled(String customizeFiled) {
+        this.customizeFiled = customizeFiled == null ? null : customizeFiled.trim();
+    }
+
+    public List<Paper> getPapers() {
+        return papers;
+    }
+
+    public void setPapers(List<Paper> papers) {
+        this.papers = papers;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -7,7 +7,7 @@
     <result column="share_type" jdbcType="VARCHAR" property="shareType" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.strangeman.classmates.bean.ShareWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.strangeman.classmates.bean.Share">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="collector_id" jdbcType="LONGVARCHAR" property="collectorId" />
     <result column="liker_id" jdbcType="LONGVARCHAR" property="likerId" />
@@ -112,7 +112,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.strangeman.classmates.bean.ShareWithBLOBs">
+  <insert id="insert" parameterType="com.strangeman.classmates.bean.Share">
     insert into share (id, owner_id, share_type, 
       create_time, content, collector_id, 
       liker_id)
@@ -120,7 +120,7 @@
       #{createTime,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{collectorId,jdbcType=LONGVARCHAR}, 
       #{likerId,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.ShareWithBLOBs">
+  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.Share">
     insert into share
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

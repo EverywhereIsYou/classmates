@@ -99,6 +99,7 @@
 
     $("#login").click(function () {
         $("#login").attr("disabled",true);
+        $("#login").text("正 在 登 录");
 
         $.ajax({
             type: 'POST',
@@ -109,16 +110,19 @@
                 alert("login error");
 
                 $("#login").attr("disabled",false);
+                $("#login").html("登&nbsp;&nbsp;&nbsp;&nbsp;录");
             },
             success: function (data) {
                 if(data.statusCode===200){
                     $(location).attr("href","<c:url value="/member/welcome" />");
+                    $("#login").html("登&nbsp;&nbsp;&nbsp;&nbsp;录");
                 }
                 else {
                     // TODO 登录失败信息显示
                     alert("login failed");
 
                     $("#login").attr("disabled",false);
+                    $("#login").html("登&nbsp;&nbsp;&nbsp;&nbsp;录");
                 }
             }
         });

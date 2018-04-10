@@ -112,6 +112,7 @@
 
     $("#register").click(function () {
         $("#register").attr("disabled",true);
+        $("#register").text("正 在 进 行 注 册");
 
         $.ajax({
             type: 'POST',
@@ -122,12 +123,14 @@
                 alert("register error");
 
                 $("#register").attr("disabled",false);
+                $("#register").text("立即注册");
             },
             success: function (data) {
                 if(data.statusCode===200){
                     // TODO 注册成功之后的提示信息
                     alert("register successfully");
 
+                    $("#register").text("立即注册");
                     $(location).attr("href","<c:url value="/login" />");
                 }
                 else {
@@ -135,6 +138,7 @@
                     alert("register failed");
 
                     $("#register").attr("disabled",false);
+                    $("#register").text("立即注册");
                 }
             }
         });

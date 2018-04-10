@@ -22,7 +22,7 @@
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="permission" jdbcType="INTEGER" property="permission" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.strangeman.classmates.bean.PaperWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.strangeman.classmates.bean.Paper">
     <result column="fav_thing_to_do" jdbcType="LONGVARCHAR" property="favThingToDo" />
     <result column="special_in_class" jdbcType="LONGVARCHAR" property="specialInClass" />
     <result column="word_to_me" jdbcType="LONGVARCHAR" property="wordToMe" />
@@ -130,7 +130,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.strangeman.classmates.bean.PaperWithBLOBs">
+  <insert id="insert" parameterType="com.strangeman.classmates.bean.Paper">
     insert into paper (id, classmate_id, author_id, 
       name, nickname, sex, 
       birthday, address, phone, 
@@ -148,7 +148,7 @@
       #{permission,jdbcType=INTEGER}, #{favThingToDo,jdbcType=LONGVARCHAR}, #{specialInClass,jdbcType=LONGVARCHAR}, 
       #{wordToMe,jdbcType=LONGVARCHAR}, #{customizeFiled,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.PaperWithBLOBs">
+  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.Paper">
     insert into paper
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

@@ -20,6 +20,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/member/**" />
+            <mvc:mapping path="/classmate/**" />
 
             <bean class="com.strangeman.classmates.interceptor.LoginInterceptor"/>
         </mvc:interceptor>

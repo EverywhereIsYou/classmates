@@ -12,7 +12,7 @@
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="last_modify_time" jdbcType="VARCHAR" property="lastModifyTime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.strangeman.classmates.bean.ClassmateWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.strangeman.classmates.bean.Classmate">
     <result column="photo_wall" jdbcType="LONGVARCHAR" property="photoWall" />
     <result column="customize_filed" jdbcType="LONGVARCHAR" property="customizeFiled" />
   </resultMap>
@@ -116,7 +116,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.strangeman.classmates.bean.ClassmateWithBLOBs">
+  <insert id="insert" parameterType="com.strangeman.classmates.bean.Classmate">
     insert into classmate (id, school, clazz, 
       name, owner_id, cover, 
       permission, create_time, last_modify_time, 
@@ -126,7 +126,7 @@
       #{permission,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=VARCHAR}, 
       #{photoWall,jdbcType=LONGVARCHAR}, #{customizeFiled,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.ClassmateWithBLOBs">
+  <insert id="insertSelective" parameterType="com.strangeman.classmates.bean.Classmate">
     insert into classmate
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

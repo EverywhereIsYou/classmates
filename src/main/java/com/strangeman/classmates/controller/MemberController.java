@@ -30,7 +30,7 @@ public class MemberController {
         HttpSession session=request.getSession();
         if(username!=null&&username.equals(session.getAttribute("username"))&&
                 dynamicCode!=null&&dynamicCode.equals(session.getAttribute("dynamicCode"))&&
-                graphicCode!=null&&graphicCode.equals(session.getAttribute("graphicCode"))){
+                graphicCode!=null&&graphicCode.equalsIgnoreCase((String) session.getAttribute("graphicCode"))){
             if(memberService.hasExist(username)){
                 result=ResultInfo.fail("用户名已存在");
                 return result;
@@ -73,7 +73,7 @@ public class MemberController {
     public ResultInfo login(String username,String password,String graphicCode,HttpServletRequest request){
         ResultInfo result;
 
-        if(graphicCode!=null&&graphicCode.equals(request.getSession().getAttribute("graphicCode"))){
+        if(graphicCode!=null&&graphicCode.equalsIgnoreCase((String) request.getSession().getAttribute("graphicCode"))){
             Member member=memberService.login(username,password);
             if(member==null){
                 result=ResultInfo.fail("用户名或密码不正确");
