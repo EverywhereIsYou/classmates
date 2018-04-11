@@ -28,7 +28,7 @@
     </div>
 </div>
 <div class="wrapper" id="wrapper">
-    <a href="#"><img src="<c:url value="/static/images/menu.png" />" alt="图片" id="menu"></a>
+    <a href="javascript:void(0)"><img src="<c:url value="/static/images/menu.png" />" alt="图片" id="menu"></a>
     <div class="container header">
         <h1>我的同学录</h1>
         <div id="liner"></div>
