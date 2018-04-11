@@ -11,6 +11,8 @@ public class Classmate {
 
     private String name;
 
+    private String desc;
+
     private String ownerId;
 
     private String cover;
@@ -59,6 +61,14 @@ public class Classmate {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getOwnerId() {

@@ -200,8 +200,8 @@
 <body>
 
 <header>
-    <a href="#"><img src="<c:url value="/static/images/logo1.png" />" alt="LOGO" id="logo"></a>
-    <a href="#"><h3>一起同过窗</h3></a>
+    <a href="<c:url value="" />"><img src="<c:url value="/static/images/logo1.png" />" alt="LOGO" id="logo"></a>
+    <a href="<c:url value="" />"><h3>一起同过窗</h3></a>
 </header>
 
 <div class="container">
@@ -218,7 +218,7 @@
     </div>
     <div class="container" id="icon">
         <div class="icon book">
-            <a href="#"><img src="<c:url value="/static/images/book.png" />" alt="icon" class="img-responsive"
+            <a href="<c:url value="/classmate/myclassmates" />"><img src="<c:url value="/static/images/book.png" />" alt="icon" class="img-responsive"
                              id="book"></a>
         </div>
         <div class="icon moment">
@@ -231,7 +231,7 @@
         </div>
     </div>
     <div class="container" id="my">
-        <a href="#"><p class="my book mybook">我的同学录</p></a>
+        <a href="<c:url value="/classmate/myclassmates" />"><p class="my book mybook">我的同学录</p></a>
         <a href="#"><p class="my moment mymoment">青春瞬间</p></a>
         <a href="#"><p class="my user2 myuser2">个人中心</p></a>
     </div>

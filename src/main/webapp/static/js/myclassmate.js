@@ -8,11 +8,15 @@ var dir = true;  //用于来回循环
 $("footer").css("background-color",classmateBgColor[0]);
 
 $("#new-classmate").click(function(){
-    if (OffOn == 0) {
-        $("#classmate-wrapper").append("<div class='my-classmate' id='my-classmate-"+b+"' style='background-color:"+classmateBgColor[a]+"'><div class='container'><div class='col-sm-8 col-xs-8' style='text-align: right;'><h1>朝花夕拾</h1><h4>华中科技大学 1401班</h4><div id='liner'></div><h3>如果你无法简洁的表达你的想法，那只说明你还不够了解它。-- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。-- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。-- 阿尔伯特·爱因斯坦</h3></div><div class='col-sm-4 col-xs-4 classmate-cover'><img src='../../../static/images/classmate_cover.jpg' alt='图' class='img-circle' id='classmate-cover-1' ></div></div></div><div class='create' id='create"+b+"' style='border-right:"+$(window).width()+"px solid "+classmateBgColor[a]+";border-bottom:100px solid "+classmateBgColor[b]+";'></div>");
+
+});
+
+function createClassmate(id,name,school,clazz,desc,cover) {
+    if (OffOn === 0) {
+        $("#classmate-wrapper").append("<div data-classmateId='"+id+"' class='my-classmate' id='my-classmate-"+b+"' style='background-color:"+classmateBgColor[a]+"'><div class='container'><div class='col-sm-8 col-xs-8' style='text-align: right;'><h1>"+name+"</h1><h4>"+school+" "+clazz+"</h4><div id='liner'></div><h3>"+desc+"</h3></div><div class='col-sm-4 col-xs-4 classmate-cover'><img src='"+cover+"' alt='图' class='img-circle' id='classmate-cover-1' ></div></div></div><div class='create' id='create"+b+"' style='border-right:"+$(window).width()+"px solid "+classmateBgColor[a]+";border-bottom:100px solid "+classmateBgColor[b]+";'></div>");
         OffOn = 1;
     }else{
-        $("#classmate-wrapper").append("<div class='my-classmate' id='my-classmate-"+b+"' style='background-color:"+classmateBgColor[a]+"'><div class='container'><div class='col-sm-4 col-xs-4 classmate-cover'><img src='../../../static/images/classmate_cover.jpg' alt='图' class='img-circle' id='classmate-cover-1' ></div><div class='col-sm-8 col-xs-8' style='text-align: left;'><h1>朝花夕拾</h1><h4>华中科技大学 1401班</h4><div id='liner'></div><h3>如果你无法简洁的表达你的想法，那只说明你还不够了解它。-- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。-- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。-- 阿尔伯特·爱因斯坦</h3></div></div></div><div class='create' id='create"+b+"' style='border-left:"+$(window).width()+"px solid "+classmateBgColor[a]+";border-bottom:100px solid "+classmateBgColor[b]+";'></div>");
+        $("#classmate-wrapper").append("<div data-classmateId='"+id+"' class='my-classmate' id='my-classmate-"+b+"' style='background-color:"+classmateBgColor[a]+"'><div class='container'><div class='col-sm-4 col-xs-4 classmate-cover'><img src='"+cover+"' alt='图' class='img-circle' id='classmate-cover-1' ></div><div class='col-sm-8 col-xs-8' style='text-align: left;'><h1>"+name+"</h1><h4>"+school+" "+clazz+"</h4><div id='liner'></div><h3>"+desc+"</h3></div></div></div><div class='create' id='create"+b+"' style='border-left:"+$(window).width()+"px solid "+classmateBgColor[a]+";border-bottom:100px solid "+classmateBgColor[b]+";'></div>");
         OffOn = 0;
     }
 
@@ -33,7 +37,7 @@ $("#new-classmate").click(function(){
             b = 1;  //a为0时，a的下一个取值是1
         }
     }
-});
+}
 
 function getwidth(){
     $("#wrapper").css("height",$(window).height()+100+"px");
@@ -104,7 +108,36 @@ $("#close").click(function(){
 });
 
 // js加载完成后立即执行一次
-$(getwidth());
+$(function () {
+    getwidth();
+
+    $.ajax({
+        type:'POST',
+        url:'/classmate/myclassmates',
+        success:function (data) {
+            console.log(data);
+            if(data!==null&&data!==""){
+                if(data.statusCode===200){
+                    $.each(data.extend.classmates,function (index,item) {
+                        var desc=item.desc;
+                        var cover=item.cover;
+                        if(desc===null){
+                            desc="说点什么，让同学了解它吧。";
+                        }
+                        if(cover===null){
+                            cover="/static/images/classmate_cover.jpg";
+                        }
+                        createClassmate(item.id,item.name,item.school,item.clazz,desc,cover);
+                    });
+                }
+                else {
+                    // TODO 请求失败执行的操作
+                    alert(data.msg);
+                }
+            }
+        }
+    });
+});
 
 // 每次改变浏览器窗口都执行一次
 $(window).resize(function(){

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <title>无标题文档</title>
+    <title>我的同学录</title>
 
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
     <link rel="stylesheet" href="<c:url value="/static/css/myclassmate.css" />">
@@ -17,13 +17,13 @@
 <!-- 菜单框 -->
 <div class="menu-wrapper" id="menu-wrapper">
     <div class="menu-content" id="menu-content">
-        <img src="../../../static/images/close.png" alt="close" class="close" id="close">
+        <img src="<c:url value="/static/images/close.png" />" alt="close" class="close" id="close">
         <ul>
-            <li id="menu-first"><a href="#">首页</a></li>
-            <li><a href="#">我的同学录</a></li>
+            <li id="menu-first"><a href="<c:url value="/member/welcome" />">首页</a></li>
+            <li><a href="<c:url value="/classmate/myclassmates" />">我的同学录</a></li>
             <li><a href="#">青春瞬间</a></li>
             <li><a href="#">个人中心</a></li>
-            <li><a href="#">退出账号</a></li>
+            <li><a href="<c:url value="/logout" />">退出账号</a></li>
         </ul>
     </div>
 </div>
@@ -73,9 +73,7 @@
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
 <script src="<c:url value="/static/js/myclassmate.js" />"></script>
-<script>
 
-
-</script>
 </body>
+
 </html>
