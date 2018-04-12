@@ -3,10 +3,11 @@
 	padding: 0;
 }
 body{
-	background-image: url("/static/images/bg.jpg");
+	background-image: url("/static/images/classmatedetail_bg.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% 100% cover;
 }
+
 #menu{
 	width: 40px;
 	height: 40px;
@@ -69,7 +70,7 @@ body{
 	display: block;
 	text-decoration: none;
 	font-size: 1.5em;
-	font-weight: 550;
+	font-weight: 500;
 	line-height: 3em;
 	color: white;
 }
@@ -86,7 +87,7 @@ body{
 #menu-first{margin-top: 50px;}
 
 .header{
-	padding-top: 18%;
+	padding-top: 4%;
 	padding-left: 100px;
 	padding-right: 100px;
 }
@@ -101,12 +102,11 @@ h1,h3{
 	position: relative;
 	line-height: 1.3em;
 }
-#classmate-wrapper h1{opacity: 0.8;}
-.my-classmate h3,h4{
-	color: white;
-	opacity: 0.6;
+.wrapper .header h1{margin-bottom: 0;}
+.wrapper .header h3{
+	font-size: 1.5em;
+	opacity: 0.8;
 }
-.wrapper .header h3{opacity: 0.8}
 
 /*画线*/
 #liner{
@@ -138,55 +138,32 @@ h1,h3{
 	left: 24%;
 }
 
-/*创建新的同学录*/
-.new-classmate{
-	width: 250px;
-	position: absolute;
-	top: 95%;
-	padding-top: 80px;
+/*中间的图标操作*/
+.operation-wrapper{
+	padding-left: 100px;
+	padding-right: 100px;
 }
-.new-classmate a{
+.row{
+	height: 80px;
+	margin-top: 20px;
+}
+.operation{text-align: right;}
+.operation a{
+	color: white;
 	text-decoration: none;
-	border-bottom: 1px solid white;
 }
-
-/*同学录之间的三角形*/
-.create{
-	height: 100px;
-	background-color: rgba(95,77,147,0.6);
+.icon{
+	width: 50px;
+	height: 50px;
+	position: relative;
+	top: 14px;
+	left: 1px;
 }
-/*同学录统一高度*/
-.my-classmate{
-	height: 270px;
-}
-
-#classmate-cover-1{
-	width: 270px;
-	height: 270px;
-}
-.classmate-cover{
-	width: 300px;
-}
-
-/*屏幕宽度小于1000px,改变同学录封面大小;*/
-@media screen and (max-width: 1000px){
-	#classmate-cover-1{
-		width: 170px;
-		height: 170px;
-	}
-	.classmate-cover{
-		width: 200px;
-	}
-}
-/*屏幕宽度小于630px,改变同学录封面大小;*/
-@media screen and (max-width: 630px){
-	#classmate-cover-1{
-		width: 100px;
-		height: 100px;
-	}
-	.classmate-cover{
-		width: 130px;
-	}
+#invite,#edit,#delete{
+	background-color: white;
+	height: 80px;
+	width: 80px;
+	border-radius: 40px;
 }
 
 /*注脚*/
