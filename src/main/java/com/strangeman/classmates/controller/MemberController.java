@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -25,13 +24,21 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public ResultInfo register(String username,String password,Integer dynamicCode,String graphicCode,
-                               HttpServletRequest request){
+                               HttpSession session){
         ResultInfo result;
 
-        HttpSession session=request.getSession();
-        if(username!=null&&username.equals(session.getAttribute("username"))&&
-                dynamicCode!=null&&dynamicCode.equals(session.getAttribute("dynamicCode"))&&
-                graphicCode!=null&&graphicCode.equalsIgnoreCase((String) session.getAttribute("graphicCode"))){
+        if(username==null||!username.equals(session.getAttribute("username"))){
+            result=ResultInfo.fail("请输入获取验证码时所用帐号");
+        }
+        else if(dynamicCode==null||!dynamicCode.equals(session.getAttribute("dynamicCode"))
+                ||session.getAttribute("dynamicCodeTime")==null
+                ||System.currentTimeMillis()-(Integer)session.getAttribute("dynamicCodeTime")>5*60*1000){
+            result=ResultInfo.fail("动态验证码错误或已过时");
+        }
+        else if(graphicCode==null||!graphicCode.equalsIgnoreCase((String) session.getAttribute("graphicCode"))){
+            result=ResultInfo.fail("图形验证码错误");
+        }
+        else{
             if(memberService.hasExist(username)){
                 result=ResultInfo.fail("用户名已存在");
                 return result;
@@ -58,9 +65,7 @@ public class MemberController {
                 }
             }
         }
-        else {
-            result=ResultInfo.fail("数据格式错误");
-        }
+
         return result;
     }
 
@@ -71,10 +76,12 @@ public class MemberController {
 
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResultInfo login(String username,String password,String graphicCode,HttpServletRequest request){
+    public ResultInfo login(String username,String password,String graphicCode,HttpSession session){
         ResultInfo result;
 
-        if(graphicCode!=null&&graphicCode.equalsIgnoreCase((String) request.getSession().getAttribute("graphicCode"))){
+        session.removeAttribute("member");
+
+        if(graphicCode!=null&&graphicCode.equalsIgnoreCase((String) session.getAttribute("graphicCode"))){
             Member member=memberService.login(username,password);
             if(member==null){
                 result=ResultInfo.fail("用户名或密码不正确");
@@ -83,7 +90,8 @@ public class MemberController {
                 member.setPwd("");
 
                 result=ResultInfo.success("登录成功");
-                request.getSession().setAttribute("member",member);
+                session.setAttribute("member",member);
+                session.setMaxInactiveInterval(30*60);
             }
         }
         else {
@@ -115,18 +123,18 @@ public class MemberController {
 
     @ResponseBody
     @RequestMapping(value = "/member/welcome",method = RequestMethod.POST)
-    public ResultInfo welcome(HttpServletRequest request){
+    public ResultInfo welcome(HttpSession session){
         ResultInfo result;
 
-        if(request.getSession().getAttribute("member")==null){
+        if(session.getAttribute("member")==null){
             result=ResultInfo.fail("请重新登录");
         }
         else {
-            String userId=((Member)request.getSession().getAttribute("member")).getId();
+            String userId=((Member) session.getAttribute("member")).getId();
             int fans=attentionService.countFans(userId);
             int attentions=attentionService.countAttentions(userId);
 
-            result=ResultInfo.success("").add("member",request.getSession().getAttribute("member"))
+            result=ResultInfo.success("").add("member",session.getAttribute("member"))
                     .add("fans",fans).add("attentions",attentions);
         }
 

@@ -36,7 +36,7 @@
             -- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。
             -- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。
             -- 阿尔伯特·爱因斯坦</h3>
-        <a href="#new-classmate">
+        <a href="javascript:void(0)">
             <div class="mousedown"><span class="glyphicon glyphicon-menu-down" id="mousedown"></span>
             </div>
         </a>

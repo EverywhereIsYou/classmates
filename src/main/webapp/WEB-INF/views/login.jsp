@@ -93,13 +93,17 @@
         });
     });
     $("#verification").click(function () {
+        getVeriCode();
+    });
+    function getVeriCode() {
         var timeNow = new Date().getTime();
         $("#verification").attr("src", "<c:url value="/codeService/graphicCode?date=" />" + timeNow);
-    });
+    }
 
     $("#login").click(function () {
         $("#login").attr("disabled",true);
         $("#login").text("正 在 登 录");
+        getVeriCode();
 
         $.ajax({
             type: 'POST',
@@ -119,7 +123,7 @@
                 }
                 else {
                     // TODO 登录失败信息显示
-                    alert("login failed");
+                    alert(data.msg);
 
                     $("#login").attr("disabled",false);
                     $("#login").html("登&nbsp;&nbsp;&nbsp;&nbsp;录");

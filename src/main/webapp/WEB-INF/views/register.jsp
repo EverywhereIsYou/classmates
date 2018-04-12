@@ -106,13 +106,18 @@
     });
 
     $("#verification").click(function () {
+        getVeriCode();
+    });
+
+    function getVeriCode() {
         var timeNow = new Date().getTime();
         $("#verification").attr("src", "<c:url value="/codeService/graphicCode?date=" />" + timeNow);
-    });
+    }
 
     $("#register").click(function () {
         $("#register").attr("disabled",true);
         $("#register").text("正 在 进 行 注 册");
+        getVeriCode();
 
         $.ajax({
             type: 'POST',
@@ -135,7 +140,7 @@
                 }
                 else {
                     // TODO 注册失败之后的提示信息
-                    alert("register failed");
+                    alert(data.msg);
 
                     $("#register").attr("disabled",false);
                     $("#register").text("立即注册");
