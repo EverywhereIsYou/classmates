@@ -103,13 +103,14 @@
     $("#login").click(function () {
         $("#login").attr("disabled",true);
         $("#login").text("正 在 登 录");
-        getVeriCode();
 
         $.ajax({
             type: 'POST',
             url: "/login",
             data: $("#form_login").serialize(),
             error: function (request) {
+                getVeriCode();
+
                 // TODO 错误提示信息
                 alert("login error");
 
@@ -117,6 +118,8 @@
                 $("#login").html("登&nbsp;&nbsp;&nbsp;&nbsp;录");
             },
             success: function (data) {
+                getVeriCode();
+
                 if(data.statusCode===200){
                     $(location).attr("href","<c:url value="/member/welcome" />");
                     $("#login").html("登&nbsp;&nbsp;&nbsp;&nbsp;录");

@@ -32,10 +32,7 @@
     <div class="container header">
         <h1>我的同学录</h1>
         <div id="liner"></div>
-        <h3>如果你无法简洁的表达你的想法，那只说明你还不够了解它。
-            -- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。
-            -- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。
-            -- 阿尔伯特·爱因斯坦</h3>
+        <h3>那些带给你感动的，那些送给你温暖的，那些陪伴你青春的，那些能让你在寂静的夜里默默思念的任何事——都在这里。</h3>
         <a href="javascript:void(0)">
             <div class="mousedown"><span class="glyphicon glyphicon-menu-down" id="mousedown"></span>
             </div>
@@ -47,23 +44,6 @@
 </div>
 <div class="conatiner-fluid" id="classmate-wrapper">
     <div class="create" id="create0"></div>
-    <!-- <div class="my-classmate" id="my-classmate-1">
-        <div class="container">
-            <div class="col-sm-8 col-xs-8" style="text-align: right;">
-                <h1>朝花夕拾</h1>
-                <h4>华中科技大学 1401班</h4>
-                <div id="liner"></div>
-                <h3>如果你无法简洁的表达你的想法，那只说明你还不够了解它。
-                      -- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。
-                      -- 阿尔伯特·爱因斯坦如果你无法简洁的表达你的想法，那只说明你还不够了解它。
-                      -- 阿尔伯特·爱因斯坦</h3>
-            </div>
-            <div class="col-sm-4 col-xs-4 classmate-cover">
-                <img src="/static/images/classmate_cover.jpg" alt="图片" class="img-circle" id="classmate-cover-1" >
-            </div>
-        </div>
-    </div>
-    <div class="creat" id="creat1"></div> -->
 </div>
 
 <footer class="footer" id="footer">

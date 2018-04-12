@@ -15,7 +15,6 @@ $("#new-classmate").click(function () {
 function createClassmate(id, name, school, clazz, desc, cover) {
 
     var myClassmate = $("<div></div>", {
-        dataClassmateId: id,
         class: 'my-classmate',
         id: 'my-classmate-' + b,
         style: 'background-color:' + classmateBgColor[a]
@@ -25,6 +24,8 @@ function createClassmate(id, name, school, clazz, desc, cover) {
         class: 'col-sm-8 col-xs-8',
         style: 'text-align: ' + direction[OffOn]
     });
+    var toClassmateDetail=$("<a></a>",{href:'/classmate/classmateDetail?classmateId='+id});
+    var toClassmateDetailImage=$("<a></a>",{href:'/classmate/classmateDetail?classmateId='+id});
     var myClassmateName = $("<h1></h1>", {text: name});
     var schoolAndClass = $("<h4></h4>", {text: school + ' ' + clazz});
     var liner = $("<div></div>", {id: 'liner'});
@@ -45,26 +46,18 @@ function createClassmate(id, name, school, clazz, desc, cover) {
         style: 'border-bottom:100px solid ' + classmateBgColor[b]
     });
     if (OffOn === 0) {
-        $("#classmate-wrapper").append(
-            myClassmate.append(
-                myClassmateContainer.append(myClassmateInfo.append(myClassmateName)
-                                                            .append(schoolAndClass)
-                                                            .append(liner)
-                                                            .append(description))
-                    .append(classmateCover.append(coverImage))
-            )
-        ).append(create);
+        toClassmateDetail.append(myClassmateName).append(schoolAndClass).append(liner).append(description).appendTo(myClassmateInfo);
+        toClassmateDetailImage.append(coverImage).appendTo(classmateCover);
+        myClassmateContainer.append(myClassmateInfo).append(classmateCover).appendTo(myClassmate).appendTo($("#classmate-wrapper"));
+
+        // $("#classmate-wrapper").append(myClassmate.append(myClassmateContainer.append(myClassmateInfo.append(toClassmateDetail.append(myClassmateName)
+        //             .append(schoolAndClass).append(liner).append(description)))
+        //         .append(classmateCover.append(toClassmateDetail.append(coverImage))))).append(create);
         // $("#classmate-wrapper").append("<div data-classmateId='"+id+"' class='my-classmate' id='my-classmate-"+b+"' style='background-color:"+classmateBgColor[a]+"'><div class='container'><div class='col-sm-8 col-xs-8' style='text-align: right;'><h1>"+name+"</h1><h4>"+school+" "+clazz+"</h4><div id='liner'></div><h3>"+desc+"</h3></div><div class='col-sm-4 col-xs-4 classmate-cover'><img src='"+cover+"' alt='图' class='img-circle' id='classmate-cover-1' ></div></div></div><div class='create' id='create"+b+"' style='border-right:"+$(window).width()+"px solid "+classmateBgColor[a]+";border-bottom:100px solid "+classmateBgColor[b]+";'></div>");
         OffOn = 1;
     } else {
-        $("#classmate-wrapper").append(
-            myClassmate.append(
-                myClassmateContainer.append(classmateCover.append(coverImage))
-                    .append(myClassmateInfo.append(myClassmateName)
-                        .append(schoolAndClass)
-                        .append(liner)
-                        .append(description)
-                    )
+        $("#classmate-wrapper").append(myClassmate.append(myClassmateContainer.append(classmateCover.append(toClassmateDetail.append(coverImage)))
+                .append(myClassmateInfo.append(toClassmateDetail.append(myClassmateName).append(schoolAndClass).append(liner).append(description)))
             )
         ).append(create);
         // $("#classmate-wrapper").append("<div data-classmateId='"+id+"' class='my-classmate' id='my-classmate-"+b+"' style='background-color:"+classmateBgColor[a]+"'><div class='container'><div class='col-sm-4 col-xs-4 classmate-cover'><img src='"+cover+"' alt='图' class='img-circle' id='classmate-cover-1' ></div><div class='col-sm-8 col-xs-8' style='text-align: left;'><h1>"+name+"</h1><h4>"+school+" "+clazz+"</h4><div id='liner'></div><h3>"+desc+"</h3></div></div></div><div class='create' id='create"+b+"' style='border-left:"+$(window).width()+"px solid "+classmateBgColor[a]+";border-bottom:100px solid "+classmateBgColor[b]+";'></div>");
@@ -90,6 +83,7 @@ function createClassmate(id, name, school, clazz, desc, cover) {
     }
 }
 
+//获取浏览器的宽度，确定三角形的宽度，根据区域大小改变文字数量。
 function getwidth() {
     $("#wrapper").css("height", $(window).height() + 100 + "px");
     $("#wrapper").css("width", $(window).width() + "px");
@@ -158,7 +152,7 @@ $("#close").click(function () {
     $("#menu-wrapper").css("display", "none");
 });
 
-// js加载完成后立即执行一次
+// 页面加载完成后立即执行一次
 $(function () {
     getwidth();
 

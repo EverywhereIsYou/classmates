@@ -103,14 +103,9 @@
     </div>
 
 </div>
-
-
-
-
 	<script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 	<script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
     <script src="<c:url value="/static/js/common.js" />"></script>
 	<script src="<c:url value="/static/js/classmatedetail.js" />"></script>
-
 </body>
 </html>

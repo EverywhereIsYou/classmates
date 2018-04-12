@@ -6,6 +6,7 @@ import com.strangeman.classmates.service.ClassmateService;
 import com.strangeman.classmates.utils.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,7 +44,7 @@ public class ClassmateController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/classmateDetail")
+    @RequestMapping(value = "/classmateDetail",method = RequestMethod.POST)
     public ResultInfo classmateDetail(HttpSession session,String classmateId){
         ResultInfo result;
 
@@ -67,6 +68,13 @@ public class ClassmateController {
         }
 
         return result;
+    }
+
+    @RequestMapping(value = "classmateDetail",method = RequestMethod.GET)
+    public String classmateDetail(Model model,String classmateId){
+        model.addAttribute("classmateId",classmateId);
+
+        return "classmate/classmatedetail";
     }
 
     private boolean haveReadPermission(Member member,Classmate classmate) {

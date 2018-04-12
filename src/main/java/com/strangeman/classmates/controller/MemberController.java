@@ -7,7 +7,6 @@ import com.strangeman.classmates.utils.MyStringUtil;
 import com.strangeman.classmates.utils.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -108,14 +107,14 @@ public class MemberController {
 
     @RequestMapping(value = "/logout",method = RequestMethod.POST)
     @ResponseBody
-    public ResultInfo logout(HttpSession session, Model model){
+    public ResultInfo logout(HttpSession session){
         session.removeAttribute("member");
 
         return ResultInfo.success("退出登录成功");
     }
 
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
-    public String logout(HttpSession session){
+    public String logoutWithPage(HttpSession session){
         session.removeAttribute("member");
 
         return "login";

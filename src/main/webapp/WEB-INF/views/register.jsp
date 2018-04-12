@@ -117,13 +117,14 @@
     $("#register").click(function () {
         $("#register").attr("disabled",true);
         $("#register").text("正 在 进 行 注 册");
-        getVeriCode();
 
         $.ajax({
             type: 'POST',
             url: "<c:url value="/register" />",
             data: $("#fm").serialize(),
             error: function (request) {
+                getVeriCode();
+
                 // TODO 错误提示信息
                 alert("register error");
 
@@ -131,6 +132,8 @@
                 $("#register").text("立即注册");
             },
             success: function (data) {
+                getVeriCode();
+
                 if(data.statusCode===200){
                     // TODO 注册成功之后的提示信息
                     alert("register successfully");

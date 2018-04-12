@@ -28,7 +28,3 @@ $("#close").click(function(){
     $(".menu-content").removeClass("menu-content-in");
     $("#menu-wrapper").css("display","none");
 });
-
-$(".mousedown").click(function () {
-    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
-});
