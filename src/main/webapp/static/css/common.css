@@ -169,12 +169,12 @@ h1,h3{
 /*注脚*/
 footer {
     text-align: center;
-    margin: 0px auto;
+    margin: 0 auto;
     width: 100%;
     height: 140px;
     position: relative;
     padding-top: 100px;
-    bottom: 0px;
+    bottom: 0;
 }
 footer p {
     color: #fff;

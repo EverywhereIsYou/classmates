@@ -38,7 +38,9 @@
             </div>
         </a>
 
-        <div class="new-classmate" id="new-classmate"><a href="#"><h3><u>＋创建新的同学录</u></h3></a></div>
+        <div class="new-classmate" id="new-classmate">
+            <a href="#"><h3><u>＋创建新的同学录</u></h3></a>
+        </div>
     </div>
 
 </div>

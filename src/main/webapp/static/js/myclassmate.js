@@ -24,7 +24,10 @@ function createClassmate(id, name, school, clazz, desc, cover) {
         class: 'col-sm-8 col-xs-8',
         style: 'text-align: ' + direction[OffOn]
     });
-    var toClassmateDetail=$("<a></a>",{href:'/classmate/classmateDetail?classmateId='+id});
+    var toClassmateDetail=$("<a></a>",{
+        href:'/classmate/classmateDetail?classmateId='+id,
+        style:'text-decoration: none;'
+    });
     var toClassmateDetailImage=$("<a></a>",{href:'/classmate/classmateDetail?classmateId='+id});
     var myClassmateName = $("<h1></h1>", {text: name});
     var schoolAndClass = $("<h4></h4>", {text: school + ' ' + clazz});
@@ -48,19 +51,14 @@ function createClassmate(id, name, school, clazz, desc, cover) {
     if (OffOn === 0) {
         toClassmateDetail.append(myClassmateName).append(schoolAndClass).append(liner).append(description).appendTo(myClassmateInfo);
         toClassmateDetailImage.append(coverImage).appendTo(classmateCover);
-        myClassmateContainer.append(myClassmateInfo).append(classmateCover).appendTo(myClassmate).appendTo($("#classmate-wrapper"));
-
-        // $("#classmate-wrapper").append(myClassmate.append(myClassmateContainer.append(myClassmateInfo.append(toClassmateDetail.append(myClassmateName)
-        //             .append(schoolAndClass).append(liner).append(description)))
-        //         .append(classmateCover.append(toClassmateDetail.append(coverImage))))).append(create);
-        // $("#classmate-wrapper").append("<div data-classmateId='"+id+"' class='my-classmate' id='my-classmate-"+b+"' style='background-color:"+classmateBgColor[a]+"'><div class='container'><div class='col-sm-8 col-xs-8' style='text-align: right;'><h1>"+name+"</h1><h4>"+school+" "+clazz+"</h4><div id='liner'></div><h3>"+desc+"</h3></div><div class='col-sm-4 col-xs-4 classmate-cover'><img src='"+cover+"' alt='图' class='img-circle' id='classmate-cover-1' ></div></div></div><div class='create' id='create"+b+"' style='border-right:"+$(window).width()+"px solid "+classmateBgColor[a]+";border-bottom:100px solid "+classmateBgColor[b]+";'></div>");
+        myClassmateContainer.append(myClassmateInfo).append(classmateCover).appendTo(myClassmate);
+        $("#classmate-wrapper").append(myClassmate).append(create);
         OffOn = 1;
     } else {
-        $("#classmate-wrapper").append(myClassmate.append(myClassmateContainer.append(classmateCover.append(toClassmateDetail.append(coverImage)))
-                .append(myClassmateInfo.append(toClassmateDetail.append(myClassmateName).append(schoolAndClass).append(liner).append(description)))
-            )
-        ).append(create);
-        // $("#classmate-wrapper").append("<div data-classmateId='"+id+"' class='my-classmate' id='my-classmate-"+b+"' style='background-color:"+classmateBgColor[a]+"'><div class='container'><div class='col-sm-4 col-xs-4 classmate-cover'><img src='"+cover+"' alt='图' class='img-circle' id='classmate-cover-1' ></div><div class='col-sm-8 col-xs-8' style='text-align: left;'><h1>"+name+"</h1><h4>"+school+" "+clazz+"</h4><div id='liner'></div><h3>"+desc+"</h3></div></div></div><div class='create' id='create"+b+"' style='border-left:"+$(window).width()+"px solid "+classmateBgColor[a]+";border-bottom:100px solid "+classmateBgColor[b]+";'></div>");
+        toClassmateDetail.append(myClassmateName).append(schoolAndClass).append(liner).append(description).appendTo(myClassmateInfo);
+        toClassmateDetailImage.append(coverImage).appendTo(classmateCover);
+        myClassmateContainer.append(classmateCover).append(myClassmateInfo).appendTo(myClassmate);
+        $("#classmate-wrapper").append(myClassmate).append(create);
         OffOn = 0;
     }
 
@@ -190,5 +188,5 @@ $(window).resize(function () {
 });
 //点击向下按钮，向下滑动到同学录
 $(".mousedown").click(function () {
-    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
+    $("html,body").animate({scrollTop: $("#new-classmate").offset().top}, 1000);
 });
