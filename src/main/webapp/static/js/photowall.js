@@ -81,6 +81,10 @@ function addPhoto() {
 //点击添加新的照片调用addPhoto()
 $("#add-new-photo").click(function () {
     addPhoto();
+    $(".photo-wrapper").click(function () {
+        $(".show-wrapper").removeClass("hidden").addClass("show");
+        photoToLarge();
+    });
     photoWallWrapperHeight();
 });
 
@@ -103,10 +107,7 @@ function photoToLarge() {
         }, 1100, "swing");
     }
 }
-$(".photo-cntent").on("click",".photo-wrapper",function () {
-    $(".show-wrapper").removeClass("hidden").addClass("show");
-    photoToLarge();
-});
+
 $("#photo-close").click(function () {
     $(".show-wrapper").removeClass("show").addClass("hidden");
 });
