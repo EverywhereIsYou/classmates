@@ -47,6 +47,10 @@ public class Paper {
 
     private String customizeFiled;
 
+    private String authorName;
+
+    private String authorAvatar;
+
     public String getId() {
         return id;
     }
@@ -229,5 +233,21 @@ public class Paper {
 
     public void setCustomizeFiled(String customizeFiled) {
         this.customizeFiled = customizeFiled == null ? null : customizeFiled.trim();
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getAuthorAvatar() {
+        return authorAvatar;
+    }
+
+    public void setAuthorAvatar(String authorAvatar) {
+        this.authorAvatar = authorAvatar;
     }
 }

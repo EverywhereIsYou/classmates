@@ -32,10 +32,11 @@
 <div class="wrapper" id="wrapper">
     <a href="javascript:void(0)"><img src="<c:url value="/static/images/menu.png" />" alt="图片" id="menu"></a>
     <div class="container header">
-        <!-- <h1>我的同学录</h1>
+        <h1 id="classmate-name">&nbsp;</h1>
+        <h3 id="school-class">&nbsp;</h3>
         <div id="liner"></div>
-        <h3>如果你无法简洁的表达你的想法，那只说明你还不够了解它。
-            -- 阿尔伯特·爱因斯坦</h3> -->
+        <h3 id="classmate-desc">&nbsp;</h3>
+        <input id="classmate_id" class="hidden" value="${classmateId}" />
         <a href="javascript:void(0)">
             <div class="mousedown"><span class="glyphicon glyphicon-menu-down" id="mousedown"></span>
             </div>
@@ -67,21 +68,25 @@
 <div class="classmate-detail-wrapper" id="classmate-detail-wrapper">
     <div class="container">
         <div class="paper" id="paper">
-            <div class="paper-header">
-                <!--<a href="#"><img src="../../../../static/images/avatar.png" alt="头像" id="avatar" class="img-circle img-responsive avatar"></a>-->
-                <!--<a href="javascript:void(0)"><h3>李四</h3></a>-->
-                <!--<h6>填写于 2018年4月11日</h6>-->
+            <input id="paper-number" class="hidden" />
+            <input id="paper-id" class="hidden" />
+            <input id="author-id" class="hidden"/>
+
+            <div class="paper-header" id="paper-header">
+                <a href="javascript:void(0)"><img src="<c:url value="/static/images/avatar.png" />" alt="头像" id="avatar" class="img-circle img-responsive avatar"></a>
+                <a href="javascript:void(0)" id="author-name"><h3>李四</h3></a>
+                <h6 id="create-time">填写于</h6>
                 <a href="javascript:void(0)"><img src="<c:url value="/static/images/delete_2.png" />" alt="删除" id="delete2" data-toggle="tooltip" title="删除本页同学录"></a>
             </div>
 
-            <div class="paper-content">
+            <div class="paper-content" id="paper-content">
                 <p id="name">姓名：</p>
                 <p id="nickname">昵称：</p>
                 <p id="sex">性别：</p>
                 <p id="birthday">生日：</p>
                 <p id="address">能收到信的地方：</p>
                 <p id="phone">常用电话：</p>
-                <p id="email">email：</p>
+                <p id="email">邮箱：</p>
                 <p id="qq">QQ：</p>
                 <p id="wechat">微信：</p>
                 <p id="fav-movie">最喜欢的电影：</p>
