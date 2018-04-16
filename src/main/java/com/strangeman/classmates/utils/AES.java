@@ -3,20 +3,18 @@ package com.strangeman.classmates.utils;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class AES {
     private static final String ALGORITHM = "AES";
     private static final String SEED="542541";
-    private static final String KEY_PATH="D:\\work\\project\\classmates\\aestest.txt";
-
     private static SecretKey secretKey;
+
+    private static final Lock lock=new ReentrantLock();
 
     public static String encrypt(String original) throws Exception{
         if(original==null||"".equals(original)){
@@ -47,16 +45,16 @@ public class AES {
     }
 
     private static SecretKey getKey(){
+        lock.lock();
         if(AES.secretKey==null) {
-            SecretKey secretKey = readKey();
+            secretKey = generateKey();
+
             if (secretKey == null) {
-                secretKey = generateKey();
-            }
-            if (secretKey == null) {
+                lock.unlock();
                 throw new RuntimeException("无法获取到密钥");
             }
-            AES.secretKey=secretKey;
         }
+        lock.unlock();
 
         return secretKey;
     }
@@ -72,28 +70,6 @@ public class AES {
         SecureRandom random=new SecureRandom();
         random.setSeed(SEED.getBytes());
         generator.init(random);
-        SecretKey secretKey=generator.generateKey();
-
-        if(secretKey!=null) {
-            try {
-                Files.write(Paths.get(KEY_PATH), secretKey.getEncoded());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return secretKey;
-    }
-
-    private static SecretKey readKey(){
-        byte[] keyBytes;
-        try {
-            keyBytes = Files.readAllBytes(Paths.get(KEY_PATH));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return keyBytes.length==0?null:new SecretKeySpec(keyBytes,ALGORITHM);
+        return generator.generateKey();
     }
 }

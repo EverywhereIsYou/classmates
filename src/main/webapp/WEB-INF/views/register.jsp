@@ -19,7 +19,7 @@
     <img src="<c:url value="/static/images/logo2.png" />" alt="图片" id="logo" class="img-responsive center-block">
 </header>
 
-<form class="form-horizontal" id="fm" autocomplete="off">
+<form class="form-horizontal" id="fm" autocomplete="off" onkeydown="if(event.keyCode===13){return false;}">
 
     <div class="form-group">
         <label class="col-sm-4 control-label">手机/邮箱：</label>
@@ -68,7 +68,7 @@
 
     <div class="form-group">
         <div class="col-sm-4 col-sm-push-4">
-            <button class="btn" id="register"><span>立即注册</span></button>
+            <button class="btn" id="register" type="button"><span>立即注册</span></button>
         </div>
     </div>
 
@@ -122,11 +122,13 @@
             type: 'POST',
             url: "<c:url value="/register" />",
             data: $("#fm").serialize(),
-            error: function (request) {
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
                 getVeriCode();
 
                 // TODO 错误提示信息
                 alert("register error");
+                alert(XMLHttpRequest.status);
+                alert(textStatus);
 
                 $("#register").attr("disabled",false);
                 $("#register").text("立即注册");
@@ -186,6 +188,12 @@
             },1000);
         }
     }
+
+    $(document).keydown(function(event){
+        if(event.keyCode===13){
+            $("#register").trigger("click");
+        }
+    });
 </script>
 
 </body>

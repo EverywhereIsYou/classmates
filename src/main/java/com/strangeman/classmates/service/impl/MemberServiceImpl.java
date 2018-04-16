@@ -3,6 +3,7 @@ package com.strangeman.classmates.service.impl;
 import com.strangeman.classmates.bean.Member;
 import com.strangeman.classmates.dao.MemberMapper;
 import com.strangeman.classmates.service.MemberService;
+import com.strangeman.classmates.utils.AES;
 import com.strangeman.classmates.utils.DataFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,6 +22,12 @@ public class MemberServiceImpl implements MemberService{
     public boolean register(Member member) {
         member.setId(UUID.randomUUID().toString());
         member.setCreateTime(DataFactory.getCurrentTime());
+        try {
+            member.setPwd(AES.encrypt(member.getPwd()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 
         log.info("register user:"+((member.getPhone()==null)?member.getEmail():member.getPhone()));
 
@@ -35,7 +42,15 @@ public class MemberServiceImpl implements MemberService{
         Member member=memberMapper.selectByUsername(username);
 
         if(member!=null){
-            if(member.getPwd().equals(password)){
+            String pwd;
+            try {
+                pwd=AES.decrypt(member.getPwd());
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
+            if(pwd.equals(password)){
                 log.info("user:"+username+" login successfully");
                 return member;
             }

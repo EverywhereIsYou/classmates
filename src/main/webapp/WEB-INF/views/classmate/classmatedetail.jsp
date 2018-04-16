@@ -74,7 +74,7 @@
 
             <div class="paper-header" id="paper-header">
                 <a href="javascript:void(0)"><img src="<c:url value="/static/images/avatar.png" />" alt="头像" id="avatar" class="img-circle img-responsive avatar"></a>
-                <a href="javascript:void(0)" id="author-name"><h3>李四</h3></a>
+                <a href="javascript:void(0)"><h3 id="author-name">李四</h3></a>
                 <h6 id="create-time">填写于</h6>
                 <a href="javascript:void(0)"><img src="<c:url value="/static/images/delete_2.png" />" alt="删除" id="delete2" data-toggle="tooltip" title="删除本页同学录"></a>
             </div>
@@ -99,10 +99,10 @@
 
                 <img id="photo" class="img-responsive" src="" alt="">
             </div>
-            <a href="#"><div class="col-sm-3 col-xs-3 navigation" id="pre">上一页</div></a>
-            <a href="#"><div class="col-sm-3 col-xs-3 navigation" id="photo-wall">照片墙</div></a>
-            <a href="#"><div class="col-sm-3 col-xs-3 navigation" id="comment-wall">留言墙</div></a>
-            <a href="#"><div class="col-sm-3 col-xs-3 navigation" id="next">下一页</div></a>
+            <a href="javascript:void(0)"><div class="col-sm-3 col-xs-3 navigation" id="pre">上一页</div></a>
+            <a href="javascript:void(0)"><div class="col-sm-3 col-xs-3 navigation" id="photo-wall">照片墙</div></a>
+            <a href="javascript:void(0)"><div class="col-sm-3 col-xs-3 navigation" id="comment-wall">留言墙</div></a>
+            <a href="javascript:void(0)"><div class="col-sm-3 col-xs-3 navigation" id="next">下一页</div></a>
         </div>
 
     </div>

@@ -31,7 +31,7 @@ public class MemberController {
         }
         else if(dynamicCode==null||!dynamicCode.equals(session.getAttribute("dynamicCode"))
                 ||session.getAttribute("dynamicCodeTime")==null
-                ||System.currentTimeMillis()-(Integer)session.getAttribute("dynamicCodeTime")>5*60*1000){
+                ||System.currentTimeMillis()-(Long)session.getAttribute("dynamicCodeTime")>5*60*1000){
             result=ResultInfo.fail("动态验证码错误或已过时");
         }
         else if(graphicCode==null||!graphicCode.equalsIgnoreCase((String) session.getAttribute("graphicCode"))){
@@ -117,7 +117,7 @@ public class MemberController {
     public String logoutWithPage(HttpSession session){
         session.removeAttribute("member");
 
-        return "login";
+        return "redirect:/login";
     }
 
     @ResponseBody

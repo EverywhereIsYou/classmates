@@ -24,7 +24,7 @@
             </a>
         </header>
 
-        <form class="form-horizontal" id="form_login" autocomplete="off">
+        <form class="form-horizontal" id="form_login" autocomplete="off" onkeydown="if(event.keyCode===13){return false;}">
 
             <div class="form-group">
                 <div class="col-xs-10 col-xs-offset-1 text">
@@ -101,6 +101,10 @@
     }
 
     $("#login").click(function () {
+        login();
+    });
+
+    function login() {
         $("#login").attr("disabled",true);
         $("#login").text("正 在 登 录");
 
@@ -108,11 +112,12 @@
             type: 'POST',
             url: "/login",
             data: $("#form_login").serialize(),
-            error: function (request) {
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
                 getVeriCode();
 
                 // TODO 错误提示信息
                 alert("login error");
+                alert(XMLHttpRequest.status);
 
                 $("#login").attr("disabled",false);
                 $("#login").html("登&nbsp;&nbsp;&nbsp;&nbsp;录");
@@ -133,17 +138,14 @@
                 }
             }
         });
-    });
-    //回车绑定鼠标点击
-    $("#form_login").keydown(function(e){
-        var e = e || event,
-            keycode = e.which || e.keyCode;
-        if (keycode === 13) {
+    }
+
+    //回车触发登录
+    $(document).keydown(function(event){
+        if(event.keyCode===13){
             $("#login").trigger("click");
         }
     });
-
-
 </script>
 </body>
 </html>

@@ -42,7 +42,7 @@ function getDetailInfo() {
                         $("#paper-content").html("");
                     }
                     else {
-                        authorInfo(0);
+                        setPaper(0);
                     }
                 }
             }
@@ -60,7 +60,7 @@ function classmateHeader(name,school_clazz,desc){
     $("#classmate-desc").text(desc);
 }
 
-function authorInfo(number) {
+function setPaper(number) {
     if(number<0||number>=classmate.papers.length){
         return;
     }
@@ -103,22 +103,61 @@ function authorInfo(number) {
     $("#fav-thing-to-do").text("最想做的事情："+paper.favThingToDo);
     $("#special-in-class").text("上课做过最奇葩的事情："+paper.specialInClass);
     $("#word-to-me").text("简单聊聊我吧："+paper.wordToMe);
+}
 
-    // var aA = $("<a></a>",{href: 'javascript:void(0)'});
-    // var avatar = $("<img>",{
-    //     src: "/static/images/avatar.png",
-    //     alt: '头像',
-    //     id: 'avatar',
-    //     class: 'img-circle img-responsive avatar'
-    // });
-    // var author = $("<h3></h3>",{text: '李四'});
-    // var writeTime = $("<h6></h6>",{text: '填写于 2018年4月11日'});
-    //
-    // $(".paper-header").append(aA.append(avatar))
-    //     .append(aA.append(author))
-    //     .append(writeTime);
+function getComments() {
+    if(classmate===undefined||classmate===null){
+        alert("没有查询到该同学录数据");
+        return;
+    }
+    $("#paper-number").text(classmate.papers.length);
+    alert("comments");
 }
 
 $(".mousedown").click(function () {
     $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
+});
+
+$("#pre").click(function () {
+    if(classmate===undefined||classmate===null){
+        alert("没有查询到该同学录数据");
+        return;
+    }
+    if(classmate.papers.length===0){
+        alert("还没有同学填写该同学录");
+        return;
+    }
+    var paperNumber=parseInt($("#paper-number").text());
+    if(paperNumber===0){
+        alert("已经是第一页了");
+        return;
+    }
+    setPaper(paperNumber-1);
+    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
+});
+
+$("#next").click(function () {
+    if(classmate===undefined||classmate===null){
+        alert("没有查询到该同学录数据");
+        return;
+    }
+    if(classmate.papers.length===0){
+        alert("还没有同学填写该同学录");
+        return;
+    }
+    var paperNumber=parseInt($("#paper-number").text());
+    if(paperNumber===classmate.papers.length-1){
+        getComments();
+        return;
+    }
+    if(paperNumber===classmate.papers.length){
+        alert("已经是最后一页了");
+        return;
+    }
+    setPaper(paperNumber+1);
+    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
+});
+
+$("#comment-wall").click(function () {
+    getComments();
 });
