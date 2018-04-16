@@ -37,12 +37,63 @@
             <div class="mousedown"><span class="glyphicon glyphicon-menu-down" id="mousedown"></span>
             </div>
         </a>
-
         <div class="new-classmate" id="new-classmate">
-            <a href="#"><h3><u>＋创建新的同学录</u></h3></a>
+            <a href="javascript:void(0)"><h3 id="create-myclassmate"><u>＋创建新的同学录</u></h3></a>
         </div>
     </div>
-
+</div>
+<%--创建同学录的模态框--%>
+<div class="create-myclassmate-wrapper hidden">
+    <div class="create-myclassmate-content">
+        <div class="create-myclassmate-header">
+            <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="create-myclassmate-close">
+            <h3 class="create-myclassmate-title">创建新的同学录</h3>
+        </div>
+        <div class="create-myclassmate-body">
+            <form class="form-horizontal" id="myclassmate-fm" autocomplete="off">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">同学录封面：</label>
+                    <div class="col-sm-8" id="my-classmate-cover">
+                        <input type="file" name="classmatecover" class="input-upload" placeholder="" id="classmatecover" accept="image/*" onchange="imgPreview(this)">
+                        <a href="javascript:void(0);"><u>＋上传封面</u></a>
+                    <img id="preview" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">同学录名称：</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="classmatename" class="form-control" placeholder="" id="classmatename">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">所属学校：</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="scholl" class="form-control" placeholder="" id="scholl">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">所属班级：</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="clazz" class="form-control" placeholder="" id="clazz">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">简单说明：</label>
+                    <div class="col-sm-8">
+                        <textarea type="text" name="dec" class="form-control" placeholder="" id="dec"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">个性定制：</label>
+                </div>
+                <div class="form-group create-btn">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <button class="btn" id="sure-create" type="button">确&nbsp;&nbsp;认&nbsp;&nbsp;创&nbsp;&nbsp;建</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <div class="conatiner-fluid" id="classmate-wrapper">
     <div class="create" id="create0"></div>

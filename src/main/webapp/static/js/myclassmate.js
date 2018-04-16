@@ -8,12 +8,7 @@ var dir = true;  //用于来回循环
 // footer的背景颜色
 $("footer").css("background-color", classmateBgColor[0]);
 
-$("#new-classmate").click(function () {
-
-});
-
 function createClassmate(id, name, school, clazz, desc, cover) {
-
     var myClassmate = $("<div></div>", {
         class: 'my-classmate',
         id: 'my-classmate-' + b,
@@ -150,8 +145,59 @@ $("#close").click(function () {
     $("#menu-wrapper").css("display", "none");
 });
 
+//创建同学录框的弹出与退出
+$("#create-myclassmate").click(function () {
+    $(".create-myclassmate-wrapper").removeClass("hidden").addClass("show");
+    $(".create-myclassmate-content").addClass("create-myclassmate-content-in");
+});
+$("#create-myclassmate-close").click(function () {
+    $(':input','#myclassmate-fm')
+        .not(':button, :submit, :reset, :hidden')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('selected');
+    $("#preview").attr("src","");
+    $(".create-myclassmate-wrapper").removeClass("show").addClass("hidden");
+    $(".create-myclassmate-content").removeClass("create-myclassmate-content-in");
+});
+
+//上传图片的预览
+function imgPreview(fileDom){
+    //判断是否支持FileReader
+    if (window.FileReader) {
+        var reader = new FileReader();
+    } else {
+        alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+    }
+    //获取文件
+    var file = fileDom.files[0];
+    var imageType = /^image\//;
+    //是否是图片
+    if (!imageType.test(file.type)) {
+        alert("请选择图片！");
+        return;
+    }
+    //读取完成
+    reader.onload = function(e) {
+        //获取图片dom
+        var img = $("#preview");
+        //图片路径设置为读取的图片
+        img.attr("src",e.target.result);
+        img.css("max-width","200px");
+        img.css("max-height","200px");
+    };
+    reader.readAsDataURL(file);
+}
+
 // 页面加载完成后立即执行一次
 $(function () {
+    $("input").focus(function () {
+        $(this).addClass("glowing");
+    });
+    $("input").blur(function () {
+        $(this).removeClass("glowing");
+    });
+
     getwidth();
 
     $.ajax({
@@ -180,6 +226,29 @@ $(function () {
             }
         }
     });
+    
+    //限制简单说明输入字数
+    // $("#dec").bind('input propertychange',function(){
+    //     var maxlength = '2000';
+    //     checkContent(this,maxlength);
+    // });
+    // $("#dec").bind("input propertychange",function () {
+    //     var maxlenght = "50";
+    //     checkContent(this,maxlenght);
+    // });
+    // function checkContent(obj,max) {
+    //     debugger;
+    //     var decInfo = $(obj).val();
+    //     if (decInfo > max){
+    //         $(obj).val(decInfo.substring(0,max));
+    //         $(obj).tips({
+    //             side:3,
+    //             msg:"只能填50个字",
+    //             bg:"#ae81ff",
+    //             times:1
+    //         });
+    //     }
+    // }
 });
 
 // 每次改变浏览器窗口都执行一次
@@ -190,3 +259,4 @@ $(window).resize(function () {
 $(".mousedown").click(function () {
     $("html,body").animate({scrollTop: $("#new-classmate").offset().top}, 1000);
 });
+
