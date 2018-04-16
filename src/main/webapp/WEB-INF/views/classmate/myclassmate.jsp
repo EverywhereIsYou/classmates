@@ -19,11 +19,11 @@
     <div class="menu-content" id="menu-content">
         <img src="<c:url value="/static/images/close.png" />" alt="close" class="close" id="close">
         <ul>
-            <li id="menu-first"><a href="<c:url value="/member/welcome" />">首页</a></li>
-            <li><a href="<c:url value="/classmate/myclassmates" />">我的同学录</a></li>
+            <li id="menu-first"><a href="<c:url value='/member/welcome' />">首页</a></li>
+            <li><a href="<c:url value='/classmate/myclassmates' />">我的同学录</a></li>
             <li><a href="#">青春瞬间</a></li>
             <li><a href="#">个人中心</a></li>
-            <li><a href="<c:url value="/logout" />">退出账号</a></li>
+            <li><a href="<c:url value='/logout' />">退出账号</a></li>
         </ul>
     </div>
 </div>
