@@ -27,8 +27,8 @@ public interface PaperMapper {
 
     int updateByExample(@Param("record") Paper record, @Param("example") PaperExample example);
 
-    @Select("select * from "
+    @Select("select paper.*,member.nickname as author_name,member.avatar as author_avatar from "
             + table_name
-            + " where classmate_id=#{classmateId}")
+            + " left join member on(paper.author_id=member.id) where classmate_id=#{classmateId}")
     List<Paper> selectPapersByClassmateId(@Param("classmateId") String classmateId);
 }
