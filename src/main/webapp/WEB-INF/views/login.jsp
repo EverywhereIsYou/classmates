@@ -134,6 +134,14 @@
             }
         });
     });
+    //回车绑定鼠标点击
+    $("#form_login").keydown(function(e){
+        var e = e || event,
+            keycode = e.which || e.keyCode;
+        if (keycode === 13) {
+            $("#login").trigger("click");
+        }
+    });
 
 
 </script>
