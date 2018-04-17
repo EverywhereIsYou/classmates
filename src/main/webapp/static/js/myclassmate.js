@@ -191,6 +191,10 @@ function imgPreview(fileDom){
 
 // 页面加载完成后立即执行一次
 $(function () {
+    getClassmates();
+});
+
+function getClassmates() {
     $("input").focus(function () {
         $(this).addClass("glowing");
     });
@@ -207,8 +211,9 @@ $(function () {
             console.log(data);
             if (data !== null && data !== "") {
                 if (data.statusCode === 200) {
+                    init();
                     $.each(data.extend.classmates, function (index, item) {
-                        var desc = item.desc;
+                        var desc = item.description;
                         var cover = item.cover;
                         if (desc === null) {
                             desc = "说点什么，让同学了解它吧。";
@@ -226,7 +231,15 @@ $(function () {
             }
         }
     });
-});
+}
+
+function init() {
+    a=0;
+    b=1;
+    OffOn = 0;
+    fir=true;
+    $("#classmate-wrapper").html('<div class="create" id="create0"></div>');
+}
 
 // 每次改变浏览器窗口都执行一次
 $(window).resize(function () {
@@ -241,6 +254,14 @@ function createNewClassmate() {
     $.post("/classmate/createClassmate",$("#myclassmate-fm").serialize(),
         function (data) {
             console.log(data);
+            if(data.statusCode===200){
+                alert("同学录创建成功");
+                $("#create-myclassmate-close").trigger("click");
+                getClassmates();
+            }
+            else{
+                alert(data.msg);
+            }
         }
     );
 }

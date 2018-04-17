@@ -6,7 +6,7 @@
     <result column="school" jdbcType="VARCHAR" property="school" />
     <result column="clazz" jdbcType="VARCHAR" property="clazz" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="desc" jdbcType="LONGVARCHAR" property="desc" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
     <result column="owner_id" jdbcType="VARCHAR" property="ownerId" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
     <result column="permission" jdbcType="INTEGER" property="permission" />
@@ -76,7 +76,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, school, clazz, name,desc, owner_id, cover, permission, create_time, last_modify_time
+    id, school, clazz, name,description, owner_id, cover, permission, create_time, last_modify_time
   </sql>
   <sql id="Blob_Column_List">
     photo_wall, customize_filed
@@ -119,11 +119,11 @@
   </delete>
   <insert id="insert" parameterType="com.strangeman.classmates.bean.Classmate">
     insert into classmate (id, school, clazz, 
-      name,desc owner_id, cover,
+      name,description,owner_id, cover,
       permission, create_time, last_modify_time, 
       photo_wall, customize_filed)
     values (#{id,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{clazz,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR},#{desc,jdbcType=LONGVARCHAR}, #{ownerId,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR},#{description,jdbcType=LONGVARCHAR}, #{ownerId,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR},
       #{permission,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=VARCHAR}, 
       #{photoWall,jdbcType=LONGVARCHAR}, #{customizeFiled,jdbcType=LONGVARCHAR})
   </insert>
@@ -142,8 +142,8 @@
       <if test="name != null">
         name,
       </if>
-      <if test="desc != null">
-        desc,
+      <if test="description != null">
+        description,
       </if>
       <if test="ownerId != null">
         owner_id,
@@ -180,8 +180,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=LONGVARCHAR},
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
       </if>
       <if test="ownerId != null">
         #{ownerId,jdbcType=VARCHAR},
@@ -227,8 +227,8 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.desc != null">
-        name = #{record.desc,jdbcType=LONGVARCHAR},
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.ownerId != null">
         owner_id = #{record.ownerId,jdbcType=VARCHAR},
@@ -262,7 +262,7 @@
       school = #{record.school,jdbcType=VARCHAR},
       clazz = #{record.clazz,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      desc = #{record.desc,jdbcType=LONGVARCHAR},
+      description = #{record.description,jdbcType=LONGVARCHAR},
       owner_id = #{record.ownerId,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
       permission = #{record.permission,jdbcType=INTEGER},
@@ -280,7 +280,7 @@
       school = #{record.school,jdbcType=VARCHAR},
       clazz = #{record.clazz,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      desc = #{record.desc,jdbcType=LONGVARCHAR},
+      description = #{record.description,jdbcType=LONGVARCHAR},
       owner_id = #{record.ownerId,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
       permission = #{record.permission,jdbcType=INTEGER},

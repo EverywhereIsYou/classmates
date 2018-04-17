@@ -28,7 +28,7 @@ function getDetailInfo() {
             if(data.statusCode===200){
                 classmate=data.extend.classmate;
                 if(classmate!==undefined&&classmate!=null){
-                    var desc=classmate.desc;
+                    var desc=classmate.description;
                     if(desc===null||desc===''){
                         desc=' ';
                     }

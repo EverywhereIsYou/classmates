@@ -11,7 +11,7 @@ public class Classmate {
 
     private String name;
 
-    private String desc;
+    private String description;
 
     private String ownerId;
 
@@ -63,12 +63,12 @@ public class Classmate {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getOwnerId() {
@@ -150,7 +150,7 @@ public class Classmate {
                 ", school='" + school + '\'' +
                 ", clazz='" + clazz + '\'' +
                 ", name='" + name + '\'' +
-                ", desc='" + desc + '\'' +
+                ", description='" + description + '\'' +
                 ", ownerId='" + ownerId + '\'' +
                 ", cover='" + cover + '\'' +
                 ", permission=" + permission +
