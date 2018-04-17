@@ -40,4 +40,14 @@ public class Liker {
     public void setContentId(String contentId) {
         this.contentId = contentId == null ? null : contentId.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Liker{" +
+                "id='" + id + '\'' +
+                ", ownerId='" + ownerId + '\'' +
+                ", contentType='" + contentType + '\'' +
+                ", contentId='" + contentId + '\'' +
+                '}';
+    }
 }

@@ -142,4 +142,24 @@ public class Classmate {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
+    @Override
+    public String toString() {
+        return "Classmate{" +
+                "id='" + id + '\'' +
+                ", school='" + school + '\'' +
+                ", clazz='" + clazz + '\'' +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", ownerId='" + ownerId + '\'' +
+                ", cover='" + cover + '\'' +
+                ", permission=" + permission +
+                ", createTime='" + createTime + '\'' +
+                ", lastModifyTime='" + lastModifyTime + '\'' +
+                ", photoWall='" + photoWall + '\'' +
+                ", customizeFiled='" + customizeFiled + '\'' +
+                ", papers=" + papers +
+                ", comments=" + comments +
+                '}';
+    }
 }

@@ -60,4 +60,16 @@ public class Attention {
     public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
+
+    @Override
+    public String toString() {
+        return "Attention{" +
+                "id='" + id + '\'' +
+                ", fanId='" + fanId + '\'' +
+                ", attentionId='" + attentionId + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", lastModifyTime='" + lastModifyTime + '\'' +
+                ", deleteFlag=" + deleteFlag +
+                '}';
+    }
 }

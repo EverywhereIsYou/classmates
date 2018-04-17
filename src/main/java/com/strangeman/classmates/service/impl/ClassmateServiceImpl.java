@@ -5,10 +5,13 @@ import com.strangeman.classmates.dao.ClassmateMapper;
 import com.strangeman.classmates.dao.CommentMapper;
 import com.strangeman.classmates.dao.PaperMapper;
 import com.strangeman.classmates.service.ClassmateService;
+import com.strangeman.classmates.utils.DataFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ClassmateServiceImpl implements ClassmateService{
@@ -32,5 +35,20 @@ public class ClassmateServiceImpl implements ClassmateService{
         }
 
         return null;
+    }
+
+    public boolean createClassmate(Classmate classmate) {
+        if (classmate==null)
+            return false;
+        if(StringUtils.isEmpty(classmate.getSchool())||StringUtils.isEmpty(classmate.getClazz())
+                ||StringUtils.isEmpty(classmate.getName())||StringUtils.isEmpty(classmate.getOwnerId()))
+            return false;
+
+        classmate.setId(UUID.randomUUID().toString());
+        classmate.setCreateTime(DataFactory.getCurrentTime());
+
+        System.out.println(classmate);
+
+        return classmateMapper.insertSelective(classmate)==1;
     }
 }

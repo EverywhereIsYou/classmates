@@ -250,4 +250,35 @@ public class Paper {
     public void setAuthorAvatar(String authorAvatar) {
         this.authorAvatar = authorAvatar;
     }
+
+    @Override
+    public String toString() {
+        return "Paper{" +
+                "id='" + id + '\'' +
+                ", classmateId='" + classmateId + '\'' +
+                ", authorId='" + authorId + '\'' +
+                ", name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", qq='" + qq + '\'' +
+                ", wechat='" + wechat + '\'' +
+                ", photo='" + photo + '\'' +
+                ", favMovie='" + favMovie + '\'' +
+                ", favSinger='" + favSinger + '\'' +
+                ", favBook='" + favBook + '\'' +
+                ", favTravelPlace='" + favTravelPlace + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", permission=" + permission +
+                ", favThingToDo='" + favThingToDo + '\'' +
+                ", specialInClass='" + specialInClass + '\'' +
+                ", wordToMe='" + wordToMe + '\'' +
+                ", customizeFiled='" + customizeFiled + '\'' +
+                ", authorName='" + authorName + '\'' +
+                ", authorAvatar='" + authorAvatar + '\'' +
+                '}';
+    }
 }

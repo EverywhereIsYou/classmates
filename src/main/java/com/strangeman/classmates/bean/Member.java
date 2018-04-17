@@ -170,4 +170,27 @@ public class Member {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id='" + id + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", realName='" + realName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", address='" + address + '\'' +
+                ", hometown='" + hometown + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", qq='" + qq + '\'' +
+                ", wechat='" + wechat + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", lastModifyTime='" + lastModifyTime + '\'' +
+                ", deleteFlag=" + deleteFlag +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }

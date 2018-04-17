@@ -226,29 +226,6 @@ $(function () {
             }
         }
     });
-    
-    //限制简单说明输入字数
-    // $("#dec").bind('input propertychange',function(){
-    //     var maxlength = '2000';
-    //     checkContent(this,maxlength);
-    // });
-    // $("#dec").bind("input propertychange",function () {
-    //     var maxlenght = "50";
-    //     checkContent(this,maxlenght);
-    // });
-    // function checkContent(obj,max) {
-    //     debugger;
-    //     var decInfo = $(obj).val();
-    //     if (decInfo > max){
-    //         $(obj).val(decInfo.substring(0,max));
-    //         $(obj).tips({
-    //             side:3,
-    //             msg:"只能填50个字",
-    //             bg:"#ae81ff",
-    //             times:1
-    //         });
-    //     }
-    // }
 });
 
 // 每次改变浏览器窗口都执行一次
@@ -260,3 +237,10 @@ $(".mousedown").click(function () {
     $("html,body").animate({scrollTop: $("#new-classmate").offset().top}, 1000);
 });
 
+function createNewClassmate() {
+    $.post("/classmate/createClassmate",$("#myclassmate-fm").serialize(),
+        function (data) {
+            console.log(data);
+        }
+    );
+}

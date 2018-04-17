@@ -40,4 +40,14 @@ public class Collection {
     public void setContentId(String contentId) {
         this.contentId = contentId == null ? null : contentId.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Collection{" +
+                "id='" + id + '\'' +
+                ", ownerId='" + ownerId + '\'' +
+                ", collectionType='" + collectionType + '\'' +
+                ", contentId='" + contentId + '\'' +
+                '}';
+    }
 }

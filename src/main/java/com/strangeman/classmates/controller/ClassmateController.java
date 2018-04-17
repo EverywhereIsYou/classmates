@@ -77,6 +77,43 @@ public class ClassmateController {
         return "classmate/classmatedetail";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "createClassmate")
+    public ResultInfo createClassmate(HttpSession session,Classmate classmate){
+        Member member= (Member) session.getAttribute("member");
+        String memberId;
+
+        if(member==null){
+            return ResultInfo.fail("查不到该用户数据，请重新登录");
+        }
+        else{
+            memberId=member.getId();
+        }
+
+        if(classmate==null||StringUtils.isEmpty(classmate.getName())||StringUtils.isEmpty(classmate.getSchool())||StringUtils.isEmpty(classmate.getClazz())){
+            return ResultInfo.fail("输入数据不完整，请重试");
+        }
+        else {
+            classmate.setOwnerId(memberId);
+        }
+
+        if(classmateService.createClassmate(classmate)){
+            return ResultInfo.success("创建同学录成功");
+        }
+        return ResultInfo.fail("创建同学录失败");
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "photoWall",method = RequestMethod.POST)
+    public ResultInfo getPhotoWall(HttpSession session,String classmateId){
+        return null;
+    }
+
+    @RequestMapping(value = "photoWall",method = RequestMethod.GET)
+    public String getPhotoWall(){
+        return "classmate/photowall";
+    }
+
     private boolean haveReadPermission(Member member,Classmate classmate) {
         return member != null && classmate != null && classmate.getOwnerId() != null && classmate.getOwnerId().equals(member.getId());
     }

@@ -60,4 +60,16 @@ public class Message {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id='" + id + '\'' +
+                ", from='" + from + '\'' +
+                ", to='" + to + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", readFlag=" + readFlag +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

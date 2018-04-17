@@ -70,4 +70,17 @@ public class Share {
     public void setLikerId(String likerId) {
         this.likerId = likerId == null ? null : likerId.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Share{" +
+                "id='" + id + '\'' +
+                ", ownerId='" + ownerId + '\'' +
+                ", shareType='" + shareType + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", content='" + content + '\'' +
+                ", collectorId='" + collectorId + '\'' +
+                ", likerId='" + likerId + '\'' +
+                '}';
+    }
 }

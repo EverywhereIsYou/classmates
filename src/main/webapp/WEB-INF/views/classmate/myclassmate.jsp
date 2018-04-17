@@ -50,11 +50,11 @@
             <h3 class="create-myclassmate-title">创建新的同学录</h3>
         </div>
         <div class="create-myclassmate-body">
-            <form class="form-horizontal" id="myclassmate-fm" autocomplete="off">
+            <form class="form-horizontal" id="myclassmate-fm" autocomplete="off" onkeydown="if(event.keyCode===13){return false;}">
                 <div class="form-group">
                     <label class="col-sm-3 control-label">同学录封面：</label>
                     <div class="col-sm-8" id="my-classmate-cover">
-                        <input type="file" name="classmatecover" class="input-upload" placeholder="" id="classmatecover" accept="image/*" onchange="imgPreview(this)">
+                        <input type="file" name="cover" class="input-upload" placeholder="" id="cover" accept="image/*" onchange="imgPreview(this)">
                         <a href="javascript:void(0);"><u>＋上传封面</u></a>
                     <img id="preview" />
                     </div>
@@ -62,13 +62,13 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">同学录名称：</label>
                     <div class="col-sm-8">
-                        <input type="text" name="classmatename" class="form-control" placeholder="" id="classmatename">
+                        <input type="text" name="name" class="form-control" placeholder="" id="classmatename">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">所属学校：</label>
                     <div class="col-sm-8">
-                        <input type="text" name="scholl" class="form-control" placeholder="" id="scholl">
+                        <input type="text" name="school" class="form-control" placeholder="" id="school">
                     </div>
                 </div>
                 <div class="form-group">
@@ -80,7 +80,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">简单说明：</label>
                     <div class="col-sm-8">
-                        <textarea type="text" name="dec" class="form-control" placeholder="" id="dec"></textarea>
+                        <textarea type="text" name="desc" class="form-control" placeholder="" id="desc"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -88,7 +88,7 @@
                 </div>
                 <div class="form-group create-btn">
                     <div class="col-sm-10 col-sm-offset-1">
-                        <button class="btn" id="sure-create" type="button">确&nbsp;&nbsp;认&nbsp;&nbsp;创&nbsp;&nbsp;建</button>
+                        <button class="btn" id="sure-create" type="button" onclick="createNewClassmate()">确&nbsp;&nbsp;认&nbsp;&nbsp;创&nbsp;&nbsp;建</button>
                     </div>
                 </div>
             </form>

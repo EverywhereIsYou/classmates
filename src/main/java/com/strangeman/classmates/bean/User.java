@@ -60,4 +60,16 @@ public class User {
     public void setLastModifyTime(String lastModifyTime) {
         this.lastModifyTime = lastModifyTime == null ? null : lastModifyTime.trim();
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", workId='" + workId + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", role='" + role + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", lastModifyTime='" + lastModifyTime + '\'' +
+                '}';
+    }
 }

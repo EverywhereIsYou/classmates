@@ -7,4 +7,5 @@ import java.util.List;
 public interface ClassmateService {
     List<Classmate> getClassmatesByUserId(String userId);
     Classmate getClassmateById(String classmateId);
+    boolean createClassmate(Classmate classmate);
 }
