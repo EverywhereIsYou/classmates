@@ -58,6 +58,7 @@ function classmateHeader(name,school_clazz,desc){
     $("#classmate-name").text(name);
     $("#school-class").text(school_clazz);
     $("#classmate-desc").text(desc);
+    $("title").text(name+"_一起同过窗");
 }
 
 function setPaper(number) {

@@ -40,8 +40,7 @@ function createClassmate(id, name, school, clazz, desc, cover) {
     var create = $("<div></div>", {
         class: 'create',
         id: 'create' + b,
-        style: 'border-' + direction[OffOn] + ':' + $(window).width() + 'px solid ' + classmateBgColor[a],
-        style: 'border-bottom:100px solid ' + classmateBgColor[b]
+        style: 'border-bottom:100px solid ' + classmateBgColor[b]+'; border-' + direction[OffOn] + ':' + $(window).width() + 'px solid ' + classmateBgColor[a]
     });
     if (OffOn === 0) {
         toClassmateDetail.append(myClassmateName).append(schoolAndClass).append(liner).append(description).appendTo(myClassmateInfo);

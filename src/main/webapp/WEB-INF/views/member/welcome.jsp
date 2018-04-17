@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>我的主页</title>
+    <title>欢迎！_一起同过窗</title>
 
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
 

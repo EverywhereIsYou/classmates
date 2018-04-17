@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <title>我的同学录</title>
+    <title>我的同学录_一起同过窗</title>
 
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
     <link rel="stylesheet" href="<c:url value="/static/css/myclassmate.css" />">
