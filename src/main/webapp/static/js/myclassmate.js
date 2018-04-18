@@ -217,7 +217,7 @@ function getClassmates() {
                         if (desc === null) {
                             desc = "说点什么，让同学了解它吧。";
                         }
-                        if (cover === null) {
+                        if (cover === null||cover==='') {
                             cover = "/static/images/classmate_cover.jpg";
                         }
                         createClassmate(item.id, item.name, item.school, item.clazz, desc, cover);
@@ -250,7 +250,44 @@ $(".mousedown").click(function () {
 });
 
 function createNewClassmate() {
-    $.post("/classmate/createClassmate",$("#myclassmate-fm").serialize(),
+    var formData=new FormData($("#myclassmate-fm")[0]);
+    $.ajax({
+        url:"/file/classmateCover",
+        data:formData,
+        type:'POST',
+        processData:false,
+        contentType:false,
+        error:function () {
+            alert("上传同学录封面失败");
+            newClassmateData(null);
+        },
+        success:function (data) {
+            if(data.statusCode===200){
+                newClassmateData(data.extend.fileName);
+            }
+            else{
+                newClassmateData(null);
+                alert(data.msg);
+            }
+        }
+    });
+}
+function newClassmateData(coverName) {
+    var contentData;
+    if(coverName===null){
+        contentData=$("#myclassmate-fm").serialize();
+    }
+    else{
+        contentData={
+            "cover":coverName,
+            "name":$("#classmatename").val(),
+            "school":$("#school").val(),
+            "clazz":$("#clazz").val(),
+            "description":$("#description").val()
+        };
+    }
+
+    $.post("/classmate/createClassmate",contentData,
         function (data) {
             console.log(data);
             if(data.statusCode===200){

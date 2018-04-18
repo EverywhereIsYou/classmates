@@ -47,8 +47,6 @@ public class ClassmateServiceImpl implements ClassmateService{
         classmate.setId(UUID.randomUUID().toString());
         classmate.setCreateTime(DataFactory.getCurrentTime());
 
-        System.out.println(classmate);
-
         return classmateMapper.insertSelective(classmate)==1;
     }
 }
