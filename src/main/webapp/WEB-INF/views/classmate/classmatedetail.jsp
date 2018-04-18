@@ -36,7 +36,7 @@
         <h3 id="school-class">&nbsp;</h3>
         <div id="liner"></div>
         <h3 id="classmate-desc">&nbsp;</h3>
-        <input id="classmate_id" class="hidden" value="${classmateId}" />
+        <input id="classmate_id" class="hidden" value="${classmateId}"/>
         <a href="javascript:void(0)">
             <div class="mousedown"><span class="glyphicon glyphicon-menu-down" id="mousedown"></span>
             </div>
@@ -67,16 +67,18 @@
 
 <div class="classmate-detail-wrapper" id="classmate-detail-wrapper">
     <div class="container">
+        <input id="paper-number" class="hidden"/>
         <div class="paper" id="paper">
-            <input id="paper-number" class="hidden" />
-            <input id="paper-id" class="hidden" />
+            <input id="paper-id" class="hidden"/>
             <input id="author-id" class="hidden"/>
 
             <div class="paper-header" id="paper-header">
-                <a href="javascript:void(0)"><img src="<c:url value="/static/images/avatar.png" />" alt="头像" id="avatar" class="img-circle img-responsive avatar"></a>
+                <a href="javascript:void(0)"><img src="<c:url value="/static/images/avatar.png" />" alt="头像" id="avatar"
+                                                  class="img-circle img-responsive avatar"></a>
                 <a href="javascript:void(0)"><h3 id="author-name">李四</h3></a>
                 <h6 id="create-time">填写于</h6>
-                <a href="javascript:void(0)"><img src="<c:url value="/static/images/delete_2.png" />" alt="删除" id="delete2" data-toggle="tooltip" title="删除本页同学录"></a>
+                <a href="javascript:void(0)"><img src="<c:url value="/static/images/delete_2.png" />" alt="删除"
+                                                  id="delete2" data-toggle="tooltip" title="删除本页同学录"></a>
             </div>
 
             <div class="paper-content" id="paper-content">
@@ -99,18 +101,58 @@
 
                 <img id="photo" class="img-responsive" src="" alt="">
             </div>
-            <a href="javascript:void(0)"><div class="col-sm-3 col-xs-3 navigation" id="pre">上一页</div></a>
-            <a href="<c:url value="/classmate/photoWall" />"><div class="col-sm-3 col-xs-3 navigation" id="photo-wall">照片墙</div></a>
-            <a href="javascript:void(0)"><div class="col-sm-3 col-xs-3 navigation" id="comment-wall">留言墙</div></a>
-            <a href="javascript:void(0)"><div class="col-sm-3 col-xs-3 navigation" id="next">下一页</div></a>
+            <a href="javascript:void(0)">
+                <div class="col-sm-3 col-xs-3 navigation pre" id="pre">上一页</div>
+            </a>
+            <a href="<c:url value="/classmate/photoWall" />">
+                <div class="col-sm-3 col-xs-3 navigation photo-wall" id="photo-wall">照片墙</div>
+            </a>
+            <a href="javascript:void(0)">
+                <div class="col-sm-3 col-xs-3 navigation comment-wall" id="comment-wall">留言墙</div>
+            </a>
+            <a href="javascript:void(0)">
+                <div class="col-sm-3 col-xs-3 navigation next" id="next">下一页</div>
+            </a>
         </div>
 
-    </div>
+        <%--留言墙--%>
+        <div class="comment-wrapper hidden" id="comment-wrapper">
+            <div class="comment-content">
+                <div id="comment-header">
+                    <h3>我要留言：</h3>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="说点什么吧！" aria-describedby="sizing-addon1"
+                               id="my-comment">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="send-comment"
+                                    onclick="sendComment()">发送留言</button>
+                        </span>
+                    </div>
+                </div>
+                <h4>精彩留言：</h4>
+                <div id="other-comment-wrapper">
 
+                </div>
+            </div>
+            <a href="javascript:void(0)">
+                <div class="col-sm-3 col-xs-3 navigation pre" id="comment-pre">上一页</div>
+            </a>
+            <a href="<c:url value="/classmate/photoWall" />">
+                <div class="col-sm-3 col-xs-3 navigation photo-wall" id="comment-photo-wall">照片墙</div>
+            </a>
+            <a href="javascript:void(0)">
+                <div class="col-sm-3 col-xs-3 navigation comment-wall" id="comment-comment-wall">留言墙</div>
+            </a>
+            <a href="javascript:void(0)">
+                <div class="col-sm-3 col-xs-3 navigation next" id="comment-next">下一页</div>
+            </a>
+        </div>
+    </div>
 </div>
-	<script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
-	<script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
-    <script src="<c:url value="/static/js/common.js" />"></script>
-	<script src="<c:url value="/static/js/classmatedetail.js" />"></script>
+
+<script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
+<script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
+<script src="<c:url value="/static/js/common.js" />"></script>
+<script src="<c:url value="/static/js/classmatedetail.js" />"></script>
 </body>
 </html>
