@@ -42,6 +42,7 @@ body{
 	margin-left: -150px;
 	background-color: #5f4d93;
 	border-radius: 4px;
+	z-index: 100;
 }
 
 /*渐入效果*/

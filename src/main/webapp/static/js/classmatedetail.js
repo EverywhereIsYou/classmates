@@ -159,6 +159,74 @@ $("#next").click(function () {
     $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 });
 
+//留言墙功能
+
 $("#comment-wall").click(function () {
     getComments();
+    $("#paper").addClass("hidden");
+
+    var commentWrapper = $("#comment-wrapper");
+    commentWrapper.removeClass("hidden").addClass("show");
+    $(".classmate-detail-wrapper").css("height",commentWrapper.height()+300+"px");
+    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
+
 });
+//点击发送留言
+function sendComment() {
+// <div class="comment">
+//     <div class="liner"></div>
+//     <a href="#">
+//         <img src="<c:url value="/static/images/avatar.png" />" alt="头像" class="img-circle img-responsive comment-avatar">
+//     </a>
+//     <div class="other-comment">
+//         <a href="#"><h4 class="write-author">李四：</h4></a>
+//         <p class="write-content">如果你无法简洁的表达你的想法，那只说明你还不够了解它。如果你无法简洁的表达你的想法，那只说明你还不够了解它。如果你无法简洁的表达你的想法，那只说明你还不够了解它。如果你无法简洁的表达你的想法，那只说明你还不够了解它。
+//         </p>
+//         <p class="write-time">2018-4-18</p>
+//     </div>
+// </div>
+    var commentDiv = $("<div></div>",{class: "comment"});
+    var linerDiv = $("<div></div>",{class: "liner"});
+    var A = $("<a></a>",{href: "#"});
+    var avatarImg = $("<img>",{
+        src: "/static/images/avatar.png",
+        class: "img-circle img-responsive comment-avatar",
+        alt: "头像"
+    });
+    var otherCommentDiv = $("<div></div>",{class: "other-comment"});
+    var writeAuthorH4 = $("<h4></h4>",{class: "write-author",text: "李四："});
+    var writeContent = $("#my-comment").val();
+    var writeContentP = $("<p></p>",{
+        class: "write-content",
+        text: writeContent
+    });
+    var nowTime = new Date();
+    var nowYear = nowTime.getFullYear();
+    var nowMonth = nowTime.getMonth()+1;
+    var nowDay = nowTime.getDate();
+    var writeTimeP = $("<p></p>",{
+        class: "write-time",
+        text: nowMonth+"月"+nowDay+"日"+nowYear+"年"
+    });
+    if (writeContent != "" && writeContent != null){
+        var otherCommentWrapper = $("#other-comment-wrapper");
+        var oldHtml = otherCommentWrapper.html();  //将之前的html内容存起来
+        otherCommentWrapper.html("");
+        otherCommentWrapper.append(commentDiv
+            .append(linerDiv)
+            .append(A.append(avatarImg))
+            .append(otherCommentDiv
+                .append(A.append(writeAuthorH4))
+                .append(writeContentP)
+                .append(writeTimeP)
+            )
+        ).append(oldHtml);
+
+        $("#my-comment").val("");
+    }
+    else {
+        alert("请输入内容");
+    }
+
+    $(".classmate-detail-wrapper").css("height",$("#comment-wrapper").height()+300+"px");
+}

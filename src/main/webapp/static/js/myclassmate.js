@@ -77,34 +77,26 @@ function createClassmate(id, name, school, clazz, desc, cover) {
 
 //获取浏览器的宽度，确定三角形的宽度，根据区域大小改变文字数量。
 function getwidth() {
-    $("#wrapper").css("height", $(window).height() + 100 + "px");
-    $("#wrapper").css("width", $(window).width() + "px");
-
+    $("#wrapper").css("height", $(window).height() + 100 + "px").css("width", $(window).width() + "px");
     $(".create").css("width", $(window).width() + "px");
     $(".my-classmate").css("width", $(window).width() + "px");
 
-    $("#create0").css("border-left", $(window).width() + "px solid rgba(0,0,0,0)");
-    $("#create0").css("border-bottom", "100px solid " + classmateBgColor[0]);
+    $("#create0").css("border-left", $(window).width() + "px solid rgba(0,0,0,0)").css("border-bottom", "100px solid " + classmateBgColor[0]);
 
     $("#my-classmate-1").css("background-color", classmateBgColor[0]);
-    $("#create1").css("border-right", $(window).width() + "px solid " + classmateBgColor[0]);
-    $("#create1").css("border-bottom", "100px solid " + classmateBgColor[1]);
+    $("#create1").css("border-right", $(window).width() + "px solid " + classmateBgColor[0]).css("border-bottom", "100px solid " + classmateBgColor[1]);
 
     $("#my-classmate-2").css("background-color", classmateBgColor[1]);
-    $("#create2").css("border-left", $(window).width() + "px solid " + classmateBgColor[1]);
-    $("#create2").css("border-bottom", "100px solid " + classmateBgColor[2]);
+    $("#create2").css("border-left", $(window).width() + "px solid " + classmateBgColor[1]).css("border-bottom", "100px solid " + classmateBgColor[2]);
 
     $("#my-classmate-3").css("background-color", classmateBgColor[2]);
-    $("#create3").css("border-right", $(window).width() + "px solid " + classmateBgColor[2]);
-    $("#create3").css("border-bottom", "100px solid " + classmateBgColor[3]);
+    $("#create3").css("border-right", $(window).width() + "px solid " + classmateBgColor[2]).css("border-bottom", "100px solid " + classmateBgColor[3]);
 
     $("#my-classmate-4").css("background-color", classmateBgColor[3]);
-    $("#create4").css("border-left", $(window).width() + "px solid " + classmateBgColor[3]);
-    $("#create4").css("border-bottom", "100px solid " + classmateBgColor[4]);
+    $("#create4").css("border-left", $(window).width() + "px solid " + classmateBgColor[3]).css("border-bottom", "100px solid " + classmateBgColor[4]);
 
     $("#my-classmate-5").css("background-color", classmateBgColor[4]);
-    $("#create5").css("border-right", $(window).width() + "px solid " + classmateBgColor[4]);
-    $("#create5").css("border-bottom", "100px solid " + classmateBgColor[3]);
+    $("#create5").css("border-right", $(window).width() + "px solid " + classmateBgColor[4]).css("border-bottom", "100px solid " + classmateBgColor[3]);
 
     // 截取h3内容并加以省略号显示
     $(".my-classmate h3").each(function () {
@@ -112,16 +104,16 @@ function getwidth() {
             if ($(this).text().length > 100) {
                 $(this).attr("value", $(this).text());
                 //获取h3的值,进行截取。赋值给text变量保存.
-                var text = $(this).text().substring(0, 100) + "...";
+                var descText = $(this).text().substring(0, 100) + "...";
                 //重新为h3赋值;
-                $(this).text(text);
+                $(this).text(descText);
             }
         }
         if ($(window).width() < 630) {
             if ($(this).text().length > 50) {
                 $(this).attr("value", $(this).text());
-                var text = $(this).text().substring(0, 50) + "...";
-                $(this).text(text);
+                var descText = $(this).text().substring(0, 50) + "...";
+                $(this).text(descText);
             }
         }
     });
