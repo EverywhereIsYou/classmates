@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface ClassmateService {
     List<Classmate> getClassmatesByUserId(String userId);
-    Classmate getClassmateById(String classmateId);
+    Classmate getSimpleClassmateById(String classmateId);
+    Classmate getCompleteClassmateById(String classmateId);
     boolean createClassmate(Classmate classmate);
 }

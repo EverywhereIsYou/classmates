@@ -26,15 +26,18 @@ public class ClassmateServiceImpl implements ClassmateService{
         return classmateMapper.selectClassmatesByUserId(userId);
     }
 
-    public Classmate getClassmateById(String classmateId) {
+    public Classmate getSimpleClassmateById(String classmateId) {
+        return classmateMapper.selectClassmateById(classmateId);
+    }
+
+    public Classmate getCompleteClassmateById(String classmateId) {
         Classmate classmate=classmateMapper.selectClassmateById(classmateId);
         if(classmate!=null){
             classmate.setPapers(paperMapper.selectPapersByClassmateId(classmateId));
             classmate.setComments(commentMapper.selectCommentsByClassmateId(classmateId));
-            return classmate;
         }
 
-        return null;
+        return classmate;
     }
 
     public boolean createClassmate(Classmate classmate) {

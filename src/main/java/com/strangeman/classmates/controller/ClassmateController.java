@@ -50,7 +50,7 @@ public class ClassmateController {
 
         Member member= (Member) session.getAttribute("member");
         if(member!=null){
-            Classmate classmate=classmateService.getClassmateById(classmateId);
+            Classmate classmate=classmateService.getCompleteClassmateById(classmateId);
             if(classmate!=null){
                 if(haveReadPermission(member,classmate)){
                     result=ResultInfo.success("").add("classmate",classmate);
@@ -70,7 +70,7 @@ public class ClassmateController {
         return result;
     }
 
-    @RequestMapping(value = "classmateDetail",method = RequestMethod.GET)
+    @RequestMapping(value = "/classmateDetail",method = RequestMethod.GET)
     public String classmateDetail(Model model,String classmateId){
         model.addAttribute("classmateId",classmateId);
 
@@ -78,7 +78,7 @@ public class ClassmateController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "createClassmate")
+    @RequestMapping(value = "/createClassmate")
     public ResultInfo createClassmate(HttpSession session,Classmate classmate){
         Member member= (Member) session.getAttribute("member");
         String memberId;
@@ -104,13 +104,37 @@ public class ClassmateController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "photoWall",method = RequestMethod.POST)
+    @RequestMapping(value = "/photoWall",method = RequestMethod.POST)
     public ResultInfo getPhotoWall(HttpSession session,String classmateId){
-        return null;
+        ResultInfo result;
+
+        Member member= (Member) session.getAttribute("member");
+        if(member==null) {
+            result=ResultInfo.fail("查不到用户数据，请重新登录");
+        }
+        else {
+            if (StringUtils.isEmpty(classmateId))
+                result=ResultInfo.fail("同学录ID为空");
+            else {
+                Classmate classmate = classmateService.getSimpleClassmateById(classmateId);
+                if (classmate != null) {
+                    if (haveReadPermission(member, classmate)) {
+                        result = ResultInfo.success("").add("classmate", classmate);
+                    } else {
+                        result = ResultInfo.fail("无该同学录查看权限");
+                    }
+                } else {
+                    result = ResultInfo.fail("无法查询该同学录数据");
+                }
+            }
+        }
+        return result;
     }
 
-    @RequestMapping(value = "photoWall",method = RequestMethod.GET)
-    public String getPhotoWall(){
+    @RequestMapping(value = "/photoWall",method = RequestMethod.GET)
+    public String getPhotoWall(Model model,String classmateId){
+        model.addAttribute("classmateId",classmateId);
+
         return "classmate/photowall";
     }
 

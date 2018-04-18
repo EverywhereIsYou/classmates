@@ -29,13 +29,15 @@
     </div>
 </div>
 
+<input id="classmateId" class="hidden" value="${classmateId}">
+
 <div class="wrapper" id="wrapper">
     <a href="javascript:void(0)"><img src="<c:url value="/static/images/menu.png" />" alt="图片" id="menu"></a>
     <div class="container header">
-        <h1>我的同学录</h1>
+        <h1 id="classmate-name">&nbsp;</h1>
+        <h3 id="classmate-shcool">&nbsp;</h3>
         <div id="liner"></div>
-        <h3>如果你无法简洁的表达你的想法，那只说明你还不够了解它。
-            -- 阿尔伯特·爱因斯坦</h3>
+        <h3 id="classmate-description">&nbsp;</h3>
         <a href="javascript:void(0)">
             <div class="mousedown"><span class="glyphicon glyphicon-menu-down" id="mousedown"></span>
             </div>
@@ -77,7 +79,7 @@
         <!--</div>-->
         <div class="show-wrapper hidden">
             <img src="<c:url value="/static/images/close.png" />" alt="close" class="close" id="photo-close">
-            <img src="<c:url value="/static/images/1.jpg" />" alt="" class="img-responsive" id="large-photo">
+            <img src="" alt="" class="img-responsive" id="large-photo">
         </div>
     </div>
 </div>

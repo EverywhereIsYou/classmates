@@ -100,7 +100,7 @@
                 <img id="photo" class="img-responsive" src="" alt="">
             </div>
             <a href="javascript:void(0)"><div class="col-sm-3 col-xs-3 navigation" id="pre">上一页</div></a>
-            <a href="<c:url value="/classmate/photoWall" />"><div class="col-sm-3 col-xs-3 navigation" id="photo-wall">照片墙</div></a>
+            <a href="<c:url value="/classmate/photoWall?classmateId=${classmateId}" />"><div class="col-sm-3 col-xs-3 navigation" id="photo-wall">照片墙</div></a>
             <a href="javascript:void(0)"><div class="col-sm-3 col-xs-3 navigation" id="comment-wall">留言墙</div></a>
             <a href="javascript:void(0)"><div class="col-sm-3 col-xs-3 navigation" id="next">下一页</div></a>
         </div>

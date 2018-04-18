@@ -27,8 +27,9 @@ public interface CommentMapper {
 
     int updateByExample(@Param("record") Comment record, @Param("example") CommentExample example);
 
-    @Select("select * from "
+    @Select("select comment.*,member.nickname as author_name,member.avatar as author_avatar from "
             + table_name
+            + " left join member on(comment.member_id=member.id)"
             + " where classmate_id=#{classmateId}")
     List<Comment> selectCommentsByClassmateId(@Param("classmateId") String classmateId);
 }

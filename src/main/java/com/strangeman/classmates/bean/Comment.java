@@ -11,6 +11,10 @@ public class Comment {
 
     private String content;
 
+    private String authorName;
+
+    private String authorAvatar;
+
     public String getId() {
         return id;
     }
@@ -51,6 +55,22 @@ public class Comment {
         this.content = content == null ? null : content.trim();
     }
 
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getAuthorAvatar() {
+        return authorAvatar;
+    }
+
+    public void setAuthorAvatar(String authorAvatar) {
+        this.authorAvatar = authorAvatar;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
@@ -59,6 +79,8 @@ public class Comment {
                 ", memberId='" + memberId + '\'' +
                 ", createTime='" + createTime + '\'' +
                 ", content='" + content + '\'' +
+                ", authorName='" + authorName + '\'' +
+                ", authorAvatar='" + authorAvatar + '\'' +
                 '}';
     }
 }
