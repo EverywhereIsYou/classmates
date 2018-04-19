@@ -80,7 +80,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">简单说明：</label>
                     <div class="col-sm-8">
-                        <textarea type="text" name="description" class="form-control" placeholder="" id="description"></textarea>
+                        <textarea type="text" name="description" class="form-control" rows="8" placeholder="" id="description"></textarea>
                     </div>
                 </div>
                 <div class="form-group">

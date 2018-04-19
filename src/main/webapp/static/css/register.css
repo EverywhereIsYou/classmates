@@ -62,7 +62,7 @@ form a:hover {
     font-weight: 700;
     background: linear-gradient(to right, #5f4d93, #e67777);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5f4d93', endColorstr='#e67777',GradientType=1);   /*IE9*/
-    border: 0px;
+    border: 0;
     -moz-box-shadow: 0 0 5px #c16b7f;
     -webkit-box-shadow: 0 0 5px #c16b7f;
     box-shadow: 0 0 5px #c16b7f;
@@ -92,10 +92,10 @@ span {
 
 /*输入框获得焦点*/
 .glowing:focus {
-    border-color: #c16b7f;
-    -moz-box-shadow: 0 0 10px #c16b7f;
-    -webkit-box-shadow: 0 0 10px #c16b7f;
-    box-shadow: 0 0 10px #c16b7f;
+    border-color: #e67777;
+    -moz-box-shadow: 0 0 10px #e67777;
+    -webkit-box-shadow: 0 0 10px #e67777;
+    box-shadow: 0 0 10px #e67777;
 }
 
 /*输入框左侧字体*/
@@ -112,14 +112,14 @@ label {
     color: white;
     font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
     font-weight: 700;
-    background-color: #c16b7f;
-    border: 0px;
+    background-color: #e67777;
+    border: 0;
 }
 
 /*验证码图片*/
 .input-group-addon {
-    padding: 0 0;
-    border: 0px;
+    padding: 0;
+    border: 0;
 }
 #verification {
     width: 100px;
@@ -140,9 +140,9 @@ label {
 /*页脚*/
 footer {
     text-align: center;
-    margin: 0px auto;
+    margin: 0 auto;
     width: 100%;
-    bottom: 0px;
+    bottom: 0;
 }
 footer p {
     color: #7f7f7f;

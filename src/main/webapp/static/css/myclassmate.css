@@ -259,16 +259,17 @@ label{text-align: right;}
 }
 /*输入框获得焦点*/
 .glowing:focus {
-	border-color: #c16b7f;
-	-moz-box-shadow: 0 0 10px #c16b7f;
-	-webkit-box-shadow: 0 0 10px #c16b7f;
-	box-shadow: 0 0 10px #c16b7f;
+	border-color: #e67777;
+	-moz-box-shadow: 0 0 10px #e67777;
+	-webkit-box-shadow: 0 0 10px #e67777;
+	box-shadow: 0 0 10px #e67777;
 }
+textarea{resize:none;}
 textarea:focus{
-	border-color: #c16b7f!important;
-	-moz-box-shadow: 0 0 10px #c16b7f!important;
-	-webkit-box-shadow: 0 0 10px #c16b7f!important;
-	box-shadow: 0 0 10px #c16b7f!important;
+	border-color: #e67777!important;
+	-moz-box-shadow: 0 0 10px #e67777!important;
+	-webkit-box-shadow: 0 0 10px #e67777!important;
+	box-shadow: 0 0 10px #e67777!important;
 }
 .create-btn{
 	margin-top: 50px;
