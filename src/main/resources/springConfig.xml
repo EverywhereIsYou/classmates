@@ -27,6 +27,8 @@
             <mvc:mapping path="/member/**" />
             <mvc:mapping path="/classmate/**" />
 
+            <mvc:exclude-mapping path="/classmate/writePaper" />
+
             <bean class="com.strangeman.classmates.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

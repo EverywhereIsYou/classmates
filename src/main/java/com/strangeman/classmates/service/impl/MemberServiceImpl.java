@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.UUID;
 
@@ -61,5 +62,9 @@ public class MemberServiceImpl implements MemberService{
         }
 
         return null;
+    }
+
+    public Member getMemberById(String memberId) {
+        return StringUtils.isEmpty(memberId)?null:memberMapper.selectById(memberId);
     }
 }

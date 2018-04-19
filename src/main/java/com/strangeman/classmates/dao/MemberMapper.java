@@ -31,4 +31,9 @@ public interface MemberMapper {
             + table_name
             + " where phone=#{username} or email=#{username}")
     Member selectByUsername(@Param("username") String username);
+
+    @Select("select * from "
+            + table_name
+            + " where id=#{memberId}")
+    Member selectById(@Param("memberId") String memberId);
 }

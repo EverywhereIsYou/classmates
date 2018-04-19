@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -13,13 +14,13 @@
 
     <title></title>
 
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
 
     <style>
         *{margin: 0;padding: 0;}
         body {
             height: 100%;
-            background-image: url("/static/images/bg.jpg");
+            background-image: url("<c:url value="/static/images/bg.jpg" />");
             background-repeat: no-repeat;
             background-size: 100% 100% cover;
             background-attachment: fixed;
@@ -175,17 +176,19 @@
 <body>
 
 <header>
-    <a href="#"><img src="/static/images/logo1.png" alt="LOGO" id="logo"></a>
+    <a href="#"><img src="<c:url value="/static/images/logo1.png" />" alt="LOGO" id="logo"></a>
     <a href="#"><h3 id="standingbyme">一起同过窗</h3></a>
 </header>
 
 <div class="main">
     <div class="wrapper">
-        <h3 class="text-center">朝花夕拾</h3>
-        <h5 class="text-center">华科1401班</h5>
-        <h5 class="text-right" id="author">————<span style="color: #e67777;">张三</span>的同学录</h5>
+        <h3 class="text-center">${classmate.name}</h3>
+        <h5 class="text-center">${classmate.school} ${classmate.clazz}</h5>
+        <h5 class="text-right" id="author">————<span style="color: #e67777;">${classmateAuthorName}</span>的同学录</h5>
         <div class="container-fluid">
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="paper-fm">
+                <input id="classmateId" name="classmateId" class="hidden" value="${classmate.id}">
+                <input id="authorId" name="authorId" class="hidden">
                 <input type="text" name="name" class="form-control" placeholder="姓名" id="name">
                 <input type="text" name="nickname" class="form-control" placeholder="昵称" id="nickname">
                 <input type="text" name="sex" class="form-control" placeholder="性别" id="sex">
@@ -195,16 +198,16 @@
                 <input type="email" name="email" class="form-control" placeholder="邮箱" id="email">
                 <input type="text" name="qq" class="form-control" placeholder="QQ" id="qq">
                 <input type="text" name="wechat" class="form-control" placeholder="微信" id="wechat">
-                <input type="text" name="fav-movie" class="form-control" placeholder="最喜欢的电影" id="fav-movie">
-                <input type="text" name="fav-singer" class="form-control" placeholder="最喜欢的歌手" id="fav-singer">
-                <input type="text" name="fav-book" class="form-control" placeholder="最爱的书" id="fav-book">
-                <input type="text" name="fav-travel-place" class="form-control" placeholder="最想去的地方" id="fav-travel-place">
+                <input type="text" name="favMovie" class="form-control" placeholder="最喜欢的电影" id="favMovie">
+                <input type="text" name="favSinger" class="form-control" placeholder="最喜欢的歌手" id="favSinger">
+                <input type="text" name="favBook" class="form-control" placeholder="最爱的书" id="favBook">
+                <input type="text" name="favTravelPlace" class="form-control" placeholder="最想去的地方" id="favTravelPlace">
 
-                <textarea class="form-control" name="fav-thing-to-do" rows="4" placeholder="最想做的事" id="fav-thing-to-do"></textarea>
-                <textarea class="form-control" name="special-in-class" rows="4" placeholder="上课做过最奇葩的事" id="special-in-class"></textarea>
-                <textarea class="form-control" name="word-to-me" rows="8" placeholder="简单聊聊我吧" id="word-to-me"></textarea>
+                <textarea class="form-control" name="favThingToDo" rows="4" placeholder="最想做的事" id="favThingToDo"></textarea>
+                <textarea class="form-control" name="specialInClass" rows="4" placeholder="上课做过最奇葩的事" id="specialInClass"></textarea>
+                <textarea class="form-control" name="wordToMe" rows="8" placeholder="简单聊聊我吧" id="wordToMe"></textarea>
 
-                <button class="btn" type="button" id="sure-write">确认填写</button>
+                <button class="btn" type="button" id="sure-write" onclick="writePaper()">确认填写</button>
             </form>
         </div>
     </div>
@@ -214,14 +217,54 @@
 </div>
 
 
-<script src="/static/js/jquery-3.2.1.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
+<script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
+<script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
 
 <script>
     $(function () {
         $(".wrapper").addClass("wrapper-gif").css("height",$(".container-fluid").height()+150+"px"); //页面加载完成后执行动画
         $(".footer").css("top",$(".wrapper").height()+120+"px");
-    })
+
+        if("${paperAuthor}"!==undefined){
+            $("#authorId").val("${paperAuthor.id}");
+            $("#name").val("${paperAuthor.realName}");
+            $("#nickname").val("${paperAuthor.nickname}");
+            $("#sex").val("${paperAuthor.sex}");
+            $("#birthday").val("${paperAuthor.birthday}");
+            $("#address").val("${paperAuthor.address}");
+            $("#phone").val("${paperAuthor.phone}");
+            $("#email").val("${paperAuthor.email}");
+            $("#qq").val("${paperAuthor.qq}");
+            $("#wechat").val("${paperAuthor.wechat}");
+        }
+    });
+
+    function writePaper() {
+        var writeBtn=$("#sure-write");
+        writeBtn.attr("disabled",true);
+        writeBtn.text("正在提交同学录");
+
+        $.post("<c:url value="/classmate/writePaper" />",$("#paper-fm").serialize(),
+            function (data) {
+                if(data.statusCode===200){
+                    alert("同学录填写成功");
+                    if(data.extend.nextPage==='welcome'){
+                        $(location).attr("href","<c:url value="/member/welcome" />");
+                    }
+                    else{
+                        $(location).attr("href","<c:url value="/" />");
+                    }
+                }
+                else if(data.status===400){
+                    alert(data.msg);
+                }
+                else{
+                    alert("网络错误，请稍后重试");
+                }
+                writeBtn.attr("disabled",false);
+                writeBtn.text("确认填写");
+            });
+    }
 </script>
 
 </body>

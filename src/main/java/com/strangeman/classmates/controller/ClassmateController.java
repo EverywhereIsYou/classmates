@@ -2,7 +2,10 @@ package com.strangeman.classmates.controller;
 
 import com.strangeman.classmates.bean.Classmate;
 import com.strangeman.classmates.bean.Member;
+import com.strangeman.classmates.bean.Paper;
 import com.strangeman.classmates.service.ClassmateService;
+import com.strangeman.classmates.service.MemberService;
+import com.strangeman.classmates.service.PaperService;
 import com.strangeman.classmates.utils.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,10 @@ import java.util.List;
 public class ClassmateController {
     @Autowired
     private ClassmateService classmateService;
+    @Autowired
+    private MemberService memberService;
+    @Autowired
+    private PaperService paperService;
 
     @RequestMapping(value = "/myclassmates",method = RequestMethod.GET)
     public String myClassmates(){
@@ -136,6 +143,73 @@ public class ClassmateController {
         model.addAttribute("classmateId",classmateId);
 
         return "classmate/photowall";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/writePaper",method = RequestMethod.POST)
+    public ResultInfo writePaper(HttpSession session,Paper paper){
+        ResultInfo result;
+        if(paper==null)
+            result=ResultInfo.fail("提交的内容为空");
+        else {
+            Member member= (Member) session.getAttribute("member");
+            if(member!=null&&member.getId()!=null){
+                paper.setAuthorId(member.getId());
+            }
+
+            if (paperService.createPaper(paper)) {
+                result = ResultInfo.success("");
+
+                if(member!=null){
+                    result.add("nextPage","welcome");
+                }
+            } else {
+                result = ResultInfo.fail("数据错误");
+            }
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/writePaper",method = RequestMethod.GET)
+    public String writePaper(Model model,HttpSession session,String classmateId){
+        if(StringUtils.isEmpty(classmateId)){
+            model.addAttribute("not_found_msg","同学录ID为空");
+            return "404";
+        }
+
+        Classmate classmate=classmateService.getSimpleClassmateById(classmateId);
+        if(classmate==null){
+            model.addAttribute("not_found_msg","未查询到同学录信息，请确认链接");
+            return "404";
+        }
+        model.addAttribute("classmate",classmate);
+
+        Member classmateAuthor=memberService.getMemberById(classmate.getOwnerId());
+        if(classmateAuthor!=null){
+            String classmateAuthorName="";
+            if(!StringUtils.isEmpty(classmateAuthor.getRealName())){
+                classmateAuthorName=classmateAuthor.getRealName();
+            }
+            else if(!StringUtils.isEmpty(classmateAuthor.getNickname())){
+                classmateAuthorName=classmateAuthor.getNickname();
+            }
+            else if(!StringUtils.isEmpty(classmateAuthor.getPhone())){
+                classmateAuthorName=classmateAuthor.getPhone();
+            }
+            else if(!StringUtils.isEmpty(classmateAuthor.getEmail())){
+                classmateAuthorName=classmateAuthor.getEmail();
+            }
+
+            model.addAttribute("classmateAuthorName",classmateAuthorName);
+        }
+
+        Member paperAuthor= (Member) session.getAttribute("member");
+        if(paperAuthor!=null){
+            model.addAttribute("paperAuthor",paperAuthor);
+        }
+
+        return "classmate/write";
     }
 
     private boolean haveReadPermission(Member member,Classmate classmate) {
