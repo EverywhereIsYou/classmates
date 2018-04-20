@@ -68,9 +68,6 @@ function setEmptyPaper() {
 
     $("#paper").removeClass("hidden").addClass("show");
     $("#comment-wrapper").addClass("hidden").removeClass("show");
-
-    $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
-    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 }
 
 function setPaper(number) {
@@ -119,9 +116,6 @@ function setPaper(number) {
 
     $("#paper").removeClass("hidden").addClass("show");
     $("#comment-wrapper").addClass("hidden").removeClass("show");
-
-    $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
-    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 }
 
 function setComments() {
@@ -188,6 +182,9 @@ $(".pre").click(function () {
     else{
         setPaper(paperNumber-1);
     }
+
+    $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
+    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 });
 
 $(".next").click(function () {
@@ -218,6 +215,9 @@ $(".next").click(function () {
     }
 
     setPaper(paperNumber+1);
+
+    $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
+    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 });
 
 //留言墙功能
