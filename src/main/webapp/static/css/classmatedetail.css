@@ -105,6 +105,7 @@
     background-color: #e67777;
     opacity: 0.9;
     border: 1px solid #e67777;
+    z-index: 0;
 }
 #send-comment:hover{opacity: 1;}
 
@@ -123,10 +124,10 @@
     width: 50px;
     height: 50px;
     position: absolute;
-    margin-left: -90px;
+    margin-left: -70px;
 }
 .other-comment{
-    margin-left: 90px;
+    margin-left: 70px;
 }
 .write-author{
     color: #e67777;
@@ -135,3 +136,220 @@
 }
 .write-author:hover{opacity: 1;}
 .write-time{color: #7f7f7f}
+
+/*邀请同学填写模态框 与删除模态框*/
+#invite-modal,#delete-modal{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(250,250,250,0.6);
+    position: fixed;
+    z-index: 100;
+    top: 0;
+}
+.invite-modal-content{
+    width: 600px;
+    height: 450px;
+    padding-top: 60px;
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    margin-top: -225px;
+    left: 50%;
+    margin-left: -300px;
+    text-align: center;
+    box-shadow: 0 0 10px #e67777!important;
+}
+.invite-modal-content-in{
+    animation: invite-modal-content-in 1s ease;
+}
+@keyframes invite-modal-content-in {
+    from{
+        margin-top: -400px;
+        opacity: 0;
+    }
+    to{
+        margin-top: -225px;
+        opacity: 1;
+    }
+}
+/*关闭图标*/
+#invite-close{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 540px;
+    margin-top: -60px;
+    opacity: 0.8;
+}
+#write-address{
+    color: #e67777;
+    text-decoration:underline;
+    font-size: 1.3em;
+}
+#qr-code{
+    width: 200px;
+    height: 200px;
+}
+#invite-modal h5{
+    color: #3c3c3c;
+    font-size: 1.4em;
+    margin-top: 30px;
+}
+#copy{
+    width: 100%;
+    color: white;
+    font-size: 1.2em;
+    background: linear-gradient(to right, #5f4d93, #e67777);
+    border: 0;
+    box-shadow: 0 0 10px #c16b7f;
+    margin-top: 20px;
+}
+
+/*编辑同学录模态框*/
+.edit-myclassmate-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(250,250,250,0.5);
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+.edit-myclassmate-title{
+    color: #5c5c5c;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+#edit-myclassmate-close{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 440px;
+    margin-top: -40px;
+    opacity: 0.8;
+}
+#edit-myclassmate-close:hover{opacity: 1;}
+.edit-myclassmate-content{
+    width: 500px;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    margin-top: -250px;
+    left: 50%;
+    margin-left: -250px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #e67777!important;
+}
+/*渐入效果*/
+.edit-myclassmate-content-in{
+    animation: edit-myclassmate-content-in 0.7s;
+}
+@keyframes edit-myclassmate-content-in{
+    from{
+        opacity: 0;
+        margin-top: -350px;
+    }
+    to{
+        opacity: 1;
+        margin-top: -250px;
+    }
+}
+
+.edit-myclassmate-body{
+    height: 420px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+/*上传图片的input设置透明*/
+#cover{opacity: 0;}
+.edit-myclassmate-body a{
+    color: #e67777;
+    font-size: 1.2em;
+    position: absolute;
+    margin-top: -20px;
+    z-index: -1;
+}
+label{text-align: right;}
+.edit-myclassmate-content .col-sm-3{
+    padding-right: 0;
+    color: #5c5c5c;
+}
+/*输入框获得焦点*/
+.glowing:focus {
+    border-color: #e67777;
+    -moz-box-shadow: 0 0 10px #e67777;
+    -webkit-box-shadow: 0 0 10px #e67777;
+    box-shadow: 0 0 10px #e67777;
+}
+textarea{resize:none;}
+textarea:focus{
+    border-color: #e67777!important;
+    -moz-box-shadow: 0 0 10px #e67777!important;
+    -webkit-box-shadow: 0 0 10px #e67777!important;
+    box-shadow: 0 0 10px #e67777!important;
+}
+.permission{color: #5c5c5c}
+.permission input:focus{box-shadow: 0 0 0 ;}
+.edit-btn{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+#sure-edit{
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: 1.2em;
+    background: linear-gradient(to right, #5f4d93, #e67777);
+    border: 0;
+    box-shadow: 0 0 10px #c16b7f;
+}
+
+/*删除模态框*/
+.delete-modal-content{
+    width: 500px;
+    height: 300px;
+    padding-top: 60px;
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    margin-top: -125px;
+    left: 50%;
+    margin-left: -250px;
+    text-align: center;
+    box-shadow: 0 0 10px #e67777!important;
+}
+.delete-modal-content-in{
+    animation: delete-modal-content-in 1s ease;
+}
+@keyframes delete-modal-content-in {
+    from{
+        margin-top: -300px;
+        opacity: 0;
+    }
+    to{
+        margin-top: -125px;
+        opacity: 1;
+    }
+}
+#delete-close{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 440px;
+    margin-top: -60px;
+    opacity: 0.8;
+}
+#sure-delete{
+    width: 100%;
+    color: white;
+    font-size: 1.2em;
+    background: linear-gradient(to right, #5f4d93, #e67777);
+    border: 0;
+    box-shadow: 0 0 10px #c16b7f;
+}

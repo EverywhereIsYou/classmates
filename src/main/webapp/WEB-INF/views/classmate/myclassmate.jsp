@@ -84,6 +84,14 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-3 control-label">开放权限：</label>
+                    <div class="col-sm-8" style="padding-top: 7px">
+                        <label class="permission"><input type="radio" name="permission" value="1" />仅自己可见</label>
+                        <label class="permission"><input type="radio" name="permission" value="2" />仅作者可见</label>
+                        <label class="permission"><input type="radio" name="permission" value="3" />所有人可见</label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-3 control-label">个性定制：</label>
                 </div>
                 <div class="form-group create-btn">

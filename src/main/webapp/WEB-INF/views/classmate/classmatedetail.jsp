@@ -45,24 +45,110 @@
 
     <div class="container operation-wrapper">
         <div class="row">
-            <div class="col-sm-10 col-xs-10 operation"><h3><a href="#">邀请同学填写</a></h3></div>
-            <div class="col-sm-2 col-xs-2" id="invite">
-                <a href="#"><img src="<c:url value="/static/images/invite.png" />" alt="邀请" class="icon"></a>
+            <div class="col-sm-10 col-xs-10 operation"><h3><a href="javascript:void(0)" class="invite">邀请同学填写</a></h3></div>
+            <div class="col-sm-2 col-xs-2 invite" id="invite">
+                <a href="javascript:void(0)"><img src="<c:url value="/static/images/invite.png" />" alt="邀请" class="icon"></a>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-10 col-xs-10 operation"><h3><a href="#">编辑</a></h3></div>
-            <div class="col-sm-2 col-xs-2" id="edit">
+            <div class="col-sm-10 col-xs-10 operation"><h3><a href="javascript:void(0)" class="edit">编辑</a></h3></div>
+            <div class="col-sm-2 col-xs-2 edit" id="edit">
                 <a href="#"><img src="<c:url value="/static/images/edit.png" />" alt="编辑" class="icon"></a>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-10 col-xs-10 operation"><h3><a href="#">删除</a></h3></div>
-            <div class="col-sm-2 col-xs-2" id="delete">
+            <div class="col-sm-10 col-xs-10 operation"><h3><a href="javascript:void(0)" class="delete">删除</a></h3></div>
+            <div class="col-sm-2 col-xs-2 delete" id="delete">
                 <a href="#"><img src="<c:url value="/static/images/delete.png" />" alt="删除" class="icon"></a>
             </div>
         </div>
     </div>
+
+    <%--邀请同学填写模态框--%>
+    <div class="hidden" id="invite-modal">
+        <div class="invite-modal-content center-block">
+            <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="invite-close">
+
+            <p id="write-address">localhost:8080/test/write</p>
+            <input id="write-address-input" type="text" class="hidden">
+            <img src="/static/images/qr_code.png" alt="二维码" id="qr-code">
+            <h5>复制链接发给同学，<br/>或者让同学扫描二维码都可以填写！</h5>
+            <button class="btn" type="button" id="copy" onclick="copy()">点&nbsp;此&nbsp;复&nbsp;制</button>
+        </div>
+    </div>
+
+    <%--编辑同学录的模态框--%>
+    <div class="edit-myclassmate-wrapper hidden">
+        <div class="edit-myclassmate-content">
+            <div class="edit-myclassmate-header">
+                <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="edit-myclassmate-close">
+                <h3 class="edit-myclassmate-title">编辑同学录</h3>
+            </div>
+            <div class="edit-myclassmate-body">
+                <form class="form-horizontal" id="myclassmate-fm" autocomplete="off" onkeydown="if(event.keyCode===13){return false;}">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">同学录封面：</label>
+                        <div class="col-sm-8" id="my-classmate-cover">
+                            <input type="file" name="cover" class="input-upload" placeholder="" id="cover" accept="image/*" onchange="imgPreview(this)">
+                            <a href="javascript:void(0);"><u>＋上传封面</u></a>
+                            <img id="preview" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">同学录名称：</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="name" class="form-control" placeholder="" id="classmatename">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">所属学校：</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="school" class="form-control" placeholder="" id="school">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">所属班级：</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="clazz" class="form-control" placeholder="" id="clazz">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">简单说明：</label>
+                        <div class="col-sm-8">
+                            <textarea type="text" name="description" class="form-control" rows="8" placeholder="" id="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">开放权限：</label>
+                        <div class="col-sm-8" style="padding-top: 7px">
+                            <label class="permission"><input type="radio" name="permission" value="1" />仅自己可见</label>
+                            <label class="permission"><input type="radio" name="permission" value="2" />仅作者可见</label>
+                            <label class="permission"><input type="radio" name="permission" value="3" />所有人可见</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">个性定制：</label>
+                    </div>
+                    <div class="form-group edit-btn">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <button class="btn" id="sure-edit" type="button" onclick="createNewClassmate()">确&nbsp;&nbsp;认&nbsp;&nbsp;修&nbsp;&nbsp;改</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%--删除模态框--%>
+    <div class="hidden" id="delete-modal">
+        <div class="delete-modal-content center-block">
+            <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="delete-close">
+            <h2>是否删除此本同学录?</h2>
+            <div class="alert alert-danger" role="alert" style="font-size: 1.3em">注意！此操作不可撤销</div>
+            <button class="btn" type="button" id="sure-delete">确&nbsp;&nbsp;认&nbsp;&nbsp;删&nbsp;&nbsp;除</button>
+        </div>
+    </div>
+
 </div>
 
 <div class="classmate-detail-wrapper" id="classmate-detail-wrapper">
