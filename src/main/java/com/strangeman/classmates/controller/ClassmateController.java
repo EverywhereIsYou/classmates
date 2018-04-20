@@ -1,9 +1,11 @@
 package com.strangeman.classmates.controller;
 
 import com.strangeman.classmates.bean.Classmate;
+import com.strangeman.classmates.bean.Comment;
 import com.strangeman.classmates.bean.Member;
 import com.strangeman.classmates.bean.Paper;
 import com.strangeman.classmates.service.ClassmateService;
+import com.strangeman.classmates.service.CommentService;
 import com.strangeman.classmates.service.MemberService;
 import com.strangeman.classmates.service.PaperService;
 import com.strangeman.classmates.utils.ResultInfo;
@@ -27,6 +29,8 @@ public class ClassmateController {
     private MemberService memberService;
     @Autowired
     private PaperService paperService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(value = "/myclassmates",method = RequestMethod.GET)
     public String myClassmates(){
@@ -188,11 +192,11 @@ public class ClassmateController {
         Member classmateAuthor=memberService.getMemberById(classmate.getOwnerId());
         if(classmateAuthor!=null){
             String classmateAuthorName="";
-            if(!StringUtils.isEmpty(classmateAuthor.getRealName())){
-                classmateAuthorName=classmateAuthor.getRealName();
-            }
-            else if(!StringUtils.isEmpty(classmateAuthor.getNickname())){
+            if(!StringUtils.isEmpty(classmateAuthor.getNickname())){
                 classmateAuthorName=classmateAuthor.getNickname();
+            }
+            else if(!StringUtils.isEmpty(classmateAuthor.getRealName())){
+                classmateAuthorName=classmateAuthor.getRealName();
             }
             else if(!StringUtils.isEmpty(classmateAuthor.getPhone())){
                 classmateAuthorName=classmateAuthor.getPhone();
@@ -210,6 +214,30 @@ public class ClassmateController {
         }
 
         return "classmate/write";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/writeComment",method = RequestMethod.POST)
+    public ResultInfo writeComment(HttpSession session,String commentContent,String classmateId){
+        if(StringUtils.isEmpty(classmateId))
+            return ResultInfo.fail("同学录ID为空");
+        if(StringUtils.isEmpty(commentContent))
+            return ResultInfo.fail("留言内容不能为空");
+
+        Member member= (Member) session.getAttribute("member");
+        if(member==null)
+            return ResultInfo.fail("登录信息失效，请重新登录");
+
+        Comment comment=new Comment();
+        comment.setClassmateId(classmateId);
+        comment.setContent(commentContent);
+        comment.setMemberId(member.getId());
+
+        if(!commentService.createComment(comment)){
+            return ResultInfo.fail("留言失败，请稍后重试");
+        }
+
+        return ResultInfo.success("").add("comments",commentService.getCommentsByClassmateId(classmateId));
     }
 
     private boolean haveReadPermission(Member member,Classmate classmate) {

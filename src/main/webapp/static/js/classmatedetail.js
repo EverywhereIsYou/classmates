@@ -11,8 +11,6 @@ $(function () {
     });
 
     getDetailInfo();
-
-    $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
 });
 
 function getDetailInfo() {
@@ -35,11 +33,7 @@ function getDetailInfo() {
                     classmateHeader(classmate.name,classmate.school+' '+classmate.clazz,desc);
 
                     if(classmate.papers===null||classmate.papers.length===0){
-                        $("#paper-header").html($("<p></p>",{
-                            class:"text-center",
-                            text:"暂时没有同学填写，邀请同学来填写吧"
-                        }));
-                        $("#paper-content").html("");
+                        setEmptyPaper();
                     }
                     else {
                         setPaper(0);
@@ -52,6 +46,8 @@ function getDetailInfo() {
             }
         }
     });
+
+    $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
 }
 
 function classmateHeader(name,school_clazz,desc){
@@ -59,6 +55,21 @@ function classmateHeader(name,school_clazz,desc){
     $("#school-class").text(school_clazz);
     $("#classmate-desc").text(desc);
     $("title").text(name+"_一起同过窗");
+}
+
+function setEmptyPaper() {
+    $("#paper-number").text(0);
+
+    $("#paper-header").html($("<p></p>",{
+        class:"text-center",
+        text:"暂时没有同学填写，邀请同学来填写吧"
+    }));
+    $("#paper-content").html("");
+
+    $("#paper").removeClass("hidden").addClass("show");
+    $("#comment-wrapper").addClass("hidden").removeClass("show");
+
+    $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
 }
 
 function setPaper(number) {
@@ -104,68 +115,126 @@ function setPaper(number) {
     $("#fav-thing-to-do").text("最想做的事情："+paper.favThingToDo);
     $("#special-in-class").text("上课做过最奇葩的事情："+paper.specialInClass);
     $("#word-to-me").text("简单聊聊我吧："+paper.wordToMe);
+
+    $("#paper").removeClass("hidden").addClass("show");
+    $("#comment-wrapper").addClass("hidden").removeClass("show");
+
+    $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
 }
 
-function getComments() {
+function setComments() {
     if(classmate===undefined||classmate===null){
         alert("没有查询到该同学录数据");
         return;
     }
-    $("#paper-number").text(classmate.papers.length);
-    alert("comments");
+
+    var comments=classmate.comments;
+    if(comments!=null||comments.length!==0){
+        $("#other-comment-wrapper").html("");
+        $.each(comments,function (index,item) {
+            var comment=$("<div class='comment'></div>");
+
+            var avatarAddress=item.authorAvatar;
+            if(avatarAddress===undefined||avatarAddress===null||avatarAddress===''){
+                avatarAddress="/static/images/avatar.png";
+            }
+            var liner=$("<div class='liner'></div>");
+            var avatar=$("<a href='#'></a>").append($("<img src='"+avatarAddress+"' alt='头像' class='img-circle img-responsive comment-avatar'>"));
+            var commentContent=$("<div class='other-comment'></div>");
+
+            var authorName=$("<a href='#'></a>").append($("<h4 class='write-author'>"+item.authorName+"</h4>"));
+            var content=$("<p class='write-content'>"+item.content+"</p>");
+            var commentTime=$("<p class='write-time'>"+item.createTime+"</p>");
+
+            commentContent.append(avatar).append(authorName).append(content).append(commentTime);
+            comment.append(liner).append(commentContent).appendTo($("#other-comment-wrapper"));
+        });
+    }
+    else{
+        $("#other-comment-wrapper").html($("<p></p>",{
+            class:"text-center",
+            text:"暂时没有留言，说点什么吧"
+        }));
+    }
+
+    $(".classmate-detail-wrapper").css("height",$("#comment-wrapper").height()+300+"px");
 }
 
 $(".mousedown").click(function () {
     $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 });
 
-$("#pre").click(function () {
+$(".pre").click(function () {
     if(classmate===undefined||classmate===null){
         alert("没有查询到该同学录数据");
         return;
     }
-    if(classmate.papers.length===0){
-        alert("还没有同学填写该同学录");
-        return;
-    }
+
     var paperNumber=parseInt($("#paper-number").text());
     if(paperNumber===0){
         alert("已经是第一页了");
         return;
     }
-    setPaper(paperNumber-1);
+
+    if(classmate.papers.length===0){
+        setEmptyPaper();
+    }
+    else{
+        setPaper(paperNumber-1);
+    }
+
     $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 });
 
-$("#next").click(function () {
+$(".next").click(function () {
     if(classmate===undefined||classmate===null){
         alert("没有查询到该同学录数据");
         return;
     }
-    if(classmate.papers.length===0){
-        alert("还没有同学填写该同学录");
-        return;
-    }
+
     var paperNumber=parseInt($("#paper-number").text());
     if(paperNumber===classmate.papers.length-1){
-        getComments();
+        $("#comment-wall").trigger("click");
         return;
     }
+
+    if(classmate.papers.length===0){
+        if(paperNumber===0){
+            $("#comment-wall").trigger("click");
+        }
+        else{
+            alert("已经是最后一页了");
+        }
+        return;
+    }
+
     if(paperNumber===classmate.papers.length){
         alert("已经是最后一页了");
         return;
     }
+
     setPaper(paperNumber+1);
     $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 });
 
 //留言墙功能
+$(".comment-wall").click(function () {
+    if(classmate===undefined||classmate===null){
+        alert("没有查询到该同学录数据");
+        return;
+    }
+    var commentWrapper = $("#comment-wrapper");
+    if(commentWrapper.hasClass("show")){
+        alert("当前已在留言墙页咯");
+        return;
+    }
 
-$("#comment-wall").click(function () {
-    getComments();
+    $("#paper-number").text(Math.max(classmate.papers.length,1));
+
     $("#paper").addClass("hidden");
 
-    var commentWrapper = $("#comment-wrapper");
+    setComments();
+
     commentWrapper.removeClass("hidden").addClass("show");
     $(".classmate-detail-wrapper").css("height",commentWrapper.height()+300+"px");
     $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
@@ -173,60 +242,34 @@ $("#comment-wall").click(function () {
 });
 //点击发送留言
 function sendComment() {
-// <div class="comment">
-//     <div class="liner"></div>
-//     <a href="#">
-//         <img src="<c:url value="/static/images/avatar.png" />" alt="头像" class="img-circle img-responsive comment-avatar">
-//     </a>
-//     <div class="other-comment">
-//         <a href="#"><h4 class="write-author">李四：</h4></a>
-//         <p class="write-content">如果你无法简洁的表达你的想法，那只说明你还不够了解它。如果你无法简洁的表达你的想法，那只说明你还不够了解它。如果你无法简洁的表达你的想法，那只说明你还不够了解它。如果你无法简洁的表达你的想法，那只说明你还不够了解它。
-//         </p>
-//         <p class="write-time">2018-4-18</p>
-//     </div>
-// </div>
-    var commentDiv = $("<div></div>",{class: "comment"});
-    var linerDiv = $("<div></div>",{class: "liner"});
-    var A = $("<a></a>",{href: "#"});
-    var avatarImg = $("<img>",{
-        src: "/static/images/avatar.png",
-        class: "img-circle img-responsive comment-avatar",
-        alt: "头像"
-    });
-    var otherCommentDiv = $("<div></div>",{class: "other-comment"});
-    var writeAuthorH4 = $("<h4></h4>",{class: "write-author",text: "李四："});
-    var writeContent = $("#my-comment").val();
-    var writeContentP = $("<p></p>",{
-        class: "write-content",
-        text: writeContent
-    });
-    var nowTime = new Date();
-    var nowYear = nowTime.getFullYear();
-    var nowMonth = nowTime.getMonth()+1;
-    var nowDay = nowTime.getDate();
-    var writeTimeP = $("<p></p>",{
-        class: "write-time",
-        text: nowMonth+"月"+nowDay+"日"+nowYear+"年"
-    });
-    if (writeContent != "" && writeContent != null){
-        var otherCommentWrapper = $("#other-comment-wrapper");
-        var oldHtml = otherCommentWrapper.html();  //将之前的html内容存起来
-        otherCommentWrapper.html("");
-        otherCommentWrapper.append(commentDiv
-            .append(linerDiv)
-            .append(A.append(avatarImg))
-            .append(otherCommentDiv
-                .append(A.append(writeAuthorH4))
-                .append(writeContentP)
-                .append(writeTimeP)
-            )
-        ).append(oldHtml);
+    var sendCommentBtn=$("#send-comment");
+    sendCommentBtn.attr("disabled",true);
+    sendCommentBtn.text("正在留言");
 
-        $("#my-comment").val("");
-    }
-    else {
-        alert("请输入内容");
+    var writeContent=$("#my-comment");
+    if(writeContent.val()===null||writeContent.val()===''){
+        alert("请输入留言内容");
+        return;
     }
 
-    $(".classmate-detail-wrapper").css("height",$("#comment-wrapper").height()+300+"px");
+    $.post("/classmate/writeComment",{"commentContent":writeContent.val(),"classmateId":classmate.id},function (data) {
+        if(data.statusCode===200){
+            var comments=data.extend.comments;
+            if(comments!==undefined&&comments!==null&&comments.length>0){
+                classmate.comments=comments;
+                setComments();
+            }
+
+            writeContent.val("");
+        }
+        else if(data.statusCode===400){
+            alert(data.msg);
+        }
+        else{
+            alert("网络错误，请稍后重试");
+        }
+
+        sendCommentBtn.attr("disabled",false);
+        sendCommentBtn.text("发送留言");
+    });
 }
