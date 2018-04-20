@@ -70,6 +70,7 @@ function setEmptyPaper() {
     $("#comment-wrapper").addClass("hidden").removeClass("show");
 
     $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
+    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 }
 
 function setPaper(number) {
@@ -120,6 +121,7 @@ function setPaper(number) {
     $("#comment-wrapper").addClass("hidden").removeClass("show");
 
     $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
+    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 }
 
 function setComments() {
@@ -157,7 +159,11 @@ function setComments() {
         }));
     }
 
+    $("#paper").addClass("hidden").removeClass("show");
+    $("#comment-wrapper").removeClass("hidden").addClass("show");
+
     $(".classmate-detail-wrapper").css("height",$("#comment-wrapper").height()+300+"px");
+    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 }
 
 $(".mousedown").click(function () {
@@ -182,8 +188,6 @@ $(".pre").click(function () {
     else{
         setPaper(paperNumber-1);
     }
-
-    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 });
 
 $(".next").click(function () {
@@ -214,7 +218,6 @@ $(".next").click(function () {
     }
 
     setPaper(paperNumber+1);
-    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
 });
 
 //留言墙功能
@@ -231,14 +234,7 @@ $(".comment-wall").click(function () {
 
     $("#paper-number").text(Math.max(classmate.papers.length,1));
 
-    $("#paper").addClass("hidden");
-
     setComments();
-
-    commentWrapper.removeClass("hidden").addClass("show");
-    $(".classmate-detail-wrapper").css("height",commentWrapper.height()+300+"px");
-    $("html,body").animate({scrollTop: $("#classmate-detail-wrapper").offset().top}, 1000);
-
 });
 //点击发送留言
 function sendComment() {
@@ -273,3 +269,82 @@ function sendComment() {
         sendCommentBtn.text("发送留言");
     });
 }
+
+//邀请同学填写模态框
+$(".invite").click(function () {
+    $("#invite-modal").removeClass("hidden").addClass("show");
+    $(".invite-modal-content").addClass("invite-modal-content-in");
+});
+$("#invite-close").click(function () {
+    $("#invite-modal").removeClass("show").addClass("hidden");
+});
+
+//点击复制功能
+function  copy() {
+    var text = $("#write-address").html();
+    var address = $("#write-address-input");
+    address.val(text); // 修改文本框的内容
+    address.select(); //选择对象
+    document.execCommand("Copy"); //执行浏览器复制命令
+    alert(address.val());
+}
+
+//编辑同学录框的弹出与退出
+$(".edit").click(function () {
+    $(".edit-myclassmate-wrapper").removeClass("hidden").addClass("show");
+    $(".edit-myclassmate-content").addClass("edit-myclassmate-content-in");
+});
+$("#edit-myclassmate-close").click(function () {
+    $(':input','#myclassmate-fm')
+        .not(':button, :submit, :reset, :hidden')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('selected');
+    $("#preview").attr("src","");
+    $(".edit-myclassmate-wrapper").removeClass("show").addClass("hidden");
+    $(".edit-myclassmate-content").removeClass("edit-myclassmate-content-in");
+});
+
+//上传图片的预览
+function imgPreview(fileDom){
+    //判断是否支持FileReader
+    if (window.FileReader) {
+        var reader = new FileReader();
+    } else {
+        alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+    }
+    //获取文件
+    var file = fileDom.files[0];
+    var imageType = /^image\//;
+    //是否是图片
+    if (!imageType.test(file.type)) {
+        alert("请选择图片！");
+        return;
+    }
+    //读取完成
+    reader.onload = function(e) {
+        //获取图片dom
+        var img = $("#preview");
+        //图片路径设置为读取的图片
+        img.attr("src",e.target.result);
+        img.css("max-width","200px");
+        img.css("max-height","200px");
+    };
+    reader.readAsDataURL(file);
+}
+
+//删除模态框的弹出与关闭
+$(".delete").click(function () {
+    $("#delete-modal").removeClass("hidden").addClass("show");
+    $(".delete-modal-content").addClass("delete-modal-content-in");
+});
+$("#delete-close").click(function () {
+    $("#delete-modal").removeClass("show").addClass("hidden");
+});
+$("#delete-modal").click(function(){
+    // 阻止事件冒泡到.delete-modal-content上
+    if (event.target === this) {
+        $(".delete-modal-content").removeClass("menu-content-in");
+        $("#delete-modal").removeClass("show").addClass("hidden");
+    }
+});
