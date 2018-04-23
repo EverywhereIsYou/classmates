@@ -240,7 +240,32 @@ public class ClassmateController {
         return ResultInfo.success("").add("comments",commentService.getCommentsByClassmateId(classmateId));
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/inviteLink")
+    public ResultInfo inviteLink(HttpSession session,String classmateId){
+        if(StringUtils.isEmpty(classmateId))
+            return ResultInfo.fail("同学录ID为空");
+
+        Member member= (Member) session.getAttribute("member");
+        if(member==null)
+            return ResultInfo.fail("为查询到用户信息，请重新登录");
+
+        Classmate classmate=classmateService.getSimpleClassmateById(classmateId);
+        if(classmate==null)
+            return ResultInfo.fail("无法查询到该同学录信息，请稍后重试");
+        if(classmate.getOwnerId()==null||!classmate.getOwnerId().equals(member.getId()))
+            return ResultInfo.fail("当前用户无该同学录分享权限");
+
+        return ResultInfo.success("").add("url",createInviteLink(classmateId));
+    }
+
     private boolean haveReadPermission(Member member,Classmate classmate) {
         return member != null && classmate != null && classmate.getOwnerId() != null && classmate.getOwnerId().equals(member.getId());
+    }
+
+    private String createInviteLink(String classmateId){
+        if(StringUtils.isEmpty(classmateId))
+            return "";
+        return "http://127.0.0.1:8080/classmate/writePaper?classmateId="+classmateId;
     }
 }

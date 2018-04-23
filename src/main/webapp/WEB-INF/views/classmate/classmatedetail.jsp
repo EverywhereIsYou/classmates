@@ -69,9 +69,9 @@
         <div class="invite-modal-content center-block">
             <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="invite-close">
 
-            <p id="write-address">localhost:8080/test/write</p>
+            <p id="write-address">&nbsp;</p>
             <input id="write-address-input" type="text" class="hidden">
-            <img src="/static/images/qr_code.png" alt="二维码" id="qr-code">
+            <img src="" alt="二维码" id="qr-code">
             <h5>复制链接发给同学，<br/>或者让同学扫描二维码都可以填写！</h5>
             <button class="btn" type="button" id="copy" onclick="copy()">点&nbsp;此&nbsp;复&nbsp;制</button>
         </div>

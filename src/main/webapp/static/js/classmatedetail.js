@@ -272,6 +272,25 @@ function sendComment() {
 
 //邀请同学填写模态框
 $(".invite").click(function () {
+    $.post("/classmate/inviteLink",{"classmateId":classmate.id},function (data) {
+        if(data.statusCode===200){
+            var url=data.extend.url;
+            if(url!==undefined&&url!==null&&url!==''){
+                $("#write-address").text(url);
+                $("#qr-code").attr("src","/codeService/QRCode?url="+url);
+            }
+            else{
+                alert("生成链接错误，请稍后重试");
+            }
+        }
+        else if(data.statusCode===400){
+            alert(data.msg);
+        }
+        else{
+            alert("网络错误，请稍后重试");
+        }
+    });
+
     $("#invite-modal").removeClass("hidden").addClass("show");
     $(".invite-modal-content").addClass("invite-modal-content-in");
 });

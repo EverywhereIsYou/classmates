@@ -2,15 +2,18 @@ package com.strangeman.classmates.controller;
 
 import com.strangeman.classmates.utils.GraphicVeriCode;
 import com.strangeman.classmates.utils.MailSender;
+import com.strangeman.classmates.utils.QRCode;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 @Controller
@@ -44,5 +47,16 @@ public class CodeController {
 
         log.info("dynamicCode:"+session.getAttribute("dynamicCode"));
         log.info("username:"+session.getAttribute("username"));
+    }
+
+    @RequestMapping("/QRCode")
+    @ResponseBody
+    public void qrCode(HttpServletResponse response,String url) throws IOException {
+        if(StringUtils.isEmpty(url))
+            return;
+
+        BufferedImage image= QRCode.getQRCode(url);
+        if(image!=null)
+            ImageIO.write(image,"JPEG",response.getOutputStream());
     }
 }
