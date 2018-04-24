@@ -7,6 +7,7 @@ import com.strangeman.classmates.utils.DataFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,5 +25,24 @@ public class PaperServiceImpl implements PaperService{
         paper.setCreateTime(DataFactory.getCurrentTime());
 
         return paperMapper.insertSelective(paper)==1;
+    }
+
+    @Override
+    public boolean deletePaper(String paperId) {
+        return paperId != null && !paperId.equals("") && paperMapper.deletePaperById(paperId) > 0;
+    }
+
+    @Override
+    public Paper getPaperById(String paperId) {
+        if(paperId==null||paperId.equals(""))
+            return null;
+        return paperMapper.selectPaperById(paperId);
+    }
+
+    @Override
+    public List<Paper> getPapersByClassmateId(String classmateId) {
+        if(classmateId==null||classmateId.equals(""))
+            return null;
+        return paperMapper.selectPapersByClassmateId(classmateId);
     }
 }

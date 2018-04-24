@@ -115,63 +115,29 @@ public class ClassmateController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/photoWall",method = RequestMethod.POST)
-    public ResultInfo getPhotoWall(HttpSession session,String classmateId){
-        ResultInfo result;
+    @RequestMapping("/deleteClassmate")
+    public ResultInfo deleteClassmate(HttpSession session,String classmateId){
+        if(StringUtils.isEmpty(classmateId))
+            return ResultInfo.fail("同学录ID为空");
 
         Member member= (Member) session.getAttribute("member");
-        if(member==null) {
-            result=ResultInfo.fail("查不到用户数据，请重新登录");
-        }
-        else {
-            if (StringUtils.isEmpty(classmateId))
-                result=ResultInfo.fail("同学录ID为空");
-            else {
-                Classmate classmate = classmateService.getSimpleClassmateById(classmateId);
-                if (classmate != null) {
-                    if (haveReadPermission(member, classmate)) {
-                        result = ResultInfo.success("").add("classmate", classmate);
-                    } else {
-                        result = ResultInfo.fail("无该同学录查看权限");
-                    }
-                } else {
-                    result = ResultInfo.fail("无法查询该同学录数据");
-                }
-            }
-        }
-        return result;
-    }
+        if(member==null)
+            return ResultInfo.fail("无法查询用户信息，请重新登录");
 
-    @RequestMapping(value = "/photoWall",method = RequestMethod.GET)
-    public String getPhotoWall(Model model,String classmateId){
-        model.addAttribute("classmateId",classmateId);
+        Classmate classmate=classmateService.getSimpleClassmateById(classmateId);
+        if(classmate==null)
+            return ResultInfo.fail("无法查询到该同学录信息");
 
-        return "classmate/photowall";
-    }
+        if(classmate.getOwnerId()==null||!classmate.getOwnerId().equals(member.getId()))
+            return ResultInfo.fail("没有该同学录删除权限");
 
-    @ResponseBody
-    @RequestMapping(value = "/writePaper",method = RequestMethod.POST)
-    public ResultInfo writePaper(HttpSession session,Paper paper){
         ResultInfo result;
-        if(paper==null)
-            result=ResultInfo.fail("提交的内容为空");
-        else {
-            Member member= (Member) session.getAttribute("member");
-            if(member!=null&&member.getId()!=null){
-                paper.setAuthorId(member.getId());
-            }
-
-            if (paperService.createPaper(paper)) {
-                result = ResultInfo.success("");
-
-                if(member!=null){
-                    result.add("nextPage","welcome");
-                }
-            } else {
-                result = ResultInfo.fail("数据错误");
-            }
+        if(classmateService.deleteClassmate(classmateId)){
+            result=ResultInfo.success("删除同学录成功");
         }
-
+        else {
+            result=ResultInfo.fail("删除同学录失败，请稍后重试");
+        }
         return result;
     }
 
@@ -217,6 +183,63 @@ public class ClassmateController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/writePaper",method = RequestMethod.POST)
+    public ResultInfo writePaper(HttpSession session,Paper paper){
+        ResultInfo result;
+        if(paper==null)
+            result=ResultInfo.fail("提交的内容为空");
+        else {
+            Member member= (Member) session.getAttribute("member");
+            if(member!=null&&member.getId()!=null){
+                paper.setAuthorId(member.getId());
+            }
+
+            if (paperService.createPaper(paper)) {
+                result = ResultInfo.success("");
+
+                if(member!=null){
+                    result.add("nextPage","welcome");
+                }
+            } else {
+                result = ResultInfo.fail("数据错误");
+            }
+        }
+
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping("/deletePaper")
+    public ResultInfo deletePaper(HttpSession session,String paperId){
+        if(StringUtils.isEmpty(paperId))
+            return ResultInfo.fail("同学录详情页ID为空");
+
+        Member member= (Member) session.getAttribute("member");
+        if(member==null)
+            return ResultInfo.fail("无法查询用户信息，请重新登录");
+
+        Paper paper=paperService.getPaperById(paperId);
+        if(paper==null)
+            return ResultInfo.fail("找不到该同学录详情页");
+
+        Classmate classmate=classmateService.getSimpleClassmateById(paper.getClassmateId());
+        if(classmate==null)
+            return ResultInfo.fail("无法查询到该同学录信息");
+
+        if(classmate.getOwnerId()==null||!classmate.getOwnerId().equals(member.getId()))
+            return ResultInfo.fail("没有该同学录删除权限");
+
+        ResultInfo result;
+        if(paperService.deletePaper(paperId)){
+            result=ResultInfo.success("删除同学录详情页成功").add("papers",paperService.getPapersByClassmateId(classmate.getId()));
+        }
+        else{
+            result=ResultInfo.fail("删除同学录详情页失败，请稍后重试");
+        }
+        return result;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/writeComment",method = RequestMethod.POST)
     public ResultInfo writeComment(HttpSession session,String commentContent,String classmateId){
         if(StringUtils.isEmpty(classmateId))
@@ -238,6 +261,41 @@ public class ClassmateController {
         }
 
         return ResultInfo.success("").add("comments",commentService.getCommentsByClassmateId(classmateId));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/photoWall",method = RequestMethod.POST)
+    public ResultInfo getPhotoWall(HttpSession session,String classmateId){
+        ResultInfo result;
+
+        Member member= (Member) session.getAttribute("member");
+        if(member==null) {
+            result=ResultInfo.fail("查不到用户数据，请重新登录");
+        }
+        else {
+            if (StringUtils.isEmpty(classmateId))
+                result=ResultInfo.fail("同学录ID为空");
+            else {
+                Classmate classmate = classmateService.getSimpleClassmateById(classmateId);
+                if (classmate != null) {
+                    if (haveReadPermission(member, classmate)) {
+                        result = ResultInfo.success("").add("classmate", classmate);
+                    } else {
+                        result = ResultInfo.fail("无该同学录查看权限");
+                    }
+                } else {
+                    result = ResultInfo.fail("无法查询该同学录数据");
+                }
+            }
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/photoWall",method = RequestMethod.GET)
+    public String getPhotoWall(Model model,String classmateId){
+        model.addAttribute("classmateId",classmateId);
+
+        return "classmate/photowall";
     }
 
     @ResponseBody

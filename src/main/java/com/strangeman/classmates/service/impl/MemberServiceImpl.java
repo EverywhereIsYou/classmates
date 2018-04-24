@@ -23,6 +23,7 @@ public class MemberServiceImpl implements MemberService{
     public boolean register(Member member) {
         member.setId(UUID.randomUUID().toString());
         member.setCreateTime(DataFactory.getCurrentTime());
+        member.setLastModifyTime(member.getCreateTime());
         try {
             member.setPwd(AES.encrypt(member.getPwd()));
         } catch (Exception e) {

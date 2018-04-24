@@ -9,4 +9,5 @@ public interface ClassmateService {
     Classmate getSimpleClassmateById(String classmateId);
     Classmate getCompleteClassmateById(String classmateId);
     boolean createClassmate(Classmate classmate);
+    boolean deleteClassmate(String classmateId);
 }

@@ -138,7 +138,7 @@
 .write-time{color: #7f7f7f}
 
 /*邀请同学填写模态框 与删除模态框*/
-#invite-modal,#delete-modal{
+#invite-modal,#delete-modal,#paper-delete-modal{
     width: 100%;
     height: 100%;
     background-color: rgba(250,250,250,0.6);
@@ -337,7 +337,7 @@ textarea:focus{
         opacity: 1;
     }
 }
-#delete-close{
+#delete-close,#paper-delete-close{
     width: 50px;
     height: 50px;
     position: absolute;
@@ -345,7 +345,7 @@ textarea:focus{
     margin-top: -60px;
     opacity: 0.8;
 }
-#sure-delete{
+#sure-delete,#paper-delete{
     width: 100%;
     color: white;
     font-size: 1.2em;

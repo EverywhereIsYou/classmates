@@ -49,7 +49,16 @@ public class ClassmateServiceImpl implements ClassmateService{
 
         classmate.setId(UUID.randomUUID().toString());
         classmate.setCreateTime(DataFactory.getCurrentTime());
+        classmate.setLastModifyTime(classmate.getCreateTime());
 
         return classmateMapper.insertSelective(classmate)==1;
+    }
+
+    @Override
+    public boolean deleteClassmate(String classmateId) {
+        if(StringUtils.isEmpty(classmateId))
+            return false;
+
+        return classmateMapper.deleteClassmateById(classmateId)>0;
     }
 }

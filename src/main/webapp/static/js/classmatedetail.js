@@ -367,3 +367,73 @@ $("#delete-modal").click(function(){
         $("#delete-modal").removeClass("show").addClass("hidden");
     }
 });
+
+//删除同学录详情页模态框的弹出与关闭
+$("#delete2").click(function () {
+    $("#paper-delete-modal").removeClass("hidden").addClass("show");
+    $(".delete-modal-content").addClass("delete-modal-content-in");
+});
+$("#paper-delete-close").click(function () {
+    $("#paper-delete-modal").removeClass("show").addClass("hidden");
+});
+$("#paper-delete-modal").click(function(){
+    // 阻止事件冒泡到.delete-modal-content上
+    if (event.target === this) {
+        $(".delete-modal-content").removeClass("menu-content-in");
+        $("#paper-delete-modal").removeClass("show").addClass("hidden");
+    }
+});
+
+function confirmDeleteClassmate() {
+    var deleteBtn=$("#sure-delete");
+    deleteBtn.attr("disabled",true);
+    deleteBtn.html("正&nbsp;&nbsp;在&nbsp;&nbsp;删&nbsp;&nbsp;除");
+
+    $.post("/classmate/deleteClassmate",{"classmateId":classmate.id},function (data) {
+        if(data.statusCode===200){
+            alert("删除成功");
+            $(location).attr("href","/classmate/myclassmates");
+        }
+        else if(data.statusCode===400){
+            alert(data.msg);
+        }
+        else{
+            alert("网络错误，请稍后重试");
+        }
+
+        deleteBtn.attr("disabled",false);
+        deleteBtn.html("确&nbsp;&nbsp;认&nbsp;&nbsp;删&nbsp;&nbsp;除");
+    });
+}
+
+function confirmDeletePaper() {
+    var deleteBtn=$("#paper-delete");
+    deleteBtn.attr("disabled",true);
+    deleteBtn.html("正&nbsp;&nbsp;在&nbsp;&nbsp;删&nbsp;&nbsp;除");
+
+    $.post("/classmate/deletePaper",{"paperId":$("#paper-id").text()},function (data) {
+        if(data.statusCode===200){
+            alert("删除成功");
+            $("#paper-delete-close").trigger("click");
+
+            var papers=data.extend.papers;
+            if(papers===undefined||papers===null||papers.length===0){
+                classmate.papers=null;
+                setEmptyPaper();
+            }
+            else {
+                classmate.papers=papers;
+                setPaper(Math.max(parseInt($("#paper-number").text())-1,0));
+            }
+        }
+        else if(data.statusCode===400){
+            alert(data.msg);
+        }
+        else{
+            alert("网络错误，请稍后重试");
+        }
+
+        deleteBtn.attr("disabled",false);
+        deleteBtn.html("确&nbsp;&nbsp;认&nbsp;&nbsp;删&nbsp;&nbsp;除");
+    });
+}

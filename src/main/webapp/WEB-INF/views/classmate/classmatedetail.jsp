@@ -53,13 +53,13 @@
         <div class="row">
             <div class="col-sm-10 col-xs-10 operation"><h3><a href="javascript:void(0)" class="edit">编辑</a></h3></div>
             <div class="col-sm-2 col-xs-2 edit" id="edit">
-                <a href="#"><img src="<c:url value="/static/images/edit.png" />" alt="编辑" class="icon"></a>
+                <a href="javascript:void(0)"><img src="<c:url value="/static/images/edit.png" />" alt="编辑" class="icon"></a>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-10 col-xs-10 operation"><h3><a href="javascript:void(0)" class="delete">删除</a></h3></div>
             <div class="col-sm-2 col-xs-2 delete" id="delete">
-                <a href="#"><img src="<c:url value="/static/images/delete.png" />" alt="删除" class="icon"></a>
+                <a href="javascript:void(0)"><img src="<c:url value="/static/images/delete.png" />" alt="删除" class="icon"></a>
             </div>
         </div>
     </div>
@@ -145,10 +145,20 @@
             <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="delete-close">
             <h2>是否删除此本同学录?</h2>
             <div class="alert alert-danger" role="alert" style="font-size: 1.3em">注意！此操作不可撤销</div>
-            <button class="btn" type="button" id="sure-delete">确&nbsp;&nbsp;认&nbsp;&nbsp;删&nbsp;&nbsp;除</button>
+            <button class="btn" type="button" id="sure-delete" onclick="confirmDeleteClassmate()">确&nbsp;&nbsp;认&nbsp;&nbsp;删&nbsp;&nbsp;除</button>
         </div>
     </div>
 
+</div>
+
+<%--删除同学录详情页模态框--%>
+<div class="hidden" id="paper-delete-modal">
+    <div class="delete-modal-content center-block">
+        <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="paper-delete-close">
+        <h2>是否删除本页同学录?</h2>
+        <div class="alert alert-danger" role="alert" style="font-size: 1.3em">注意！此操作不可撤销</div>
+        <button class="btn" type="button" id="paper-delete" onclick="confirmDeletePaper()">确&nbsp;&nbsp;认&nbsp;&nbsp;删&nbsp;&nbsp;除</button>
+    </div>
 </div>
 
 <div class="classmate-detail-wrapper" id="classmate-detail-wrapper">

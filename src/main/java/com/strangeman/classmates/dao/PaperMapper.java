@@ -3,6 +3,8 @@ package com.strangeman.classmates.dao;
 import com.strangeman.classmates.bean.Paper;
 import com.strangeman.classmates.bean.PaperExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -29,6 +31,17 @@ public interface PaperMapper {
 
     @Select("select paper.*,member.nickname as author_name,member.avatar as author_avatar from "
             + table_name
-            + " left join member on(paper.author_id=member.id) where classmate_id=#{classmateId}")
+            + " left join member on(paper.author_id=member.id) where classmate_id=#{classmateId} "
+            + " order by create_time desc")
     List<Paper> selectPapersByClassmateId(@Param("classmateId") String classmateId);
+
+    @Select("select * from "
+            +table_name
+            +" where id=#{paperId}")
+    Paper selectPaperById(@Param("paperId") String paperId);
+
+    @Delete("delete from "
+            +table_name
+            +" where id=#{paperId}")
+    int deletePaperById(@Param("paperId") String paperId);
 }

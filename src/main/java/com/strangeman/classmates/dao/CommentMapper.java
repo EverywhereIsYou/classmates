@@ -30,6 +30,6 @@ public interface CommentMapper {
     @Select("select comment.*,member.nickname as author_name,member.avatar as author_avatar from "
             + table_name
             + " left join member on(comment.member_id=member.id)"
-            + " where classmate_id=#{classmateId}")
+            + " where classmate_id=#{classmateId} order by create_time desc")
     List<Comment> selectCommentsByClassmateId(@Param("classmateId") String classmateId);
 }
