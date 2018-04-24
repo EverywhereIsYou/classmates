@@ -200,14 +200,14 @@
 <body>
 
 <header>
-    <a href="<c:url value="" />"><img src="<c:url value="/static/images/logo1.png" />" alt="LOGO" id="logo"></a>
-    <a href="<c:url value="" />"><h3>一起同过窗</h3></a>
+    <a href="<c:url value="/" />"><img src="<c:url value="/static/images/logo1.png" />" alt="LOGO" id="logo"></a>
+    <a href="<c:url value="/" />"><h3>一起同过窗</h3></a>
 </header>
 
 <div class="container">
     <div class="avatar">
-        <a href="#"><img src="<c:url value="/static/images/avatar.png" />" alt="avatar"
-                         class="img-responsive center-block" id="avatar"></a>
+        <img src="<c:url value="/static/images/avatar.png" />" alt="avatar"
+                         class="img-responsive center-block" id="avatar">
 
         <div class="" id="account-number">
             <h1 id="member_nickname">&nbsp;</h1>

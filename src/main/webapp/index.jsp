@@ -207,16 +207,16 @@
 <body>
 
 <header>
-    <a href=""><img src="<c:url value="/static/images/logo1.png" />" id="logo" alt="LOGO"></a>
-    <a href="#"><h3 id="standingbyme">一起同过窗</h3></a>
+    <a href="<c:url value="/" />"><img src="<c:url value="/static/images/logo1.png" />" id="logo" alt="LOGO"></a>
+    <a href="<c:url value="/" />"><h3 id="standingbyme">一起同过窗</h3></a>
     <ul>
         <li><a href="#" id="a1">首页</a></li>
         <li><a href="javascript:void(0)" id="a2">下载</a></li>
     </ul>
     <div class="show"></div>
     <ul id="login-register">
-        <li><a href="#">注册</a></li>
-        <li><a href="#">登录</a></li>
+        <li><a href="<c:url value="/register" />">注册</a></li>
+        <li><a href="<c:url value="/login" />">登录</a></li>
     </ul>
 </header>
 
@@ -252,12 +252,12 @@
         </div>
     </div>
     <h2>你的同学录<br>交给我们来保管</h2>
-    <h4><a href=""><u>前往网页版</u></a></h4>
+    <h4><a href="<c:url value="/login" />"><u>前往网页版</u></a></h4>
     <button class="btn">下载Android版</button>
 
     <footer>
         <div class="liner"></div>
-        <p>Copyright © 2018 <a href="#">Standingbyme</a>. All Rights Reserved.</p>
+        <p>Copyright © 2018 <a href="<c:url value="/" />">Standingbyme</a>. All Rights Reserved.</p>
     </footer>
 </div>
 

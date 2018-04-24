@@ -81,7 +81,7 @@
 </div>
 
 <footer class="footer">
-    <p>Copyright © 2018 <a href="#">Standingbyme</a>. All Rights Reserved.</p>
+    <p>Copyright © 2018 <a href="<c:url value="/" />">Standingbyme</a>. All Rights Reserved.</p>
 </footer>
 
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>

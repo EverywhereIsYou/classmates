@@ -19,7 +19,7 @@
     <div class="wrapper">
         <header>
             <div id="line"></div>
-            <a href="#">
+            <a href="<c:url value="/" />">
                 <img src="<c:url value="/static/images/logo2.png" />" alt="图片" id="logo" class="img-responsive center-block">
             </a>
         </header>
@@ -74,7 +74,7 @@
 </div>
 
 <footer class="footer">
-    <p>Copyright © 2018 <a href="#">Standingbyme</a>. All Rights Reserved.</p>
+    <p>Copyright © 2018 <a href="<c:url value="/" />">Standingbyme</a>. All Rights Reserved.</p>
 </footer>
 
 

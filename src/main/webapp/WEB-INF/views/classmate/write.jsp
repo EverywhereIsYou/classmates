@@ -176,8 +176,8 @@
 <body>
 
 <header>
-    <a href="#"><img src="<c:url value="/static/images/logo1.png" />" alt="LOGO" id="logo"></a>
-    <a href="#"><h3 id="standingbyme">一起同过窗</h3></a>
+    <a href="<c:url value="/" />"><img src="<c:url value="/static/images/logo1.png" />" alt="LOGO" id="logo"></a>
+    <a href="<c:url value="/" />"><h3 id="standingbyme">一起同过窗</h3></a>
 </header>
 
 <div class="main">
@@ -212,7 +212,7 @@
         </div>
     </div>
     <footer class="footer">
-        <p>Copyright © 2018 <a href="#">Standingbyme</a>. All Rights Reserved.</p>
+        <p>Copyright © 2018 <a href="<c:url value="/" />">Standingbyme</a>. All Rights Reserved.</p>
     </footer>
 </div>
 
