@@ -83,35 +83,50 @@ $("#add-new-photo").click(function () {
 
 });
 
-function setPhoto(photoAddress) {
-    addPhoto(photoAddress);
-    $(".myphoto").click(function () {
-        $(".show-wrapper").removeClass("hidden").addClass("show");
-        var url=$(this).css('background-image');
-        photoToLarge(url.split('"')[1].split('"')[0]);
-    });
-    photoWallWrapperHeight();
-}
-
 //图片放大全屏显示效果
+var gifNumber = 1;   //动画类型，一共2种
+
 function photoToLarge(photoAddress) {
     var largePhoto = $("#large-photo");
-
     var photoWidth = largePhoto.width();
     var photoHeight = largePhoto.height();
     largePhoto.attr("src",photoAddress);
 
-    if (photoHeight <= $(window).height() || photoHeight > photoWidth) {
-        largePhoto.css("height", 10 + "px");
-        largePhoto.stop().animate({
-            height: $(window).height() - 100
-        }, 1100, "swing");
+    if (gifNumber === 1) {
+        if (photoHeight <= $(window).height() || photoHeight > photoWidth) {
+            largePhoto.css("height", 10 + "px")
+                .removeClass("large-photo-3");
+            largePhoto.stop().animate({
+                height: $(window).height() - 100
+            }, 1100, "swing");
+        }
+        else {
+            largePhoto.css("width", 10 + "px")
+                .removeClass("large-photo-3");
+            largePhoto.stop().animate({
+                width: $(window).width() - 200
+            }, 1100, "swing");
+        }
+        gifNumber = 2;
     }
-    else {
-        largePhoto.css("width", 10 + "px");
-        largePhoto.stop().animate({
-            width: $(window).width() - 200
-        }, 1100, "swing");
+    else if (gifNumber === 2){
+        if (photoHeight <= $(window).height() || photoHeight > photoWidth){
+            largePhoto.css("height",$(window).height() - 100 + "px")
+                .css("opacity","0")
+                .removeClass("large-photo-3");
+            largePhoto.stop().animate({
+                opacity: "1"
+            },1100,"swing");
+        }
+        else{
+            largePhoto.css("width",$(window).width() - 200 + "px")
+                .css("opacity","0")
+                .removeClass("large-photo-3");
+            largePhoto.stop().animate({
+                opacity: "1"
+            },1100,"swing");
+        }
+        gifNumber = 1;
     }
 }
 
@@ -129,8 +144,14 @@ $(function () {
 
                 var photos=data.extend.classmate.photoWall.split("|");
                 $.each(photos,function (index,item) {
-                    setPhoto(item);
+                    addPhoto(item);
                 });
+                $(".myphoto").click(function () {
+                    $(".show-wrapper").removeClass("hidden").addClass("show");
+                    var url=$(this).css('background-image');
+                    photoToLarge(url.split('"')[1].split('"')[0]);
+                });
+                photoWallWrapperHeight();
             }
             else if(data.statusCode===400){
                 alert(data.msg);

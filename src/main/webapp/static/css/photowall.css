@@ -63,8 +63,8 @@
     display: inline-block;
     position: relative;
     border-radius: 5px;
-    top: 50%;
-    transform: translateY(-50%);
+    top:50%;
+    transform: translateY(-50%)!important;
     box-shadow:0 0 2px rgba(250, 250, 250, 0.4);
 }
 

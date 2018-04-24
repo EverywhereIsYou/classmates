@@ -64,7 +64,9 @@
 
             <div class="form-group">
                 <div class="col-xs-6 col-xs-offset-3">
-                    <button class="btn" id="download"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp;下载android版
+                    <button type="button" class="btn" id="download">
+                        <span class="glyphicon glyphicon-download-alt"></span>
+                        &nbsp;&nbsp;&nbsp;下载android版
                     </button>
                 </div>
             </div>
