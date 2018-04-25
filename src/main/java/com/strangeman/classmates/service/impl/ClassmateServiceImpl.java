@@ -1,6 +1,7 @@
 package com.strangeman.classmates.service.impl;
 
 import com.strangeman.classmates.bean.Classmate;
+import com.strangeman.classmates.bean.ClassmateExample;
 import com.strangeman.classmates.dao.ClassmateMapper;
 import com.strangeman.classmates.dao.CommentMapper;
 import com.strangeman.classmates.dao.PaperMapper;
@@ -56,9 +57,21 @@ public class ClassmateServiceImpl implements ClassmateService{
 
     @Override
     public boolean deleteClassmate(String classmateId) {
-        if(StringUtils.isEmpty(classmateId))
+        return !StringUtils.isEmpty(classmateId) && classmateMapper.deleteClassmateById(classmateId) > 0;
+
+    }
+
+    @Override
+    public boolean modifyClassmate(Classmate classmate) {
+        if(classmate==null||StringUtils.isEmpty(classmate.getId()))
             return false;
 
-        return classmateMapper.deleteClassmateById(classmateId)>0;
+        classmate.setLastModifyTime(DataFactory.getCurrentTime());
+
+        ClassmateExample example=new ClassmateExample();
+        ClassmateExample.Criteria criteria=example.createCriteria();
+        criteria.andIdEqualTo(classmate.getId());
+
+        return classmateMapper.updateByExampleSelective(classmate,example)==1;
     }
 }

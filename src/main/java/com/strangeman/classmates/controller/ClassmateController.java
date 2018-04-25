@@ -115,6 +115,30 @@ public class ClassmateController {
     }
 
     @ResponseBody
+    @RequestMapping("/updateClassmate")
+    public ResultInfo updateClassmate(HttpSession session,Classmate classmate){
+        if(classmate==null||classmate.getId()==null||classmate.getId().equals(""))
+            return ResultInfo.fail("同学录ID不能为空");
+
+        Member member= (Member) session.getAttribute("member");
+        if(member==null)
+            return ResultInfo.fail("为查询到用户信息，请重新登录");
+
+        Classmate classmateOld=classmateService.getSimpleClassmateById(classmate.getId());
+        if(classmateOld==null)
+            return ResultInfo.fail("无法查询到当前同学录");
+
+        if(!classmateOld.getOwnerId().equals(member.getId()))
+            return ResultInfo.fail("当前用户没有修改权限");
+
+        classmate.setOwnerId(classmateOld.getOwnerId());
+        if(classmateService.modifyClassmate(classmate))
+            return ResultInfo.success("同学录修改成功");
+
+        return ResultInfo.fail("修改失败，请稍后重试");
+    }
+
+    @ResponseBody
     @RequestMapping("/deleteClassmate")
     public ResultInfo deleteClassmate(HttpSession session,String classmateId){
         if(StringUtils.isEmpty(classmateId))

@@ -36,7 +36,7 @@
         <h3 id="school-class">&nbsp;</h3>
         <div id="liner"></div>
         <h3 id="classmate-desc">&nbsp;</h3>
-        <input id="classmate_id" class="hidden" value="${classmateId}"/>
+        <input id="classmate_id" class="hidden" value="${classmateId}" title=""/>
         <a href="javascript:void(0)">
             <div class="mousedown"><span class="glyphicon glyphicon-menu-down" id="mousedown"></span>
             </div>
@@ -70,7 +70,7 @@
             <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="invite-close">
 
             <p id="write-address">&nbsp;</p>
-            <input id="write-address-input" type="text" class="hidden">
+            <input id="write-address-input" type="text" class="hidden" title="">
             <img src="" alt="二维码" id="qr-code">
             <h5>复制链接发给同学，<br/>或者让同学扫描二维码都可以填写！</h5>
             <button class="btn" type="button" id="copy" onclick="copy()">点&nbsp;此&nbsp;复&nbsp;制</button>
@@ -91,7 +91,7 @@
                         <div class="col-sm-8" id="my-classmate-cover">
                             <input type="file" name="cover" class="input-upload" placeholder="" id="cover" accept="image/*" onchange="imgPreview(this)">
                             <a href="javascript:void(0);"><u>＋上传封面</u></a>
-                            <img id="preview" />
+                            <img id="preview"  src=""/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -115,7 +115,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">简单说明：</label>
                         <div class="col-sm-8">
-                            <textarea type="text" name="description" class="form-control" rows="8" placeholder="" id="description"></textarea>
+                            <textarea name="description" class="form-control" rows="8" placeholder="" id="description"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -131,7 +131,7 @@
                     </div>
                     <div class="form-group edit-btn">
                         <div class="col-sm-10 col-sm-offset-1">
-                            <button class="btn" id="sure-edit" type="button" onclick="createNewClassmate()">确&nbsp;&nbsp;认&nbsp;&nbsp;修&nbsp;&nbsp;改</button>
+                            <button class="btn" id="sure-edit" type="button" onclick="modifyClassmate()">确&nbsp;&nbsp;认&nbsp;&nbsp;修&nbsp;&nbsp;改</button>
                         </div>
                     </div>
                 </form>
@@ -163,10 +163,10 @@
 
 <div class="classmate-detail-wrapper" id="classmate-detail-wrapper">
     <div class="container">
-        <input id="paper-number" class="hidden"/>
+        <input id="paper-number" class="hidden" title=""/>
         <div class="paper" id="paper">
-            <input id="paper-id" class="hidden"/>
-            <input id="author-id" class="hidden"/>
+            <input id="paper-id" class="hidden" title=""/>
+            <input id="author-id" class="hidden" title=""/>
 
             <div class="paper-header" id="paper-header">
                 <a href="javascript:void(0)"><img src="<c:url value="/static/images/avatar.png" />" alt="头像" id="avatar"

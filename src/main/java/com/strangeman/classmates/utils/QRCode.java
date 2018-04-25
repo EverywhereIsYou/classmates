@@ -23,7 +23,7 @@ public class QRCode {
         BufferedImage image=null;
 
         int size=200;
-        Map<EncodeHintType,Object> hints=new HashMap<EncodeHintType, Object>();
+        Map<EncodeHintType,Object> hints=new HashMap<>();
         hints.put(EncodeHintType.CHARACTER_SET,"utf-8");
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
         hints.put(EncodeHintType.MARGIN,2);
@@ -50,9 +50,7 @@ public class QRCode {
                 logo.flush();
                 image.flush();
             }
-        } catch (WriterException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
 

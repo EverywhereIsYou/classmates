@@ -242,6 +242,10 @@ $(".mousedown").click(function () {
 });
 
 function createNewClassmate() {
+    var confirmCreateBtn=$("#sure-create");
+    confirmCreateBtn.attr("disabled",true);
+    confirmCreateBtn.html("正&nbsp;&nbsp;在&nbsp;&nbsp;创&nbsp;&nbsp;建");
+
     var formData=new FormData($("#myclassmate-fm")[0]);
     $.ajax({
         url:"/file/classmateCover",
@@ -266,22 +270,17 @@ function createNewClassmate() {
 }
 function newClassmateData(coverName) {
     var contentData;
-    if(coverName===null){
-        contentData=$("#myclassmate-fm").serialize();
-    }
-    else{
-        contentData={
-            "cover":coverName,
-            "name":$("#classmatename").val(),
-            "school":$("#school").val(),
-            "clazz":$("#clazz").val(),
-            "description":$("#description").val()
-        };
-    }
+
+    contentData={
+        "cover":coverName,
+        "name":$("#classmatename").val(),
+        "school":$("#school").val(),
+        "clazz":$("#clazz").val(),
+        "description":$("#description").val()
+    };
 
     $.post("/classmate/createClassmate",contentData,
         function (data) {
-            console.log(data);
             if(data.statusCode===200){
                 alert("同学录创建成功");
                 $("#create-myclassmate-close").trigger("click");
@@ -292,4 +291,8 @@ function newClassmateData(coverName) {
             }
         }
     );
+
+    var confirmCreateBtn=$("#sure-create");
+    confirmCreateBtn.attr("disabled",false);
+    confirmCreateBtn.html("确&nbsp;&nbsp;认&nbsp;&nbsp;创&nbsp;&nbsp;建");
 }

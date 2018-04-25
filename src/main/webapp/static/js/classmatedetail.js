@@ -26,11 +26,7 @@ function getDetailInfo() {
             if(data.statusCode===200){
                 classmate=data.extend.classmate;
                 if(classmate!==undefined&&classmate!=null){
-                    var desc=classmate.description;
-                    if(desc===null||desc===''){
-                        desc=' ';
-                    }
-                    classmateHeader(classmate.name,classmate.school+' '+classmate.clazz,desc);
+                    classmateHeader();
 
                     if(classmate.papers===null||classmate.papers.length===0){
                         setEmptyPaper();
@@ -50,11 +46,16 @@ function getDetailInfo() {
     $(".classmate-detail-wrapper").css("height",$("#paper").height()+300+"px");
 }
 
-function classmateHeader(name,school_clazz,desc){
-    $("#classmate-name").text(name);
-    $("#school-class").text(school_clazz);
-    $("#classmate-desc").text(desc);
-    $("title").text(name+"_一起同过窗");
+function classmateHeader(){
+    $("#classmate-name").text(classmate.name);
+    $("#school-class").text(classmate.school+" "+classmate.clazz);
+    if(classmate.description===null||classmate.description===''){
+        $("#classmate-desc").text(" ");
+    }
+    else {
+        $("#classmate-desc").text(classmate.description);
+    }
+    $("title").text(classmate.name+"_一起同过窗");
 }
 
 function setEmptyPaper() {
@@ -310,6 +311,12 @@ function  copy() {
 
 //编辑同学录框的弹出与退出
 $(".edit").click(function () {
+    $("#preview").attr("src",classmate.cover);
+    $("#classmatename").val(classmate.name);
+    $("#school").val(classmate.school);
+    $("#clazz").val(classmate.clazz);
+    $("#description").val(classmate.description);
+
     $(".edit-myclassmate-wrapper").removeClass("hidden").addClass("show");
     $(".edit-myclassmate-content").addClass("edit-myclassmate-content-in");
 });
@@ -323,6 +330,85 @@ $("#edit-myclassmate-close").click(function () {
     $(".edit-myclassmate-wrapper").removeClass("show").addClass("hidden");
     $(".edit-myclassmate-content").removeClass("edit-myclassmate-content-in");
 });
+
+function modifyClassmate() {
+    var confirmModifyBtn=$("#sure-edit");
+    confirmModifyBtn.attr("disabled",true);
+    confirmModifyBtn.html("正&nbsp;&nbsp;在&nbsp;&nbsp;修&nbsp;&nbsp;改");
+
+    var imgAddress=$("#preview")[0].src;
+    if(imgAddress===classmate.cover||(imgAddress===""&&classmate.cover===null)){
+        modifyClassmateData(null);
+    }
+    else {
+        var imageData=new FormData($("#myclassmate-fm")[0]);
+        $.ajax({
+            url:"/file/classmateCover",
+            data:imageData,
+            type:'POST',
+            processData:false,
+            contentType:false,
+            error:function () {
+                modifyClassmateData(null);
+                alert("上传同学录封面失败");
+            },
+            success:function (data) {
+                if(data.statusCode===200){
+                    modifyClassmateData(data.extend.fileName);
+                }
+                else{
+                    modifyClassmateData(null);
+                    alert(data.msg);
+                }
+            }
+        });
+    }
+}
+function modifyClassmateData(coverName) {
+    var contentData;
+
+    var classmateName=$("#classmatename").val();
+    var school=$("#school").val();
+    var clazz=$("#clazz").val();
+    var description=$("#description").val();
+
+    contentData={
+        "id":classmate.id,
+        "cover":coverName,
+        "name":classmateName,
+        "school":school,
+        "clazz":clazz,
+        "description":description
+    };
+
+
+    $.post("/classmate/updateClassmate",contentData,function (data) {
+        if(data.statusCode===200){
+            alert("同学录修改成功");
+            $("#edit-myclassmate-close").trigger("click");
+
+            classmate.name=classmateName;
+            classmate.school=school;
+            classmate.clazz=clazz;
+            classmate.description=description;
+            if(coverName!=null){
+                classmate.cover=coverName;
+            }
+
+            classmateHeader();
+        }
+        else if(data.statusCode===400){
+            alert(data.msg);
+        }
+        else{
+            alert("网络错误，请稍后重试");
+        }
+    });
+
+    var confirmModifyBtn=$("#sure-edit");
+    confirmModifyBtn.attr("disabled",false);
+    confirmModifyBtn.html("确&nbsp;&nbsp;认&nbsp;&nbsp;修&nbsp;&nbsp;改");
+}
 
 //上传图片的预览
 function imgPreview(fileDom){
