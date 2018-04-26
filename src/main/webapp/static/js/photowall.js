@@ -78,11 +78,6 @@ function addPhoto(photoAddress) {
     }
 }
 
-//点击添加新的照片调用addPhoto()
-$("#add-new-photo").click(function () {
-
-});
-
 //图片放大全屏显示效果
 var gifNumber = 1;   //动画类型，一共2种
 
@@ -161,3 +156,47 @@ $(function () {
             }
         });
 });
+
+//上传照片
+$("#add-new-photo").click(function () {
+    $(".upload-photo-wrapper").removeClass("hidden").addClass("show");
+    $(".upload-photo-content").addClass("upload-photo-content-in");
+});
+$("#upload-photo-close").click(function () {
+    $(':input','#myclassmate-fm')
+        .not(':button, :submit, :reset, :hidden')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('selected');
+    $("#preview").attr("src","");
+    $(".upload-photo-wrapper").removeClass("show").addClass("hidden");
+    $(".upload-photo-content").removeClass("upload-photo-content-in");
+});
+//上传图片的预览
+function imgPreview(fileDom){
+    //判断是否支持FileReader
+    if (window.FileReader) {
+        var reader = new FileReader();
+    } else {
+        alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+    }
+    //获取文件
+    var file = fileDom.files[0];
+    var imageType = /^image\//;
+    //是否是图片
+    if (!imageType.test(file.type)) {
+        alert("请选择图片！");
+        return;
+    }
+    //读取完成
+    reader.onload = function(e) {
+        //获取图片dom
+        var img = $("#preview");
+        //图片路径设置为读取的图片
+        img.attr("src",e.target.result);
+        img.css("max-width","200px")
+            .css("max-height","150px")
+            .css("margin-top","20px");
+    };
+    reader.readAsDataURL(file);
+}

@@ -39,47 +39,36 @@
         <div id="liner"></div>
         <h3 id="classmate-description">&nbsp;</h3>
         <a href="javascript:void(0)">
-            <div class="mousedown"><span class="glyphicon glyphicon-menu-down" id="mousedown"></span>
+            <div class="mousedown">
+                <span class="glyphicon glyphicon-menu-down" id="mousedown"></span>
             </div>
         </a>
     </div>
-
-    <div class="container operation-wrapper">
-        <div class="row">
-            <div class="col-sm-10 col-xs-8 operation"><h3><a href="#">邀请同学填写</a></h3></div>
-            <div class="col-sm-2 col-xs-2" id="invite">
-                <a href="#"><img src="<c:url value="/static/images/invite.png" />" alt="邀请" class="icon"></a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-10 col-xs-8 operation"><h3><a href="#">编辑</a></h3></div>
-            <div class="col-sm-2 col-xs-2" id="edit">
-                <a href="#"><img src="<c:url value="/static/images/edit.png" />" alt="编辑" class="icon"></a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-10 col-xs-8 operation"><h3><a href="#">删除</a></h3></div>
-            <div class="col-sm-2 col-xs-2" id="delete">
-                <a href="#"><img src="<c:url value="/static/images/delete.png" />" alt="删除" class="icon"></a>
-            </div>
-        </div>
-    </div>
 </div>
+
 <div class="photo-wall-wrapper container-fluid" id="photo-wall-wrapper">
     <div class="col-sm-offset-2 col-xs-offset-2">
         <a href="javascript:void (0)"><h3 id="add-new-photo"><u>＋添加新的照片</u></h3></a>
     </div>
     <div class="photo-cntent container-fluid">
-        <!--<div class="col-sm-7 photo-wrapper" id="photo1">-->
-            <!--<a href="javascript:void (0)">-->
-                <!--<div class="myphoto" style="background-image: url('../../../../static/images/1.jpg')">-->
-                    <!--<div class="photo-color" id="photo-color1"></div>-->
-                <!--</div>-->
-            <!--</a>-->
-        <!--</div>-->
         <div class="show-wrapper hidden">
             <img src="<c:url value="/static/images/close.png" />" alt="close" class="close" id="photo-close">
             <img src="" alt="" class="img-responsive" id="large-photo">
+        </div>
+    </div>
+</div>
+
+<div class="upload-photo-wrapper hidden">
+    <div class="upload-photo-content">
+        <div class="upload-photo-header">
+            <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="upload-photo-close">
+            <h3 class="upload-photo-title">添加新的照片</h3>
+        </div>
+        <div class="upload-photo-body">
+            <input type="file" name="cover" class="input-upload" placeholder="" id="cover" accept="image/*" onchange="imgPreview(this)">
+            <a href="javascript:void(0);" class="center-block"><u>＋添加照片</u></a>
+            <img id="preview" />
+            <button type="button" class="btn" id="do-upload">确 认 上 传</button>
         </div>
     </div>
 </div>

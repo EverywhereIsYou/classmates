@@ -75,3 +75,86 @@
     top: 20px;
     right: 10px;
 }
+
+/*上传照片模态框*/
+.upload-photo-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(250,250,250,0.5);
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+.upload-photo-title{
+    color: #5c5c5c;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+#upload-photo-close{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 440px;
+    margin-top: -40px;
+    opacity: 0.8;
+}
+#upload-photo-close:hover{opacity: 1;}
+.upload-photo-content{
+    width: 500px;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    margin-top: -250px;
+    left: 50%;
+    margin-left: -250px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #e67777!important;
+    text-align: center;
+}
+/*渐入效果*/
+.upload-photo-content-in{
+    animation: upload-photo-content-in 0.7s;
+}
+@keyframes upload-photo-content-in{
+    from{
+        opacity: 0;
+        margin-top: -350px;
+    }
+    to{
+        opacity: 1;
+        margin-top: -250px;
+    }
+}
+
+.upload-photo-body{
+    text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+/*上传图片的input设置透明*/
+#cover{
+    width: 100%;
+    opacity: 0;
+    margin: 0;
+}
+.upload-photo-body a{
+    width: 100%;
+    text-align: center;
+    color: #e67777;
+    font-size: 1.2em;
+    position: absolute;
+    margin-top: -20px;
+    z-index: -1;
+}
+#do-upload{
+    width: 400px;
+    height: 100%;
+    color: white;
+    font-size: 1.2em;
+    background: linear-gradient(to right, #5f4d93, #e67777);
+    border: 0;
+    box-shadow: 0 0 10px #c16b7f;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
