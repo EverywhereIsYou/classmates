@@ -15,7 +15,6 @@ $(function () {
 
 function getDetailInfo() {
     var data = {"classmateId":$("#classmate_id").val()};
-    var result;
 
     $.ajax({
         type:'POST',

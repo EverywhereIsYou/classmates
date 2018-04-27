@@ -201,7 +201,7 @@
             <a href="javascript:void(0)">
                 <div class="col-sm-3 col-xs-3 navigation pre" id="pre">上一页</div>
             </a>
-            <a href="<c:url value="/classmate/photoWall?classmateId=${classmateId}" />">
+            <a href="<c:url value="/classmate/photoWall?classmateId=${classmateId}" />" target="_blank">
                 <div class="col-sm-3 col-xs-3 navigation photo-wall" id="photo-wall">照片墙</div>
             </a>
             <a href="javascript:void(0)">
@@ -234,7 +234,7 @@
             <a href="javascript:void(0)">
                 <div class="col-sm-3 col-xs-3 navigation pre" id="comment-pre">上一页</div>
             </a>
-            <a href="<c:url value="/classmate/photoWall?classmateId=${classmateId}" />">
+            <a href="<c:url value="/classmate/photoWall?classmateId=${classmateId}" />" target="_blank">
                 <div class="col-sm-3 col-xs-3 navigation photo-wall" id="comment-photo-wall">照片墙</div>
             </a>
             <a href="javascript:void(0)">

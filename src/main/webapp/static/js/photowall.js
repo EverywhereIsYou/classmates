@@ -189,7 +189,7 @@ function addImage() {
     $("#addImageBtn").attr("disabled",true);
     var fileInput=$("<input type='file' name='cover' class='input-upload' accept='image/*' onchange='imgPreview(this)'>");
     fileInput.click();
-    // TODO 当窗口失去焦点时，可以再次点击添加照片按钮(无法获取打开文件选择框事件)
+    //当窗口失去焦点时，可以再次点击添加照片按钮(无法获取打开文件选择框事件)
     $(window).blur(function () {
         $("#addImageBtn").attr("disabled",false);
     });

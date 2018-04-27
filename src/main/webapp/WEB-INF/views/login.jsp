@@ -91,8 +91,7 @@
 
         $("input").focus(function () {
             $(this).addClass("glowing");
-        });
-        $("input").blur(function () {
+        }).blur(function () {
             $(this).removeClass("glowing");
         });
     });
@@ -109,22 +108,20 @@
     });
 
     function login() {
-        $("#login").attr("disabled",true);
-        $("#login").text("正 在 登 录");
+        $("#login").attr("disabled",true).text("正 在 登 录");
 
         $.ajax({
             type: 'POST',
             url: "/login",
             data: $("#form_login").serialize(),
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            error: function (XMLHttpRequest) {
                 getVeriCode();
 
-                // TODO 错误提示信息
+                //错误提示信息
                 alert("login error");
                 alert(XMLHttpRequest.status);
 
-                $("#login").attr("disabled",false);
-                $("#login").html("登&nbsp;&nbsp;&nbsp;&nbsp;录");
+                $("#login").attr("disabled",false).html("登&nbsp;&nbsp;&nbsp;&nbsp;录");
             },
             success: function (data) {
                 getVeriCode();
@@ -134,14 +131,14 @@
                     $("#login").html("登&nbsp;&nbsp;&nbsp;&nbsp;录");
                 }
                 else {
-                    // TODO 登录失败信息显示
+                    //登录失败信息显示
                     alert(data.msg);
 
-                    $("#login").attr("disabled",false);
-                    $("#login").html("登&nbsp;&nbsp;&nbsp;&nbsp;录");
+                    $("#login").attr("disabled",false).html("登&nbsp;&nbsp;&nbsp;&nbsp;录");
                 }
             }
         });
+        $("#graphicCode").val("");
     }
 
     //回车触发登录

@@ -100,11 +100,12 @@ function getwidth() {
 
     // 截取h3内容并加以省略号显示
     $(".my-classmate h3").each(function () {
+        var descText = "";
         if ($(window).width() >= 630) {
             if ($(this).text().length > 100) {
                 $(this).attr("value", $(this).text());
                 //获取h3的值,进行截取。赋值给text变量保存.
-                var descText = $(this).text().substring(0, 100) + "...";
+                descText = $(this).text().substring(0, 100) + "...";
                 //重新为h3赋值;
                 $(this).text(descText);
             }
@@ -112,7 +113,7 @@ function getwidth() {
         if ($(window).width() < 630) {
             if ($(this).text().length > 50) {
                 $(this).attr("value", $(this).text());
-                var descText = $(this).text().substring(0, 50) + "...";
+                descText = $(this).text().substring(0, 50) + "...";
                 $(this).text(descText);
             }
         }
@@ -188,8 +189,7 @@ $(function () {
 function getClassmates() {
     $("input").focus(function () {
         $(this).addClass("glowing");
-    });
-    $("input").blur(function () {
+    }).blur(function () {
         $(this).removeClass("glowing");
     });
 

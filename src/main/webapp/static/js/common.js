@@ -1,6 +1,5 @@
 function getwidth() {
-    $("#wrapper").css("height", $(window).height() + "px");
-    $("#wrapper").css("width", $(window).width() + "px");
+    $("#wrapper").css("height", $(window).height() + "px").css("width", $(window).width() + "px");
 }
 
 // js加载完成后立即执行一次

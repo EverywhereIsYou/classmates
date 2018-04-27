@@ -96,8 +96,7 @@
 <script>
     $("input").focus(function () {
         $(this).addClass("glowing");
-    });
-    $("input").blur(function () {
+    }).blur(function () {
         $(this).removeClass("glowing");
     });
 
@@ -121,43 +120,41 @@
     }
 
     $("#register").click(function () {
-        $("#register").attr("disabled",true);
-        $("#register").text("正 在 进 行 注 册");
+        $("#register").attr("disabled",true).text("正 在 进 行 注 册");
 
         $.ajax({
             type: 'POST',
             url: "<c:url value="/register" />",
             data: $("#fm").serialize(),
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            error: function (XMLHttpRequest, textStatus) {
                 getVeriCode();
 
-                // TODO 错误提示信息
+                //错误提示信息
                 alert("register error");
                 alert(XMLHttpRequest.status);
                 alert(textStatus);
 
-                $("#register").attr("disabled",false);
-                $("#register").text("立即注册");
+                $("#register").attr("disabled",false).text("立即注册");
             },
             success: function (data) {
                 getVeriCode();
 
                 if(data.statusCode===200){
-                    // TODO 注册成功之后的提示信息
+                    //注册成功之后的提示信息
                     alert("register successfully");
 
                     $("#register").text("立即注册");
                     $(location).attr("href","<c:url value="/login" />");
                 }
                 else {
-                    // TODO 注册失败之后的提示信息
+                    //注册失败之后的提示信息
                     alert(data.msg);
 
-                    $("#register").attr("disabled",false);
-                    $("#register").text("立即注册");
+                    $("#register").attr("disabled",false).text("立即注册");
                 }
             }
         });
+        $("#graphicCode").val("");
     });
 
     $("#back").click(function(){
