@@ -228,6 +228,10 @@ function imgPreview(fileDom){
 }
 
 function uploadImages() {
+    var uploadBtn=$("#do-upload");
+    uploadBtn.attr("disables",true);
+    uploadBtn.text("正 在 上 传");
+
     var imageData=new FormData();
 
     for(var i=0;;i++){
@@ -237,6 +241,8 @@ function uploadImages() {
         }
         else if(i===0){
             alert("请先添加图片");
+            uploadBtn.attr("disables",false);
+            uploadBtn.text("确 认 上 传");
             return;
         }
         else{
@@ -252,6 +258,8 @@ function uploadImages() {
         contentType:false,
         error:function () {
             alert("上传照片失败，请稍后重试");
+            uploadBtn.attr("disables",false);
+            uploadBtn.text("确 认 上 传");
         },
         success:function (imageBack) {
             if(imageBack.statusCode===200){
@@ -274,10 +282,15 @@ function uploadImages() {
                         else{
                             alert("照片上传失败，请稍后重试");
                         }
+
+                        uploadBtn.attr("disables",false);
+                        uploadBtn.text("确 认 上 传");
                 });
             }
             else{
                 alert(imageBack.msg);
+                uploadBtn.attr("disables",false);
+                uploadBtn.text("确 认 上 传");
             }
         }
     });
