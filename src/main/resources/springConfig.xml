@@ -26,6 +26,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/member/**" />
             <mvc:mapping path="/classmate/**" />
+            <mvc:mapping path="/file/**" />
 
             <mvc:exclude-mapping path="/classmate/writePaper" />
 

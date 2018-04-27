@@ -7,6 +7,7 @@ import com.strangeman.classmates.utils.MyStringUtil;
 import com.strangeman.classmates.utils.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +24,7 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public ResultInfo register(String username,String password,Integer dynamicCode,String graphicCode,
-                               HttpSession session){
+                               String nickname,HttpSession session){
         ResultInfo result;
 
         if(username==null||!username.equals(session.getAttribute("username"))){
@@ -36,6 +37,9 @@ public class MemberController {
         }
         else if(graphicCode==null||!graphicCode.equalsIgnoreCase((String) session.getAttribute("graphicCode"))){
             result=ResultInfo.fail("图形验证码错误");
+        }
+        else if(StringUtils.isEmpty(nickname)){
+            result=ResultInfo.fail("昵称不能为空");
         }
         else{
             if(memberService.hasExist(username)){

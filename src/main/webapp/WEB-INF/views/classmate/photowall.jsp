@@ -50,12 +50,11 @@
     <div class="col-sm-offset-2 col-xs-offset-2">
         <a href="javascript:void (0)"><h3 id="add-new-photo"><u>＋添加新的照片</u></h3></a>
     </div>
-    <div class="photo-cntent container-fluid">
-        <div class="show-wrapper hidden">
-            <img src="<c:url value="/static/images/close.png" />" alt="close" class="close" id="photo-close">
-            <img src="" alt="" class="img-responsive" id="large-photo">
-        </div>
+    <div class="show-wrapper hidden">
+        <img src="<c:url value="/static/images/close.png" />" alt="close" class="close" id="photo-close">
+        <img src="" alt="" class="img-responsive" id="large-photo">
     </div>
+    <div class="photo-cntent container-fluid" id="photo-area"></div>
 </div>
 
 <div class="upload-photo-wrapper hidden">
@@ -64,12 +63,9 @@
             <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="upload-photo-close">
             <h3 class="upload-photo-title">添加新的照片</h3>
         </div>
-        <div class="upload-photo-body">
-            <input type="file" name="cover" class="input-upload" placeholder="" id="cover" accept="image/*" onchange="imgPreview(this)">
-            <a href="javascript:void(0);" class="center-block"><u>＋添加照片</u></a>
-            <img id="preview" />
-            <button type="button" class="btn" id="do-upload">确 认 上 传</button>
-        </div>
+        <button onclick="addImage()" id="addImageBtn">添加照片</button>
+        <div class="upload-photo-body" id="upload-photo-body"></div>
+        <button type="button" class="btn" id="do-upload" onclick="uploadImages()">确 认 上 传</button>
     </div>
 </div>
 

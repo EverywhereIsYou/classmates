@@ -315,6 +315,30 @@ public class ClassmateController {
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping("/addPhoto")
+    public ResultInfo addPhoto(HttpSession session,String classmateId,String photos){
+        if(StringUtils.isEmpty(photos))
+            return ResultInfo.fail("照片地址不能为空");
+        if(StringUtils.isEmpty(classmateId))
+            return ResultInfo.fail("同学录ID不能为空");
+
+        Member member= (Member) session.getAttribute("member");
+        if(member==null)
+            return ResultInfo.fail("为查询到用户信息，请重新登录");
+
+        Classmate classmate=classmateService.getSimpleClassmateById(classmateId);
+        if(classmate==null)
+            return ResultInfo.fail("无法获取同学录数据");
+        if(!classmate.getOwnerId().equals(member.getId()))
+            return ResultInfo.fail("没有该同学录修改权限");
+
+        classmate.setPhotoWall(photos+classmate.getPhotoWall());
+        if(classmateService.modifyClassmate(classmate))
+            return ResultInfo.success("添加照片成功").add("photos",classmate.getPhotoWall());
+        return ResultInfo.fail("添加照片失败，请稍后重试");
+    }
+
     @RequestMapping(value = "/photoWall",method = RequestMethod.GET)
     public String getPhotoWall(Model model,String classmateId){
         model.addAttribute("classmateId",classmateId);

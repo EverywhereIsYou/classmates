@@ -15,6 +15,7 @@ import java.util.UUID;
 @RequestMapping("/file")
 public class FileController {
     private static final String CLASSMATE_COVER_PATH="/static/images/classmate/cover/";
+    private static final String CLASSMATE_PHOTO_WALL="/static/images/classmate/photoWall/";
 
     @ResponseBody
     @RequestMapping("/classmateCover")
@@ -23,26 +24,58 @@ public class FileController {
             return ResultInfo.fail("封面为空");
 
         String path=session.getServletContext().getRealPath(CLASSMATE_COVER_PATH);
-        String OriginalFileName=cover.getOriginalFilename();
-        String suffix=OriginalFileName.substring(OriginalFileName.lastIndexOf("."));
+
+        String fileName=createFile(path,cover);
+        if(fileName!=null)
+            return ResultInfo.success("").add("fileName",CLASSMATE_COVER_PATH+fileName);
+
+        return ResultInfo.fail("上传图片失败，请稍后重试");
+    }
+
+    @ResponseBody
+    @RequestMapping("/photoWall")
+    public ResultInfo addPhotoWall(HttpSession session,MultipartFile[] images){
+        if(images==null||images.length==0)
+            return ResultInfo.fail("未获取到图片");
+
+        String path=session.getServletContext().getRealPath(CLASSMATE_PHOTO_WALL);
+
+        StringBuilder success=new StringBuilder();
+        int failNum=0;
+        for(MultipartFile file:images){
+            String fileName=createFile(path,file);
+            if(fileName!=null){
+                success.append(CLASSMATE_PHOTO_WALL).append(fileName).append("|");
+            }
+            else {
+                failNum++;
+            }
+        }
+
+        if(success.length()>0)
+            return ResultInfo.success("").add("fileNames",success.toString()).add("failNum",failNum);
+
+        return ResultInfo.fail("上传图片失败，请稍后重试");
+    }
+
+    private String createFile(String path,MultipartFile originalFile){
+        String originalFileName=originalFile.getOriginalFilename();
+        String suffix=originalFileName.substring(originalFileName.lastIndexOf("."));
         String fileName= UUID.randomUUID().toString()+suffix;
 
         File file=new File(path,fileName);
         if(!file.exists()){
             if(!file.mkdirs()){
-                return ResultInfo.fail("无法创建文件，请稍后重试");
+                return null;
             }
         }
 
-        ResultInfo result;
         try {
-            cover.transferTo(file);
-            result=ResultInfo.success("").add("fileName", CLASSMATE_COVER_PATH+fileName);
+            originalFile.transferTo(file);
+            return fileName;
         } catch (IOException e) {
             e.printStackTrace();
-            result=ResultInfo.fail("上传图片错误，请稍后重试");
+            return null;
         }
-
-        return result;
     }
 }
