@@ -46,11 +46,17 @@
             <input type="password" name="password" class="form-control" placeholder="" id="password">
         </div>
     </div>
-
     <div class="form-group">
         <label class="col-sm-4 control-label">确认密码：</label>
         <div class="col-sm-4">
             <input type="password" name="" class="form-control" placeholder="">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-4 control-label">昵&nbsp;&nbsp;称：</label>
+        <div class="col-sm-4">
+            <input type="text" name="nickname" class="form-control" placeholder="">
         </div>
     </div>
 

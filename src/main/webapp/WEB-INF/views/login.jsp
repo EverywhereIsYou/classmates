@@ -66,7 +66,7 @@
                 <div class="col-xs-6 col-xs-offset-3">
                     <button type="button" class="btn" id="download">
                         <span class="glyphicon glyphicon-download-alt"></span>
-                        &nbsp;&nbsp;&nbsp;下载android版
+                        &nbsp;&nbsp;下载android版
                     </button>
                 </div>
             </div>
@@ -82,6 +82,8 @@
 
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
+<script src="<c:url value="/static/js/404.js" />"></script>
+<script src="<c:url value="/static/js/balloon.js" />"></script>
 
 <script>
     $(function () {
@@ -148,6 +150,7 @@
             $("#login").trigger("click");
         }
     });
+
 </script>
 </body>
 </html>

@@ -160,3 +160,13 @@
     margin-top: 40px;
     margin-bottom: 40px;
 }
+
+/*添加照片按钮*/
+#addImageBtn{
+    background-color: #e67777!important;
+    color: white!important;
+}
+.input-upload{
+    width: 100%;
+    opacity: 0;
+}

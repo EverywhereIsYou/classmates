@@ -63,7 +63,7 @@
             <img src="<c:url value="/static/images/close2.png" />" alt="close" class="close" id="upload-photo-close">
             <h3 class="upload-photo-title">添加新的照片</h3>
         </div>
-        <button onclick="addImage()" id="addImageBtn">添加照片</button>
+        <button onclick="addImage()" id="addImageBtn" class="btn">添加照片</button>
         <div class="upload-photo-body" id="upload-photo-body"></div>
         <button type="button" class="btn" id="do-upload" onclick="uploadImages()">确 认 上 传</button>
     </div>

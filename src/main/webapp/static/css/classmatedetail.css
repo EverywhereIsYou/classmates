@@ -196,7 +196,7 @@
 #invite-modal h5{
     color: #3c3c3c;
     font-size: 1.4em;
-    margin-top: 30px;
+    margin: 0;
 }
 #copy{
     width: 100%;

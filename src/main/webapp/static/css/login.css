@@ -1,14 +1,17 @@
 body {
-    background-image: url("/static/images/login_background.png");
+    background-image: url("/static/images/login_bg.png")!important;
     background-repeat: no-repeat;
     background-size: 100% 100% cover;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .main {
     width: 100%;
     height: 100%;
+    padding: 0!important;
+    margin: 0!important;
     position: absolute;
+    overflow-x: hidden;
 
     /*透视效果*/
     perspective: 1000;
@@ -55,7 +58,7 @@ body {
 
 /*过渡到这个效果*/
 .wrapper-gif {
-    opacity: 0.9;
+    opacity: 1;
     -o-transform: rotateX(0deg);
     -moz-transform: rotateX(0deg);
     -webkit-transform: rotateX(0deg);
@@ -119,8 +122,9 @@ input {
 /*输入框右边按钮*/
 .input-group-addon {
     padding: 0 0;
-    background-color: #c16b7f;
-    border: 0px;
+    background-color: #7f7f7f;
+    border: 0;
+    height: 34px!important;
 }
 
 /*验证码图片*/
@@ -139,39 +143,31 @@ input {
 /*登录、下载按钮*/
 #login, #download {
     width: 100%;
+    height: 34px;
     color: white;
     font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: 700;
     background: linear-gradient(to right, #5f4d93, #e67777);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5f4d93', endColorstr='#e67777', GradientType=1); /*IE9*/
-    border: 0px;
+    border: 0;
     -moz-box-shadow: 0 0 5px #c16b7f;
     -webkit-box-shadow: 0 0 5px #c16b7f;
     box-shadow: 0 0 5px #c16b7f;
 }
-
+#login{line-height: 22px}
 #download {
     height: 30px;
     font-size: 1em;
     margin-top: 25px;
 }
 
-#p-one {
-    color: #5f4d93;
-}
+#p-one,#p-two{font-size: 14px}
+#p-one {color: #5f4d93}
+#p-one:hover {color: #5f4d93}
 
-#p-one:hover {
-    color: #5f4d93;
-}
-
-#p-two {
-    color: #e67777;
-}
-
-#p-two:hover {
-    color: #e67777;
-}
+#p-two {color: #e67777}
+#p-two:hover {color: #e67777}
 
 /*页脚*/
 footer {
@@ -181,11 +177,13 @@ footer {
     margin: 0;
     width: 100%;
     bottom: 0;
+    z-index: -100;
 }
 
 footer p {
-    color: white;
+    color: #5c5c5c;
     opacity: 0.8;
+    font-size: 14px;
 }
 
 footer a {

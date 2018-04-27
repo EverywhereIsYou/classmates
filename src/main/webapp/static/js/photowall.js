@@ -158,6 +158,10 @@ function parsePhoto(data) {
         return;
     }
 
+    a=0;
+    b=0;
+    c=1;
+
     var photos=data.split("|");
     $.each(photos,function (index,item) {
         addPhoto(item);
@@ -216,8 +220,7 @@ function imgPreview(fileDom){
             var img=$("<img src='"+e.target.result+"'>");
             //图片路径设置为读取的图片
             img.css("max-width","200px")
-                .css("max-height","150px")
-                .css("margin-top","20px");
+                .css("max-height","150px");
 
             $("#upload-photo-body").append(fileDom).append(img);
         };
