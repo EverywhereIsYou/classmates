@@ -372,6 +372,6 @@ public class ClassmateController {
     private String createInviteLink(String classmateId){
         if(StringUtils.isEmpty(classmateId))
             return "";
-        return "http://127.0.0.1:8080/classmate/writePaper?classmateId="+classmateId;
+        return "http://www.strange-man.cn/classmate/writePaper?classmateId="+classmateId;
     }
 }

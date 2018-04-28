@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
-<Configuration>
+<Configuration status="TRACE">
     <Appenders>
         <Console name="CONSOLE" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %F.%M - %msg%n"/>
-            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%c{1}][%M][%L] - %msg%n"/>
         </Console>
 
-        <RollingRandomAccessFile name="INFO" fileName="logs/info.log" filePattern="logs/info-%d{yyyy-MM-dd}.log">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %F.%M - %msg%n"/>
+        <RollingRandomAccessFile name="INFO" fileName="${log4j:configParentLocation}/logs/info.log" filePattern="${log4j:configParentLocation}/logs/info-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%c{1}][%M][%L] - %msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
@@ -18,8 +17,8 @@
             </Filters>
         </RollingRandomAccessFile>
 
-        <RollingRandomAccessFile name="ERROR" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}.log">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{36} %F.%M - %msg%n"/>
+        <RollingRandomAccessFile name="ERROR" fileName="${log4j:configParentLocation}/logs/error.log" filePattern="${log4j:configParentLocation}/logs/error-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%c{1}][%M][%L] - %msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
@@ -30,14 +29,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="org.springframework" level="trace" additivity="true">
-            <AppenderRef ref="CONSOLE"/>
-        </Logger>
-        <Logger name="org.mybatis" level="trace" additivity="true">
-            <AppenderRef ref="CONSOLE"/>
-        </Logger>
-
-        <Root level="debug">
+        <Root level="trace">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="INFO"/>
             <AppenderRef ref="ERROR"/>

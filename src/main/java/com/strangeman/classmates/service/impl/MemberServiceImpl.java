@@ -5,8 +5,8 @@ import com.strangeman.classmates.dao.MemberMapper;
 import com.strangeman.classmates.service.MemberService;
 import com.strangeman.classmates.utils.AES;
 import com.strangeman.classmates.utils.DataFactory;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Service
 public class MemberServiceImpl implements MemberService{
-    private Log log= LogFactory.getLog(MemberServiceImpl.class);
+    private Logger log= LoggerFactory.getLogger(MemberServiceImpl.class);
 
     @Autowired
     private MemberMapper memberMapper;

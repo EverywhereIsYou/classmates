@@ -3,8 +3,8 @@ package com.strangeman.classmates.controller;
 import com.strangeman.classmates.utils.GraphicVeriCode;
 import com.strangeman.classmates.utils.MailSender;
 import com.strangeman.classmates.utils.QRCode;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/codeService")
 public class CodeController {
-    private Log log= LogFactory.getLog(CodeController.class);
+    private Logger log= LoggerFactory.getLogger(CodeController.class);
 
     @RequestMapping("/graphicCode")
     @ResponseBody
