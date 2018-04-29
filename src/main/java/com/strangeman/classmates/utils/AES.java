@@ -61,13 +61,14 @@ public class AES {
 
     private static SecretKey generateKey(){
         KeyGenerator generator;
+        SecureRandom random;
         try {
             generator = KeyGenerator.getInstance(ALGORITHM);
+            random=SecureRandom.getInstance("SHA1PRNG");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return null;
         }
-        SecureRandom random=new SecureRandom();
         random.setSeed(SEED.getBytes());
         generator.init(random);
         return generator.generateKey();
