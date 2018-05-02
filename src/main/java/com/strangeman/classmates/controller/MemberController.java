@@ -90,8 +90,6 @@ public class MemberController {
                 result=ResultInfo.fail("用户名或密码不正确");
             }
             else{
-                member.setPwd("");
-
                 result=ResultInfo.success("登录成功");
                 session.setAttribute("member",member);
                 session.setMaxInactiveInterval(30*60);
