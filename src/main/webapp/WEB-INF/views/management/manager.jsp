@@ -5,7 +5,7 @@
   Time: 13:11
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
 
     <title>Title</title>
+
+    <style>
+        .container{border: 0!important;}
+    </style>
+
 </head>
 <body>
 <div class="container table-responsive">
@@ -68,12 +73,12 @@
     <%--分页信息--%>
     <div class="row">
         <%--分页文字信息--%>
-        <div class="col-md-6">
+        <div class="col-md-12 text-right">
             当前记录：xxx
         </div>
 
         <%--分页条信息--%>
-        <div class="col-md-6">
+        <div class="col-md-12 text-center">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li><a href="#">首页</a></li>
@@ -111,7 +116,7 @@
             </div>
             <div class="modal-body text-center">
                 <button class="btn btn-danger btn-sm">确认</button>
-                <button class="btn btn-success btn-sm">取消</button>
+                <button class="btn btn-success btn-sm"  data-dismiss="modal">取消</button>
             </div>
         </div>
     </div>
@@ -145,9 +150,9 @@
                         <label for="remark">备注</label>
                         <input type="text" class="form-control" id="remark" placeholder="备注" value="">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <button class="btn btn-danger btn-sm">确认</button>
-                        <button class="btn btn-success btn-sm">取消</button>
+                        <button class="btn btn-success btn-sm" data-dismiss="modal">取消</button>
                     </div>
                 </form>
             </div>

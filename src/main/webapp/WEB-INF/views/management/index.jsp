@@ -24,11 +24,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" id="username" data-toggle="dropdown" role="button"
+                    <a href="javascript:void(0)" class="dropdown-toggle" id="username" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">admin <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">修改密码</a></li>
-                        <li onclick="logout()"><a href="#">退出</a></li>
+                        <li id="modify"  data-toggle="modal" data-target="#modify-modal"><a href="javascript:void(0)">修改密码</a></li>
+                        <li id="logout" onclick=""><a href="javascript:void(0)">退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -36,66 +36,87 @@
     </div>
 </nav>
 
+<%--修改密码模态框--%>
+<div class="modal fade" id="modify-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h3>修改此账号的密码</h3>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" class="form-control" id="password" placeholder="密码" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">新的密码</label>
+                        <input type="password" class="form-control" id="new-password" placeholder="新的密码" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">确认新的密码</label>
+                        <input type="password" class="form-control" id="confirm-password" placeholder="确认新的密码" value="">
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-danger btn-sm">确认</button>
+                        <button class="btn btn-success btn-sm" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%--左边菜单栏--%>
 <div class="menu" id="menu">
     <div class="panel-group" id="accordion">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a href="#collapseOne" data-toggle="collapse"
-                   data-parent="#accordion">
-                    <h4 class="panel-title">
-                        用户管理
-                    </h4>
+                <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">
+                    <h4 class="panel-title">用户管理</h4>
                 </a>
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
                 <a href="javascript:void (0)" id="manager">
-                    <div class="panel-body">
-                        管理员
-                    </div>
+                    <div class="panel-body">管理员</div>
                 </a>
-                <a href="javascript:void (0)">
-                    <div class="panel-body">
-                        普通用户
-                    </div>
+                <a href="javascript:void (0)" id="member">
+                    <div class="panel-body">普通用户</div>
                 </a>
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a href="#collapseTwo" data-toggle="collapse"
-                   data-parent="#accordion">
-                    <h4 class="panel-title">
-                        同学录管理
-                    </h4>
+                <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion">
+                    <h4 class="panel-title">同学录管理</h4>
                 </a>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                    这里是第二部分。
-                </div>
+                <a href="javascript:void (0)">
+                    <div class="panel-body">这里是第二部分。</div>
+                </a>
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a href="#collapseThree" data-toggle="collapse"
-                   data-parent="#accordion">
-                    <h4 class="panel-title">
-                        反馈消息
-                    </h4>
+                <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion">
+                    <h4 class="panel-title">反馈消息</h4>
                 </a>
             </div>
             <div id="collapseThree" class="panel-collapse collapse">
-                <div class="panel-body">
-                    这里是第三部分。
-                </div>
+                <a href="javascript:void (0)">
+                    <div class="panel-body">这里是第三部分。</div>
+                </a>
             </div>
         </div>
     </div>
 </div>
 <div class="content container-fluid">
     <%--主体内容--%>
-    <iframe src="welcome_manager" frameborder="0"></iframe>
+    <iframe src="/test/welcome_manager" frameborder="0"></iframe>
 </div>
 
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
@@ -110,7 +131,7 @@
     });
 
     $("#manager").click(function () {
-        $("iframe").attr("src", "manager");
+        $("iframe").attr("src", "/test/manager");
     });
 </script>
 
