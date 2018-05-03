@@ -4,6 +4,7 @@
     position: absolute;
     top: 0;
     background-color: rgba(0,0,0,0.3);
+    z-index: 1000!important;
 }
 .alert-box-in{
     animation: alert-box-in 0.7s ease;
