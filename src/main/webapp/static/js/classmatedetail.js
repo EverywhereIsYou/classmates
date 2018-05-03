@@ -310,7 +310,7 @@ function  copy() {
 
 //编辑同学录框的弹出与退出
 $(".edit").click(function () {
-    $("#preview").attr("src",classmate.cover);
+    $("#preview").attr("src",classmate.cover).css("max-width","200px").css("max-height","200px");
     $("#classmatename").val(classmate.name);
     $("#school").val(classmate.school);
     $("#clazz").val(classmate.clazz);

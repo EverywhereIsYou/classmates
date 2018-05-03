@@ -228,7 +228,7 @@ function init() {
     a=0;
     b=1;
     OffOn = 0;
-    fir=true;
+    dir=true;
     $("#classmate-wrapper").html('<div class="create" id="create0"></div>');
 }
 
