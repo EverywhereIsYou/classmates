@@ -16,6 +16,7 @@
     <title></title>
 
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
+    <link rel="stylesheet" href="<c:url value="/static/css/alert.css" />">
 
     <style>
         *{margin: 0;padding: 0;}
@@ -220,6 +221,7 @@
 
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
+<script src="<c:url value="/static/js/alert.js" />"></script>
 
 <script>
     $(function () {

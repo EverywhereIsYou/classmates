@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
     <link rel="stylesheet" href="<c:url value="/static/css/common.css" />">
     <link rel="stylesheet" href="<c:url value="/static/css/photowall.css" />">
+    <link rel="stylesheet" href="<c:url value="/static/css/alert.css" />">
 
 </head>
 <body>
@@ -73,6 +74,7 @@
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
 <script src="<c:url value="/static/js/common.js" />"></script>
 <script src="<c:url value="/static/js/photowall.js" />"></script>
+<script src="<c:url value="/static/js/alert.js" />"></script>
 
 </body>
 </html>

@@ -8,7 +8,8 @@
     <title>注册_一起同过窗</title>
 
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/register.css" />">
+    <link rel="stylesheet" href="<c:url value="/static/css/register.css" />">
+    <link rel="stylesheet" href="<c:url value="/static/css/alert.css" />">
 
 </head>
 
@@ -92,6 +93,7 @@
 
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
+<script src="<c:url value="/static/js/alert.js" />"></script>
 
 <script>
     $("input").focus(function () {

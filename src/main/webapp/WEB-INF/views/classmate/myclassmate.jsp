@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
     <link rel="stylesheet" href="<c:url value="/static/css/myclassmate.css" />">
+    <link rel="stylesheet" href="<c:url value="/static/css/alert.css" />">
+
 </head>
 
 <body>
@@ -114,6 +116,7 @@
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
 <script src="<c:url value="/static/js/myclassmate.js" />"></script>
+<script src="<c:url value="/static/js/alert.js" />"></script>
 
 </body>
 

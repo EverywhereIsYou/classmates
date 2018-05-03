@@ -12,6 +12,8 @@
 
 <body>
 
+
+
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
 
