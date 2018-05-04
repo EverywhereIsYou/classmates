@@ -60,6 +60,7 @@ public class MemberController {
                 }
 
                 member.setPwd(password);
+                member.setNickname(nickname);
                 if(memberService.register(member)){
                     result=ResultInfo.success("注册成功");
                 }

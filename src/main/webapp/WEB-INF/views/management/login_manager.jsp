@@ -41,7 +41,7 @@
 <h1 class="text-center" style="margin-bottom: 50px">一起同过窗_后台管理系统</h1>
 
 <div class="container">
-    <form id="form_login_manager" action="/management/login" method="post" autocomplete="off" onkeydown="if(event.keyCode===13){return false;}">
+    <form id="form_login_manager" action="<c:url value="/management/login" />" method="post" autocomplete="off" onkeydown="if(event.keyCode===13){return false;}">
         <div class="form-group col-sm-4 col-sm-offset-4">
             <label for="username" class="control-label">账号</label>
             <input type="text" class="form-control" id="username" name="workId" placeholder="账号" value="">
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="form-group col-sm-4 col-sm-offset-4 text-center">
-            <button type="submit" class="btn btn-primary" id="login">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+            <button type="button" class="btn btn-primary" id="login">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
         </div>
     </form>
 </div>
@@ -70,17 +70,19 @@
 
 <script>
     $("#verification").click(function () {
-        getVeriCode();
+        $("#verification").attr("src", "<c:url value="/codeService/graphicCode?date=" />" + new Date().getTime());
     });
-    function getVeriCode() {
-        var timeNow = new Date().getTime();
-        $("#verification").attr("src", "<c:url value="/codeService/graphicCode?date=" />" + timeNow);
-    }
+
     //回车触发登录
     $(document).keydown(function(event){
         if(event.keyCode===13){
             $("#login").trigger("click");
         }
+    });
+
+    $("#login").click(function () {
+        $("#login").html("正&nbsp;&nbsp;在&nbsp;&nbsp;登&nbsp;&nbsp;录").attr("disabled",true);
+        $("#form_login_manager").submit();
     });
 
     $(function () {
@@ -89,7 +91,6 @@
             alert(errorMsg);
         }
     });
-
 </script>
 
 </body>

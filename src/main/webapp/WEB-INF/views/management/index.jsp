@@ -25,10 +25,10 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle" id="username" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false">admin <span class="caret"></span></a>
+                       aria-haspopup="true" aria-expanded="false">${user.workId} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li id="modify"  data-toggle="modal" data-target="#modify-modal"><a href="javascript:void(0)">修改密码</a></li>
-                        <li id="logout" onclick=""><a href="javascript:void(0)">退出</a></li>
+                        <li id="logout"><a href="<c:url value="/management/logout" />">退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -41,7 +41,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
+                <button type="button" class="close" data-dismiss="modal" onclick="clearPwd()">
                     <span>&times;</span>
                 </button>
                 <h3>修改此账号的密码</h3>
@@ -61,8 +61,8 @@
                         <input type="password" class="form-control" id="confirm-password" placeholder="确认新的密码" value="">
                     </div>
                     <div class="form-group text-center">
-                        <button class="btn btn-danger btn-sm">确认</button>
-                        <button class="btn btn-success btn-sm" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="modifyPwd()" id="confirm-pwd">确认</button>
+                        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" id="cancal-pwd" onclick="clearPwd()">取消</button>
                     </div>
                 </form>
             </div>
@@ -80,7 +80,7 @@
                 </a>
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
-                <a href="javascript:void (0)" id="manager">
+                <a href="javascript:void (0)" id="manager" onclick="getBody('<c:url value="/data/user/manager" />')">
                     <div class="panel-body">管理员</div>
                 </a>
                 <a href="javascript:void (0)" id="member">
@@ -116,7 +116,7 @@
 </div>
 <div class="content container-fluid">
     <%--主体内容--%>
-    <iframe src="/test/welcome_manager" frameborder="0"></iframe>
+    <iframe src="<c:url value="/management/welcome" />" frameborder="0"></iframe>
 </div>
 
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
@@ -130,9 +130,33 @@
         $(".content").css("height", $(window).height() - 50 + "px");
     });
 
-    $("#manager").click(function () {
-        $("iframe").attr("src", "/test/manager");
-    });
+    function getBody(body) {
+        $("iframe").attr("src", body);
+    }
+
+    function modifyPwd() {
+        $("#confirm-pwd").val("正在修改").attr("disabled",true);
+        $.post("<c:url value="/data/user/modifyPwd" />",{"oldPassword":$("#password").val(),"newPassword":$("#new-password").val()},
+            function (data) {
+                if(data.statusCode===200){
+                    alert("密码修改成功,请重新登录");
+                    $(location).attr("href","<c:url value="/management/logout" />");
+                }
+                else if(data.statusCode===400){
+                    alert(data.msg);
+                }
+                else{
+                    alert("网络错误，请稍后重试")
+                }
+                $("#confirm-pwd").val("确认").attr("disabled",false);
+            });
+    }
+
+    function clearPwd() {
+        $("#password").val("");
+        $("#new-password").val("");
+        $("#confirm-password").val("");
+    }
 </script>
 
 </body>

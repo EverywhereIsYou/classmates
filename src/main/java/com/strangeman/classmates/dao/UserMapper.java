@@ -27,4 +27,9 @@ public interface UserMapper {
             + table_name
             + " where work_id=#{workId}")
     User selectByWorkId(@Param("workId") String workId);
+
+    @Select("select * from "
+            + table_name
+            + " where id=#{userId}")
+    User selectByUserId(@Param("userId") String userId);
 }

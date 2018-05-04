@@ -32,5 +32,12 @@
 
             <bean class="com.strangeman.classmates.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/data/**"/>
+            <mvc:mapping path="/management/index"/>
+            <mvc:mapping path="/management/welcome"/>
+
+            <bean class="com.strangeman.classmates.interceptor.UserInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 </beans>

@@ -49,14 +49,31 @@ public class ManagementController {
         return "redirect:/management/index";
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("user");
+        return "redirect:/management/login";
+    }
+
     @RequestMapping("/index")
     public String index(HttpSession session, Model model){
-        User user= (User) session.getAttribute("user");
-        if(user==null)
-            return "redirect:management/login";
+        User loginUser= (User) session.getAttribute("user");
+        if(loginUser==null)
+            return "redirect:/management/login";
 
-        user.setPwd("");
+        User user=new User();
+        user.setWorkId(loginUser.getWorkId());
+        user.setLastModifyTime(loginUser.getLastModifyTime());
+        user.setCreateTime(loginUser.getCreateTime());
+        user.setId(loginUser.getId());
+        user.setRole(loginUser.getRole());
+
         model.addAttribute("user",user);
         return "management/index";
+    }
+
+    @RequestMapping("/welcome")
+    public String welcome(){
+        return "management/welcome_manager";
     }
 }

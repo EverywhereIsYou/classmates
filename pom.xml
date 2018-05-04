@@ -174,5 +174,12 @@
             <artifactId>core</artifactId>
             <version>3.3.2</version>
         </dependency>
+
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.2</version>
+        </dependency>
     </dependencies>
 </project>
