@@ -11,6 +11,7 @@
 <head>
 
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
+    <link rel="stylesheet" href="<c:url value="/static/css/alert.css" />">
 
     <title>Title</title>
 
@@ -119,6 +120,7 @@
 
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
+<script src="<c:url value="/static/js/alert.js" />"></script>
 <script>
     $(function () {
         getUserByPage(1);
@@ -276,6 +278,5 @@
         $("#delete-modal").modal("hide");
     }
 </script>
-
 </body>
 </html>

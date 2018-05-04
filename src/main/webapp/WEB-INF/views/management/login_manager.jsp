@@ -11,6 +11,7 @@
 <head>
 
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
+    <link rel="stylesheet" href="<c:url value="/static/css/alert.css" />">
 
     <title>登录_后台管理系统</title>
 
@@ -67,6 +68,7 @@
 
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
+<script src="<c:url value="/static/js/alert.js" />"></script>
 
 <script>
     $("#verification").click(function () {
