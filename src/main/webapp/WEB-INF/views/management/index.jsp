@@ -84,8 +84,8 @@
                 <a href="javascript:void (0)" id="manager" onclick="getBody('<c:url value="/data/user/manager" />')">
                     <div class="panel-body">管理员</div>
                 </a>
-                <a href="javascript:void (0)" id="member">
-                    <div class="panel-body">普通用户</div>
+                <a href="javascript:void (0)" id="member" onclick="getBody('<c:url value="/data/member/member" />')">
+                    <div class="panel-body">注册用户</div>
                 </a>
             </div>
         </div>

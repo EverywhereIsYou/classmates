@@ -3,8 +3,11 @@ package com.strangeman.classmates.dao;
 import com.strangeman.classmates.bean.Member;
 import com.strangeman.classmates.bean.MemberExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface MemberMapper {
     String table_name="member";
@@ -36,4 +39,9 @@ public interface MemberMapper {
             + table_name
             + " where id=#{memberId}")
     Member selectById(@Param("memberId") String memberId);
+
+    @Delete("delete from "
+            + table_name
+            + " where id=#{memberId}")
+    int deleteMemberById(@RequestParam("memberId") String memberId);
 }

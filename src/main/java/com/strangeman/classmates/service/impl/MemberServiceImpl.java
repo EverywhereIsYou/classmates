@@ -1,6 +1,7 @@
 package com.strangeman.classmates.service.impl;
 
 import com.strangeman.classmates.bean.Member;
+import com.strangeman.classmates.bean.MemberExample;
 import com.strangeman.classmates.dao.MemberMapper;
 import com.strangeman.classmates.service.MemberService;
 import com.strangeman.classmates.utils.AES;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -67,5 +69,17 @@ public class MemberServiceImpl implements MemberService{
 
     public Member getMemberById(String memberId) {
         return StringUtils.isEmpty(memberId)?null:memberMapper.selectById(memberId);
+    }
+
+    @Override
+    public List<Member> getAllMember() {
+        MemberExample example=new MemberExample();
+        example.setOrderByClause("last_modify_time desc");
+        return memberMapper.selectByExampleWithBLOBs(example);
+    }
+
+    @Override
+    public boolean deleteMemberById(String memberId) {
+        return memberMapper.deleteMemberById(memberId)==1;
     }
 }

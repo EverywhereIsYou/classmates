@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <%--两个按钮--%>
+    <%--按钮--%>
     <div class="row" style="margin-bottom: 20px">
         <div class="col-md-1 col-md-offset-11">
             <button class="btn btn-primary"  data-toggle="modal" data-target="#edit-modal">新增</button>
@@ -84,7 +84,7 @@
     </div>
 </div>
 
-<%--编辑模态框--%>
+<%--添加模态框--%>
 <div class="modal fade" id="edit-modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -121,16 +121,17 @@
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
 <script src="<c:url value="/static/js/alert.js" />"></script>
+<script src="<c:url value="/static/js/pageinfo.js" />" ></script>
 <script>
     $(function () {
-        getUserByPage(1);
+        getDataByPage(1);
     });
 
-    function getUserByPage(page) {
-        getUser(page,6);
+    function getDataByPage(page) {
+        getData(page,6);
     }
 
-    function getUser(page,limit) {
+    function getData(page,limit) {
         $.post("/data/user/list",{"page":page,"limit":limit},function (data) {
             if(data.statusCode===200){
                 setUser(data.extend.pageInfo.list);
@@ -171,77 +172,12 @@
         });
     }
     
-    function setPageInfo(pageInfo) {
-        if(pageInfo===undefined||pageInfo===null)
-            return;
-
-        $("#page-info").text("总共 "+pageInfo.total+" 条记录，"+pageInfo.pages+" 页");
-    }
-
-    function setNavArea(pageInfo) {
-        var navArea=$("#nav-area");
-        navArea.html("");
-
-        var nav=$("<nav></nav>");
-        var ul=$("<ul class='pagination'></ul>");
-
-        var firstLi=$("<li></li>").append($("<a href='javascript:void(0)'></a>").append("首页"));
-        var preLi=$("<li></li>").append($("<a href='javascript:void(0)'></a>").append($("<span></span>").append("&laquo;")));
-        if(pageInfo.isFirstPage===true){
-            firstLi.addClass("disabled",true);
-            preLi.addClass("disabled",true);
-        }
-        else{
-            firstLi.click(function () {
-                getUserByPage(1);
-            });
-            preLi.click(function () {
-                getUserByPage(pageInfo.prePage);
-            });
-        }
-
-        ul.append(firstLi).append(preLi);
-
-        $.each(pageInfo.navigatepageNums,function () {
-            var pageLi=$("<li></li>").append($("<a href='javascript:void(0)'></a>").append(this));
-            var currentPage=parseInt(this);
-            if(currentPage===pageInfo.pageNum){
-                pageLi.addClass("active");
-            }
-            else{
-                pageLi.click(function () {
-                    getUserByPage(currentPage);
-                });
-            }
-
-            ul.append(pageLi);
-        });
-
-        var nextLi=$("<li></li>").append($("<a href='javascript:void(0)'></a>").append($("<span></span>").append("&raquo;")));
-        var lastLi=$("<li></li>").append($("<a href='javascript:void(0)'></a>").append("末页"));
-        if(pageInfo.hasNextPage===false){
-            nextLi.addClass("disabled",true);
-            lastLi.addClass("disabled",true);
-        }
-        else{
-            nextLi.click(function () {
-                getUserByPage(pageInfo.nextPage);
-            });
-            lastLi.click(function () {
-                getUserByPage(pageInfo.pages);
-            });
-        }
-
-        ul.append(nextLi).append(lastLi).appendTo(nav);
-        nav.appendTo(navArea);
-    }
-    
     function confirmCreate() {
         $.post("/data/user/add",$("#create-user").serialize(),function (data) {
             clearCreate();
 
             if(data.statusCode===200){
-                getUserByPage(1);
+                getDataByPage(1);
                 alert("创建成功");
             }
             else if(data.statusCode===400){
@@ -265,7 +201,7 @@
     function confirmDelete() {
         $.post("/data/user/delete",{"userId":$("#delete-user-id").val()},function (data) {
             if(data.statusCode===200){
-                getUserByPage($(".active").val());
+                getDataByPage($(".active").val());
                 alert("删除成功");
             }
             else if(data.statusCode===400){
