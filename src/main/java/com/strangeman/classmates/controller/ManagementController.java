@@ -19,28 +19,28 @@ public class ManagementController {
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String login(){
-        return "management/login_manager";
+        return "management/login";
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(String workId, String password, String graphicCode, Model model, HttpSession session){
         if(StringUtils.isEmpty(graphicCode)){
             model.addAttribute("errorMsg","验证码不能为空");
-            return "management/login_manager";
+            return "management/login";
         }
         if(!graphicCode.equalsIgnoreCase((String) session.getAttribute("graphicCode"))){
             model.addAttribute("errorMsg","验证码错误");
-            return "management/login_manager";
+            return "management/login";
         }
         if(StringUtils.isEmpty(workId)||StringUtils.isEmpty(password)){
             model.addAttribute("errorMsg","用户名和密码不能为空");
-            return "management/login_manager";
+            return "management/login";
         }
 
         User user=userService.login(workId,password);
         if(user==null){
             model.addAttribute("errorMsg","用户名或密码错误");
-            return "management/login_manager";
+            return "management/login";
         }
 
         session.setAttribute("user",user);
@@ -74,6 +74,6 @@ public class ManagementController {
 
     @RequestMapping("/welcome")
     public String welcome(){
-        return "management/welcome_manager";
+        return "management/welcome";
     }
 }
