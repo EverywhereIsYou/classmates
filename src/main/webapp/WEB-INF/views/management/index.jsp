@@ -99,6 +99,9 @@
                 <a href="javascript:void (0)" onclick="getBody('<c:url value="/data/classmate/classmate" />')">
                     <div class="panel-body">同学录</div>
                 </a>
+                <a href="javascript:void (0)" onclick="getBody('<c:url value="/data/paper/paper" />')">
+                    <div class="panel-body">同学录详情页</div>
+                </a>
             </div>
         </div>
         <div class="panel panel-default">

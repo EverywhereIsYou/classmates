@@ -9,4 +9,5 @@ public interface PaperService {
     boolean deletePaper(String paperId);
     Paper getPaperById(String paperId);
     List<Paper> getPapersByClassmateId(String classmateId);
+    List<Paper> getAllPaper();
 }

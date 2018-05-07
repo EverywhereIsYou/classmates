@@ -1,6 +1,7 @@
 package com.strangeman.classmates.service.impl;
 
 import com.strangeman.classmates.bean.Paper;
+import com.strangeman.classmates.bean.PaperExample;
 import com.strangeman.classmates.dao.PaperMapper;
 import com.strangeman.classmates.service.PaperService;
 import com.strangeman.classmates.utils.DataFactory;
@@ -44,5 +45,12 @@ public class PaperServiceImpl implements PaperService{
         if(classmateId==null||classmateId.equals(""))
             return null;
         return paperMapper.selectPapersByClassmateId(classmateId);
+    }
+
+    @Override
+    public List<Paper> getAllPaper() {
+        PaperExample example=new PaperExample();
+        example.setOrderByClause("create_time desc");
+        return paperMapper.selectByExampleWithBLOBs(example);
     }
 }
