@@ -1,21 +1,22 @@
 <%--
   Created by IntelliJ IDEA.
   User: li
-  Date: 2018/5/4
-  Time: 15:09
+  Date: 2018/5/7
+  Time: 9:08
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link rel="stylesheet" href="<c:url value="/static/css/bootstrap.min.css" />">
     <link rel="stylesheet" href="<c:url value="/static/css/alert.css" />">
-
     <title>Title</title>
-
     <style>
         .container{border: 0!important;}
+        textarea{
+            resize:none;
+        }
     </style>
 </head>
 <body>
@@ -23,7 +24,7 @@
     <%--表格标题--%>
     <div class="row">
         <div class="col-md-12">
-            <h3>用户信息</h3>
+            <h3>同学录信息</h3>
         </div>
     </div>
 
@@ -36,11 +37,11 @@
                 <thead>
                 <tr>
                     <th class="text-center">序号</th>
-                    <th class="text-center">昵称</th>
-                    <th class="text-center">真实姓名</th>
-                    <th class="text-center">性别</th>
-                    <th class="text-center">邮箱</th>
-                    <th class="text-center">电话</th>
+                    <th class="text-center">名称</th>
+                    <th class="text-center">学校</th>
+                    <th class="text-center">班级</th>
+                    <th class="text-center">创建时间</th>
+                    <th class="text-center">修改时间</th>
                     <th class="text-center">操作</th>
                 </tr>
                 </thead>
@@ -67,9 +68,9 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
-                <h3 id="member-id">&nbsp;</h3>
+                <h3 id="classmate-name">&nbsp;</h3>
             </div>
-            <input type="hidden" id="delete-member-id">
+            <input type="hidden" id="delete-classmate-id">
             <div class="modal-body text-center">
                 <button class="btn btn-danger btn-sm" onclick="confirmDelete()">确认</button>
                 <button class="btn btn-success btn-sm"  data-dismiss="modal">取消</button>
@@ -86,60 +87,28 @@
                 <button type="button" class="close" data-dismiss="modal" id="close-create-user">
                     <span>&times;</span>
                 </button>
-                <h3>用户信息详情</h3>
+                <h3>同学录信息详情</h3>
             </div>
             <div class="modal-body container-fluid">
                 <form>
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            <label for="nickname">昵称</label>
-                            <input type="text" class="form-control" id="nickname" placeholder="昵称" name="nickname">
+                            <label for="name">名称</label>
+                            <input type="text" class="form-control" id="name" placeholder="名称" name="name">
                         </div>
                         <div class="col-xs-6">
-                            <label for="realName">真实姓名</label>
-                            <input type="text" class="form-control" id="realName" placeholder="真实姓名" name="realName">
+                            <label for="permission">权限</label>
+                            <input type="text" class="form-control" id="permission" placeholder="权限" name="permission">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            <label for="email">邮箱</label>
-                            <input type="text" class="form-control" id="email" placeholder="邮箱" name="email">
+                            <label for="school">学校</label>
+                            <input type="text" class="form-control" id="school" placeholder="学校" name="school">
                         </div>
                         <div class="col-xs-6">
-                            <label for="phone">电话</label>
-                            <input type="text" class="form-control" id="phone" placeholder="电话" name="phone">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-xs-6">
-                            <label for="qq">QQ</label>
-                            <input type="text" class="form-control" id="qq" placeholder="QQ" name="qq">
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="wechat">微信</label>
-                            <input type="text" class="form-control" id="wechat" placeholder="微信" name="wechat">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-xs-6">
-                            <label for="sex">性别</label>
-                            <input type="text" class="form-control" id="sex" placeholder="性别" name="sex">
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="birthday">生日</label>
-                            <input type="text" class="form-control" id="birthday" placeholder="生日" name="birthday">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-xs-12">
-                            <label for="address">住址</label>
-                            <input type="text" class="form-control" id="address" placeholder="住址" name="address">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-xs-12">
-                            <label for="hometown">故乡</label>
-                            <input type="text" class="form-control" id="hometown" placeholder="故乡" name="hometown">
+                            <label for="clazz">班级</label>
+                            <input type="text" class="form-control" id="clazz" placeholder="班级" name="clazz">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -148,14 +117,20 @@
                             <input type="text" class="form-control" id="createTime" placeholder="创建时间" name="createTime">
                         </div>
                         <div class="col-xs-6">
-                            <label for="lastModifyTime">最后修改时间</label>
-                            <input type="text" class="form-control" id="lastModifyTime" placeholder="最后修改时间" name="lastModifyTime">
+                            <label for="lastModifyTime">修改时间</label>
+                            <input type="text" class="form-control" id="lastModifyTime" placeholder="修改时间" name="lastModifyTime">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-12">
-                            <label for="remark">备注</label>
-                            <textarea rows="3" class="form-control" style="resize:none" id="remark" placeholder="备注" name="remark"></textarea>
+                            <label for="description">描述</label>
+                            <textarea rows="3" class="form-control" id="description" placeholder="描述" name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12">
+                            <label for="customizeFiled">自定义</label>
+                            <textarea rows="5" class="form-control" id="customizeFiled" placeholder="自定义" name="customizeFiled"></textarea>
                         </div>
                     </div>
 
@@ -184,9 +159,9 @@
     }
 
     function getData(page,limit) {
-        $.post("/data/member/list",{"page":page,"limit":limit},function (data) {
+        $.post("/data/classmate/list",{"page":page,"limit":limit},function (data) {
             if(data.statusCode===200){
-                setMember(data.extend.pageInfo.list);
+                setClassmate(data.extend.pageInfo.list);
                 setPageInfo(data.extend.pageInfo);
                 setNavArea(data.extend.pageInfo);
             }
@@ -199,21 +174,21 @@
         });
     }
 
-    function setMember(memberList) {
+    function setClassmate(classmateList) {
         var tableBody=$(".table tbody");
-        if(memberList===undefined||memberList===null||memberList.length===0){
+        if(classmateList===undefined||classmateList===null||classmateList.length===0){
             tableBody.html("暂无数据");
             return;
         }
         tableBody.html("");
 
-        $.each(memberList,function (index,item) {
+        $.each(classmateList,function (index,item) {
             var numTd=$("<td></td>").append(index+1);
-            var nicknameTd=$("<td></td>").append(item.nickname);
-            var realnameTd=$("<td></td>").append(item.realName);
-            var sexTd=$("<td></td>").append(item.sex);
-            var emailTd=$("<td></td>").append(item.email);
-            var phoneTd=$("<td></td>").append(item.phone);
+            var nameTd=$("<td></td>").append(item.name);
+            var schoolTd=$("<td></td>").append(item.school);
+            var clazzTd=$("<td></td>").append(item.clazz);
+            var createTimeTd=$("<td></td>").append(item.createTime);
+            var modifyTimeTd=$("<td></td>").append(item.lastModifyTime);
 
             var detailBtn=$("<button class='btn btn-primary btn-sm'></button>").append($("<span class='glyphicon glyphicon-search'></span>"))
                 .append("详情").click(function () {
@@ -221,43 +196,45 @@
                 });
             var deleteBtn=$("<button class='btn btn-danger btn-sm'></button>").append($("<span class='glyphicon glyphicon-trash'></span>"))
                 .append("删除").click(function () {
-                    if(item.email!=null&&item.email!=='')
-                        deleteMember(item.email,item.id);
-                    else
-                        deleteMember(item.phone,item.id);
+                        deleteClassmate(item.name,item.id);
                 });
             var btnTd=$("<td></td>").append(detailBtn).append(" ").append(deleteBtn);
 
-            $("<tr class='text-center'></tr>").append(numTd).append(nicknameTd).append(realnameTd).append(sexTd)
-                .append(emailTd).append(phoneTd).append(btnTd).appendTo(tableBody);
+            $("<tr class='text-center'></tr>").append(numTd).append(nameTd).append(schoolTd).append(clazzTd)
+                .append(createTimeTd).append(modifyTimeTd).append(btnTd).appendTo(tableBody);
         });
     }
 
-    function detail(member) {
-        $("#nickname").val(member.nickname);
-        $("#realName").val(member.realName);
-        $("#email").val(member.email);
-        $("#phone").val(member.phone);
-        $("#qq").val(member.qq);
-        $("#wechat").val(member.wechat);
-        $("#sex").val(member.sex);
-        $("#birthday").val(member.birthday);
-        $("#address").val(member.address);
-        $("#hometown").val(member.hometown);
-        $("#createTime").val(member.createTime);
-        $("#lastModifyTime").val(member.lastModifyTime);
-        $("#remark").val(member.remark);
+    function detail(classmate) {
+        $("#name").val(classmate.name);
+        var permission=classmate.permission;
+        if(permission===2){
+            $("#permission").val("参与人可见");
+        }
+        else if(permission===1){
+            $("#permission").val("拥有者可见");
+        }
+        else if(permission===3){
+            $("#permission").val("所有人可见");
+        }
+
+        $("#school").val(classmate.school);
+        $("#clazz").val(classmate.clazz);
+        $("#createTime").val(classmate.createTime);
+        $("#lastModifyTime").val(classmate.lastModifyTime);
+        $("#description").val(classmate.description);
+        $("#customizeFiled").val(classmate.customizeFiled);
 
         $("#view-modal").modal("show");
     }
 
-    function deleteMember(account,member) {
-        $("#member-id").text("确定要删除帐号为 "+account+" 的用户吗？");
-        $("#delete-member-id").val(member);
+    function deleteClassmate(name,classmate) {
+        $("#classmate-name").text("确定要删除名称为 "+name+" 的同学录吗？");
+        $("#delete-classmate-id").val(classmate);
         $("#delete-modal").modal("show");
     }
     function confirmDelete() {
-        $.post("/data/member/delete",{"memberId":$("#delete-member-id").val()},function (data) {
+        $.post("/data/classmate/delete",{"classmateId":$("#delete-classmate-id").val()},function (data) {
             if(data.statusCode===200){
                 getDataByPage($(".active").val());
                 alert("删除成功");

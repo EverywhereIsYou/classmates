@@ -11,4 +11,5 @@ public interface ClassmateService {
     boolean createClassmate(Classmate classmate);
     boolean deleteClassmate(String classmateId);
     boolean modifyClassmate(Classmate classmate);
+    List<Classmate> getAllClassmate();
 }

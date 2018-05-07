@@ -96,8 +96,8 @@
                 </a>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
-                <a href="javascript:void (0)">
-                    <div class="panel-body">这里是第二部分。</div>
+                <a href="javascript:void (0)" onclick="getBody('<c:url value="/data/classmate/classmate" />')">
+                    <div class="panel-body">同学录</div>
                 </a>
             </div>
         </div>

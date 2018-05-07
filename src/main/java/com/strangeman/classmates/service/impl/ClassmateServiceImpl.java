@@ -74,4 +74,11 @@ public class ClassmateServiceImpl implements ClassmateService{
 
         return classmateMapper.updateByExampleSelective(classmate,example)==1;
     }
+
+    @Override
+    public List<Classmate> getAllClassmate() {
+        ClassmateExample example=new ClassmateExample();
+        example.setOrderByClause("last_modify_time desc");
+        return classmateMapper.selectByExample(example);
+    }
 }

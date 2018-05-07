@@ -31,13 +31,13 @@ public class DataMemberController {
     public ResultInfo memberList(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer limit){
         PageHelper.startPage(page,limit);
         List<Member> members=memberService.getAllMember();
-        if(members!=null){
+        if(members!=null&&members.size()!=0){
             for(Member member:members){
                 member.setPwd("");
             }
             return ResultInfo.success("").add("pageInfo",new PageInfo<>(members,5));
         }
-        return null;
+        return ResultInfo.fail("未查询到数据，请稍后重试");
     }
 
     @RequestMapping("/delete")
