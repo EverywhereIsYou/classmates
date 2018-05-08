@@ -82,4 +82,14 @@ public class MemberServiceImpl implements MemberService{
     public boolean deleteMemberById(String memberId) {
         return memberMapper.deleteMemberById(memberId)==1;
     }
+
+    @Override
+    public boolean modifyMember(Member member) {
+        if(member==null)
+            return false;
+
+        MemberExample example=new MemberExample();
+        example.createCriteria().andIdEqualTo(member.getId());
+        return memberMapper.updateByExampleSelective(member,example)==1;
+    }
 }

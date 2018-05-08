@@ -184,7 +184,7 @@
     }
 
     function getData(page,limit) {
-        $.post("/data/member/list",{"page":page,"limit":limit},function (data) {
+        $.post("<c:url value="/data/member/list" />",{"page":page,"limit":limit},function (data) {
             if(data.statusCode===200){
                 setMember(data.extend.pageInfo.list);
                 setPageInfo(data.extend.pageInfo);
@@ -257,7 +257,7 @@
         $("#delete-modal").modal("show");
     }
     function confirmDelete() {
-        $.post("/data/member/delete",{"memberId":$("#delete-member-id").val()},function (data) {
+        $.post("<c:url value="/data/member/delete" />",{"memberId":$("#delete-member-id").val()},function (data) {
             if(data.statusCode===200){
                 getDataByPage($(".active").text());
                 alert("删除成功");

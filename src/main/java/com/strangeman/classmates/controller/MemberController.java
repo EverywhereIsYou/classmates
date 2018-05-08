@@ -126,25 +126,53 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/member/welcome",method = RequestMethod.POST)
     public ResultInfo welcome(HttpSession session){
-        ResultInfo result;
+        Member member= (Member) session.getAttribute("member");
+        if(member==null)
+            return ResultInfo.fail("请重新登录");
 
-        if(session.getAttribute("member")==null){
-            result=ResultInfo.fail("请重新登录");
-        }
-        else {
-            String userId=((Member) session.getAttribute("member")).getId();
-            int fans=attentionService.countFans(userId);
-            int attentions=attentionService.countAttentions(userId);
+        int fans=attentionService.countFans(member.getId());
+        int attentions=attentionService.countAttentions(member.getId());
 
-            result=ResultInfo.success("").add("member",session.getAttribute("member"))
-                    .add("fans",fans).add("attentions",attentions);
-        }
-
-        return result;
+        Member member1=member.cloneWithoutPwd();
+        if(member1==null)
+            return ResultInfo.fail("网络错误，请稍后重试");
+        return ResultInfo.success("").add("member",member1).add("fans",fans).add("attentions",attentions);
     }
 
     @RequestMapping(value = "/member/welcome",method = RequestMethod.GET)
     public String welcome(){
         return "member/welcome";
+    }
+
+    @RequestMapping("/member/personCenter")
+    @ResponseBody
+    public ResultInfo personCenter(HttpSession session){
+        Member member= (Member) session.getAttribute("member");
+        if(member==null)
+            return ResultInfo.fail("未查询到登录信息，请重新登录");
+
+        Member member1=member.cloneWithoutPwd();
+        if(member1==null)
+            return ResultInfo.fail("网络错误，请稍后重试");
+        return ResultInfo.success("查询成功").add("member",member1);
+    }
+
+    @RequestMapping("/member/modifyInfo")
+    @ResponseBody
+    public ResultInfo modifyMemberInfo(HttpSession session,Member member){
+        Member loginMember= (Member) session.getAttribute("member");
+        if(loginMember==null)
+            return ResultInfo.fail("未查询到登录信息，请重新登录");
+        if(member==null)
+            return ResultInfo.fail("修改内容不能为空");
+
+        member.setPwd(null);
+        member.setId(loginMember.getId());
+
+        if(memberService.modifyMember(member)){
+            session.setAttribute("member",member);
+            return ResultInfo.success("修改成功");
+        }
+        return ResultInfo.fail("修改信息失败，请稍后重试");
     }
 }

@@ -20,7 +20,7 @@
 <nav class="navbar navbar-inverse bdr-n z-ind">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="javascript:void(0)">一起同过窗_后台管理系统</a>
+            <a class="navbar-brand" href="<c:url value="/management/welcome" />">一起同过窗_后台管理系统</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -147,8 +147,7 @@
         $.post("<c:url value="/data/user/modifyPwd" />",{"oldPassword":$("#password").val(),"newPassword":$("#new-password").val()},
             function (data) {
                 if(data.statusCode===200){
-                    alert("密码修改成功,请重新登录");
-                    $(location).attr("href","<c:url value="/management/logout" />");
+                    alert("密码修改成功");
                 }
                 else if(data.statusCode===400){
                     alert(data.msg);
@@ -157,7 +156,9 @@
                     alert("网络错误，请稍后重试")
                 }
                 $("#confirm-pwd").val("确认").attr("disabled",false);
+                clearPwd();
             });
+        $("#modify-modal").modal("hide");
     }
 
     function clearPwd() {

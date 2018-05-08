@@ -218,7 +218,7 @@
     }
 
     function getData(page,limit) {
-        $.post("/data/paper/list",{"page":page,"limit":limit},function (data) {
+        $.post("<c:url value="/data/paper/list" />",{"page":page,"limit":limit},function (data) {
             if(data.statusCode===200){
                 setPaper(data.extend.pageInfo.list);
                 setPageInfo(data.extend.pageInfo);
@@ -308,7 +308,7 @@
         $("#delete-modal").modal("show");
     }
     function confirmDelete() {
-        $.post("/data/paper/delete",{"paperId":$("#delete-paper-id").val()},function (data) {
+        $.post("<c:url value="/data/paper/delete" />",{"paperId":$("#delete-paper-id").val()},function (data) {
             if(data.statusCode===200){
                 getDataByPage($(".active").text());
                 alert("删除成功");

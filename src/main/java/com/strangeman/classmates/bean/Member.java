@@ -1,6 +1,6 @@
 package com.strangeman.classmates.bean;
 
-public class Member {
+public class Member implements Cloneable{
     private String id;
 
     private String nickname;
@@ -192,5 +192,17 @@ public class Member {
                 ", deleteFlag=" + deleteFlag +
                 ", remark='" + remark + '\'' +
                 '}';
+    }
+
+    public Member cloneWithoutPwd(){
+        Member member;
+        try {
+            member = (Member) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+        member.setPwd("");
+        return member;
     }
 }

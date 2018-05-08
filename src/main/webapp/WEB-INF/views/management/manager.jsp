@@ -132,7 +132,7 @@
     }
 
     function getData(page,limit) {
-        $.post("/data/user/list",{"page":page,"limit":limit},function (data) {
+        $.post("<c:url value="/data/user/list" />",{"page":page,"limit":limit},function (data) {
             if(data.statusCode===200){
                 setUser(data.extend.pageInfo.list);
                 setPageInfo(data.extend.pageInfo);
@@ -173,7 +173,7 @@
     }
     
     function confirmCreate() {
-        $.post("/data/user/add",$("#create-user").serialize(),function (data) {
+        $.post("<c:url value="/data/user/add" />",$("#create-user").serialize(),function (data) {
             clearCreate();
 
             if(data.statusCode===200){
@@ -199,7 +199,7 @@
         $("#delete-modal").modal("show");
     }
     function confirmDelete() {
-        $.post("/data/user/delete",{"userId":$("#delete-user-id").val()},function (data) {
+        $.post("<c:url value="/data/user/delete" />",{"userId":$("#delete-user-id").val()},function (data) {
             if(data.statusCode===200){
                 getDataByPage($(".active").text());
                 alert("删除成功");

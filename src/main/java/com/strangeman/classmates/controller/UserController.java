@@ -105,8 +105,10 @@ public class UserController {
                 return ResultInfo.fail("系统发生错误，请稍后重试");
             }
 
-            if(userService.modifyUser(user))
+            if(userService.modifyUser(user)){
+                session.setAttribute("user",user);
                 return ResultInfo.success("");
+            }
             return ResultInfo.fail("修改密码失败，请稍后重试");
         }
 

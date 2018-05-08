@@ -159,7 +159,7 @@
     }
 
     function getData(page,limit) {
-        $.post("/data/classmate/list",{"page":page,"limit":limit},function (data) {
+        $.post("<c:url value="/data/classmate/list"/>",{"page":page,"limit":limit},function (data) {
             if(data.statusCode===200){
                 setClassmate(data.extend.pageInfo.list);
                 setPageInfo(data.extend.pageInfo);
@@ -234,7 +234,7 @@
         $("#delete-modal").modal("show");
     }
     function confirmDelete() {
-        $.post("/data/classmate/delete",{"classmateId":$("#delete-classmate-id").val()},function (data) {
+        $.post("<c:url value="/data/classmate/delete" />",{"classmateId":$("#delete-classmate-id").val()},function (data) {
             if(data.statusCode===200){
                 getDataByPage($(".active").text());
                 alert("删除成功");
