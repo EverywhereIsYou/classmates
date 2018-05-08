@@ -201,7 +201,7 @@
     function confirmDelete() {
         $.post("/data/user/delete",{"userId":$("#delete-user-id").val()},function (data) {
             if(data.statusCode===200){
-                getDataByPage($(".active").val());
+                getDataByPage($(".active").text());
                 alert("删除成功");
             }
             else if(data.statusCode===400){
