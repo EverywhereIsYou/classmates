@@ -3,10 +3,12 @@ package com.strangeman.classmates.controller;
 import com.strangeman.classmates.bean.Member;
 import com.strangeman.classmates.service.AttentionService;
 import com.strangeman.classmates.service.MemberService;
+import com.strangeman.classmates.utils.AES;
 import com.strangeman.classmates.utils.MyStringUtil;
 import com.strangeman.classmates.utils.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -144,9 +146,9 @@ public class MemberController {
         return "member/welcome";
     }
 
-    @RequestMapping("/member/personCenter")
+    @RequestMapping(value = "/member/baseInfo",method = RequestMethod.POST)
     @ResponseBody
-    public ResultInfo personCenter(HttpSession session){
+    public ResultInfo baseInfo(HttpSession session){
         Member member= (Member) session.getAttribute("member");
         if(member==null)
             return ResultInfo.fail("未查询到登录信息，请重新登录");
@@ -157,7 +159,7 @@ public class MemberController {
         return ResultInfo.success("查询成功").add("member",member1);
     }
 
-    @RequestMapping("/member/modifyInfo")
+    @RequestMapping(value = "/member/modifyInfo",method = RequestMethod.POST)
     @ResponseBody
     public ResultInfo modifyMemberInfo(HttpSession session,Member member){
         Member loginMember= (Member) session.getAttribute("member");
@@ -170,9 +172,95 @@ public class MemberController {
         member.setId(loginMember.getId());
 
         if(memberService.modifyMember(member)){
+            member.setPwd(loginMember.getPwd());
             session.setAttribute("member",member);
             return ResultInfo.success("修改成功");
         }
         return ResultInfo.fail("修改信息失败，请稍后重试");
+    }
+
+    @RequestMapping(value = "/member/modifyAvatar",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultInfo modifyAvatar(HttpSession session,String avatar){
+        Member member= (Member) session.getAttribute("member");
+        if(member==null)
+            return ResultInfo.fail("未查询到登录信息，请重新登录");
+        if(StringUtils.isEmpty(avatar))
+            return ResultInfo.fail("上传的照片不能为空");
+
+        Member member1=new Member();
+        member1.setId(member.getId());
+        member1.setAvatar(avatar);
+
+        if(memberService.modifyMember(member1)){
+            member.setAvatar(avatar);
+            return ResultInfo.success("头像上传成功");
+        }
+        return ResultInfo.fail("上传头像失败，请稍后重试");
+    }
+
+    @RequestMapping(value = "/member/modifyPwd",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultInfo modifyPwd(HttpSession session,String oldPassword,String newPassword,String graphicCode){
+        if(graphicCode==null||!graphicCode.equalsIgnoreCase((String) session.getAttribute("graphicCode")))
+            return ResultInfo.fail("验证码错误");
+        if(StringUtils.isEmpty(oldPassword)||StringUtils.isEmpty(newPassword))
+            return ResultInfo.fail("新旧密码均不能为空");
+
+        Member member= (Member) session.getAttribute("member");
+        if(member==null)
+            return ResultInfo.fail("未查询到登录信息，请重新登录");
+
+        String originPwd;
+        try {
+            originPwd = AES.decrypt(member.getPwd());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultInfo.fail("系统发生错误，请稍后重试");
+        }
+
+        if(originPwd.equals(oldPassword)){
+            Member memberTemp=new Member();
+            memberTemp.setId(member.getId());
+            try {
+                memberTemp.setPwd(AES.encrypt(newPassword));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResultInfo.fail("系统发生错误，请稍后重试");
+            }
+
+            if(memberService.modifyMember(memberTemp)){
+                member.setPwd(memberTemp.getPwd());
+                return ResultInfo.success("");
+            }
+            return ResultInfo.fail("修改密码失败，请稍后重试");
+        }
+        return ResultInfo.fail("旧密码错误");
+    }
+
+    @RequestMapping(value = "/member/personCenter",method = RequestMethod.GET)
+    public String personCenter(HttpSession session, Model model){
+        Member member= (Member) session.getAttribute("member");
+        if(member==null)
+            return "redirect:/login";
+
+        model.addAttribute("nickname",member.getNickname());
+
+        return "member/member";
+    }
+
+    @RequestMapping(value = "/member/modifyPwd",method = RequestMethod.GET)
+    public String modifyPwd(){
+        return "member/member_modifyPwd";
+    }
+
+    @RequestMapping(value = "/member/baseInfo",method = RequestMethod.GET)
+    public String baseInfo(){
+        return "member/member_myInfo";
+    }
+
+    @RequestMapping(value = "/member/avatar",method = RequestMethod.GET)
+    public String avatar(){
+        return "member/member_myAvatar";
     }
 }

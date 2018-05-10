@@ -116,7 +116,7 @@
             </div>
         </div>
         <div class="col-xs-4 col-xs-offset-4">
-            <button type="submit" class="btn" id="confirm-modify">保&nbsp;&nbsp;存</button>
+            <button type="button" class="btn" id="confirm-modify" onclick="modifyMember()">保&nbsp;&nbsp;存</button>
         </div>
     </form>
 </div>
@@ -124,6 +124,57 @@
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
 <script src="<c:url value="/static/js/alert.js" />"></script>
+<script>
+    $(function () {
+        $.post("<c:url value="/member/baseInfo" />",function (data) {
+            if(data.statusCode===200){
+                setMember(data.extend.member);
+            }
+            else if(data.statusCode===400){
+                alert(data.msg);
+            }
+            else{
+                alert("网络错误，请稍后重试");
+            }
+        });
+    });
+
+    function setMember(member) {
+        $("#nickname").val(member.nickname);
+        $("#realName").val(member.realName);
+        $("#sex").val(member.sex);
+        $("#birthday").val(member.birthday);
+        $("#address").val(member.address);
+        $("#hometown").val(member.hometown);
+        $("#qq").val(member.qq);
+        $("#wechat").val(member.wechat);
+
+        var phone=member.phone;
+        if(phone!==undefined&&phone!==null&&phone!==''){
+            $("#phone").val(phone).attr("readonly",true);
+        }
+        var email=member.email;
+        if(email!==undefined&&email!==null&&email!==''){
+            $("#email").val(email).attr("readonly",true);
+        }
+    }
+
+    function modifyMember() {
+        $("#confirm-modify").html("正 在 修 改").attr("disabled",true);
+        $.post("<c:url value="/member/modifyInfo" />",$("#fm").serialize(),function (data) {
+            if(data.statusCode===200){
+                alert("修改成功");
+            }
+            else if(data.statusCode===400){
+                alert(data.msg);
+            }
+            else{
+                alert("网络错误，请稍后重试");
+            }
+            $("#confirm-modify").html("保&nbsp;&nbsp;存").attr("disabled",false);
+        });
+    }
+</script>
 
 </body>
 </html>

@@ -228,14 +228,14 @@
                              id="moment"></a>
         </div>
         <div class="icon user2">
-            <a href="#"><img src="<c:url value="/static/images/user2.png" />" alt="icon" class="img-responsive"
+            <a href="<c:url value="/member/personCenter" />"><img src="<c:url value="/static/images/user2.png" />" alt="icon" class="img-responsive"
                              id="user2"></a>
         </div>
     </div>
     <div class="container" id="my">
         <a href="<c:url value="/classmate/myclassmates" />"><p class="my book mybook">我的同学录</p></a>
         <a href="#"><p class="my moment mymoment">青春瞬间</p></a>
-        <a href="#"><p class="my user2 myuser2">个人中心</p></a>
+        <a href="<c:url value="/member/personCenter" />"><p class="my user2 myuser2">个人中心</p></a>
     </div>
 </div>
 

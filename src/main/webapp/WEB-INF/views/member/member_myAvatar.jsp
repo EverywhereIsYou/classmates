@@ -70,10 +70,10 @@
 <body>
 
 <div class="container">
-    <img src="<c:url value="/static/images/avatar.png" />" alt="" id="preview">
-    <input type="file" name="cover" class="input-upload" placeholder="" id="avatar" accept="image/*" onchange="imgPreview(this)">
+    <img src="" alt="" id="preview">
+    <input type="file" name="avatar" class="input-upload" placeholder="" id="avatar" accept="image/*" onchange="imgPreview(this)">
     <a href="javascript:void(0);"><u>＋上传头像</u></a>
-    <button>保&nbsp;&nbsp;存</button>
+    <button onclick="uploadAvatar()" id="upload-avatar">保&nbsp;&nbsp;存</button>
 </div>
 
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
@@ -105,6 +105,59 @@
             img.attr("src",e.target.result);
         };
         reader.readAsDataURL(file);
+    }
+
+    var originAvatar;
+    $(function () {
+        $.post("<c:url value="/member/baseInfo" />",function (data) {
+            var image=$("#preview");
+            if(data.statusCode===200){
+                image.attr("src",data.extend.member.avatar);
+            }
+            else{
+                image.attr("src","<c:url value="/static/images/avatar.png" />");
+            }
+            originAvatar=image[0].src;
+        });
+    });
+
+    function uploadAvatar() {
+        var imageSrc=$("#preview")[0].src;
+        if(imageSrc===undefined||imageSrc===null||imageSrc===''||imageSrc===originAvatar){
+            alert("请先选择一张图片");
+            return;
+        }
+
+        $("#upload-avatar").html("正 在 上 传").attr("disabled",true);
+        var formData=new FormData();
+        formData.append("avatar",$("#avatar")[0].files[0]);
+        $.ajax({
+            url:'<c:url value="/file/memberAvatar" />',
+            data:formData,
+            type:'POST',
+            processData:false,
+            contentType:false,
+            error:function () {
+                alert("网络错误，请稍后重试");
+            },
+            success:function (data) {
+                if(data.statusCode===200){
+                    $.post("<c:url value="/member/modifyAvatar" />",{"avatar":data.extend.fileName},function (data) {
+                        if(data.statusCode===200){
+                            alert("上传头像成功");
+                        }
+                        else{
+                            alert(data.msg);
+                        }
+                        $("#upload-avatar").html("保&nbsp;&nbsp;存").attr("disabled",false);
+                    });
+                }
+                else{
+                    alert(data.msg);
+                    $("#upload-avatar").html("保&nbsp;&nbsp;存").attr("disabled",false);
+                }
+            }
+        });
     }
 </script>
 

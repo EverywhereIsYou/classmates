@@ -98,15 +98,17 @@ public class UserController {
         }
 
         if(originPassword.equals(oldPassword)){
+            User userTemp=new User();
+            userTemp.setId(user.getId());
             try {
-                user.setPwd(AES.encrypt(newPassword));
+                userTemp.setPwd(AES.encrypt(newPassword));
             } catch (Exception e) {
                 e.printStackTrace();
                 return ResultInfo.fail("系统发生错误，请稍后重试");
             }
 
-            if(userService.modifyUser(user)){
-                session.setAttribute("user",user);
+            if(userService.modifyUser(userTemp)){
+                user.setPwd(userTemp.getPwd());
                 return ResultInfo.success("");
             }
             return ResultInfo.fail("修改密码失败，请稍后重试");

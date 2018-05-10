@@ -120,10 +120,12 @@
 
             var deleteBtn=$("<button class='btn btn-danger btn-sm'></button>").append($("<span class='glyphicon glyphicon-trash'></span>"))
                 .append("删除").click(function () {
-                    var authorName=item.authorName;
-                    if(authorName===undefined||authorName===null||authorName==='')
-                        authorName='未注册用户';
-                    deleteComment(authorName,item.id);
+                    var content=item.content;
+                    if(content===undefined||content===null||content==='')
+                        content=' ';
+                    else if(content.length>5)
+                        content=content.substring(0,5)+"...";
+                    deleteComment(content,item.id);
                 });
 
             var btnTd=$("<td></td>").append(deleteBtn);
@@ -132,8 +134,8 @@
         });
     }
 
-    function deleteComment(name,commentId) {
-        $("#comment-author-name").text("确定要删除作者为 "+name+" 的评论吗？");
+    function deleteComment(content,commentId) {
+        $("#comment-author-name").text("确定要删除内容为 "+content+" 的评论吗？");
         $("#delete-comment-id").val(commentId);
         $("#delete-modal").modal("show");
     }

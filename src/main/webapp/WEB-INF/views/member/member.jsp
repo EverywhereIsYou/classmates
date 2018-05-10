@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="<c:url value="/static/css/alert.css" />">
     <link rel="stylesheet" href="<c:url value="/static/css/common.css" />">
 
-<title>张三_个人中心</title>
+<title>${nickname}_个人中心</title>
 
     <style>
         *{margin: 0;padding: 0;}
@@ -109,8 +109,8 @@
 <body>
 
 <header>
-    <a href="javascript:void(0)"><p id="standingbyme">一起同过窗</p></a>
-    <a href="javascript:void(0)"><p id="logout">退出账号</p></a>
+    <a href="<c:url value="/member/welcome" />"><p id="standingbyme">一起同过窗</p></a>
+    <a href="<c:url value="/logout" />"><p id="logout">退出账号</p></a>
 </header>
 
 <div class="main container">
@@ -128,7 +128,7 @@
             </div>
         </div>
         <div class="account-content">
-            <iframe src="<c:url value="/test/member_myInfo" />" frameborder="0"></iframe>
+            <iframe src="<c:url value="/member/baseInfo" />" frameborder="0"></iframe>
         </div>
     </div>
 </div>
@@ -147,13 +147,13 @@
         $(e).addClass("active");
 
         if(id === "myInfo"){
-            $("iframe").attr("src","<c:url value='/test/member_myInfo' />");
+            $("iframe").attr("src","<c:url value='/member/baseInfo' />");
         }
         else if(id === "myAvatar"){
-            $("iframe").attr("src","<c:url value='/test/member_myAvatar' />");
+            $("iframe").attr("src","<c:url value='/member/avatar' />");
         }
         else if(id === "confirmPassword"){
-            $("iframe").attr("src","<c:url value='/test/member_confirmPassword' />");
+            $("iframe").attr("src","<c:url value='/member/modifyPwd' />");
         }
     }
 

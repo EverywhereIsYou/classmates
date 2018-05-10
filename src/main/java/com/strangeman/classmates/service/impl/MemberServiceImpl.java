@@ -88,6 +88,8 @@ public class MemberServiceImpl implements MemberService{
         if(member==null)
             return false;
 
+        member.setLastModifyTime(DataFactory.getCurrentTime());
+
         MemberExample example=new MemberExample();
         example.createCriteria().andIdEqualTo(member.getId());
         return memberMapper.updateByExampleSelective(member,example)==1;

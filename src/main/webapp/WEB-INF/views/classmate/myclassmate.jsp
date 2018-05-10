@@ -24,7 +24,7 @@
             <li id="menu-first"><a href="<c:url value='/member/welcome' />">首页</a></li>
             <li><a href="<c:url value='/classmate/myclassmates' />">我的同学录</a></li>
             <li><a href="#">青春瞬间</a></li>
-            <li><a href="#">个人中心</a></li>
+            <li><a href="<c:url value="/member/personCenter" />">个人中心</a></li>
             <li><a href="<c:url value='/logout' />">退出账号</a></li>
         </ul>
     </div>

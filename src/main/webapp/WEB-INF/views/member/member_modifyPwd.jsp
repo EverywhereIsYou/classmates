@@ -45,6 +45,16 @@
             box-shadow: 0 0 5px #e67777;
             margin-top: 40px;
         }
+
+        /*验证码图片*/
+        .input-group-addon {
+            padding: 0;
+            border: 0;
+        }
+        #verification {
+            width: 100px;
+            height: 34px;
+        }
     </style>
 
 </head>
@@ -57,7 +67,7 @@
         <div class="form-group">
             <label class="col-xs-2 control-label">密码：</label>
             <div class="col-xs-8">
-                <input type="password" name="password" class="form-control" placeholder="现在使用的密码" id="password">
+                <input type="password" name="oldPassword" class="form-control" placeholder="现在使用的密码" id="password">
             </div>
         </div>
         <div class="form-group">
@@ -72,9 +82,20 @@
                 <input type="password" name="confirmPassword" class="form-control" placeholder="再次输入新的密码" id="confirmPassword">
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">验证码：</label>
+            <div class="col-xs-8">
+                <div class="input-group">
+                    <input type="text" name="graphicCode" class="form-control" placeholder="请输入验证码" id="graphicCode">
+                    <div class="input-group-addon">
+                        <img src="<c:url value="/codeService/graphicCode" />" id="verification">
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="col-xs-4 col-xs-offset-4">
-            <button type="submit" class="btn" id="save">保&nbsp;&nbsp;存</button>
+            <button type="button" class="btn" id="save" onclick="modifyPwd()">保&nbsp;&nbsp;存</button>
         </div>
     </form>
 </div>
@@ -82,6 +103,29 @@
 <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
 <script src="<c:url value="/static/js/alert.js" />"></script>
+<script>
+    function modifyPwd() {
+        $("#save").html("正 在 修 改").attr("disabled",true);
+        $.post("<c:url value="/member/modifyPwd" />",$("#fm").serialize(),function (data) {
+            if(data.statusCode===200){
+                alert("密码修改成功");
+            }
+            else if(data.statusCode===400){
+                alert(data.msg);
+            }
+            else{
+                alert("网络错误，请稍后重试");
+            }
+            $("#save").html("保&nbsp;&nbsp;存").attr("disabled",false);
+            $("#verification").trigger("click");
+            $("#graphicCode").val("");
+        });
+    }
+
+    $("#verification").click(function () {
+        $("#verification").attr("src", "<c:url value="/codeService/graphicCode?date=" />" + new Date().getTime());
+    });
+</script>
 
 </body>
 </html>

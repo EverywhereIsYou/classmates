@@ -16,20 +16,18 @@ import java.util.UUID;
 public class FileController {
     private static final String CLASSMATE_COVER_PATH="/static/images/classmate/cover/";
     private static final String CLASSMATE_PHOTO_WALL="/static/images/classmate/photoWall/";
+    private static final String MEMBER_AVATAR="/static/images/member/avatar/";
 
     @ResponseBody
     @RequestMapping("/classmateCover")
     public ResultInfo setClassmateCover(HttpSession session,MultipartFile cover){
-        if(cover==null)
-            return ResultInfo.fail("封面为空");
+        return writePicture(session,cover,CLASSMATE_COVER_PATH);
+    }
 
-        String path=session.getServletContext().getRealPath(CLASSMATE_COVER_PATH);
-
-        String fileName=createFile(path,cover);
-        if(fileName!=null)
-            return ResultInfo.success("").add("fileName",CLASSMATE_COVER_PATH+fileName);
-
-        return ResultInfo.fail("上传图片失败，请稍后重试");
+    @ResponseBody
+    @RequestMapping("/memberAvatar")
+    public ResultInfo setMemberAvatar(HttpSession session,MultipartFile avatar){
+        return writePicture(session,avatar,MEMBER_AVATAR);
     }
 
     @ResponseBody
@@ -77,5 +75,18 @@ public class FileController {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private ResultInfo writePicture(HttpSession session,MultipartFile picture,String basePath){
+        if(picture==null)
+            return ResultInfo.fail("封面为空");
+
+        String path=session.getServletContext().getRealPath(basePath);
+
+        String fileName=createFile(path,picture);
+        if(fileName!=null)
+            return ResultInfo.success("").add("fileName",basePath+fileName);
+
+        return ResultInfo.fail("上传图片失败，请稍后重试");
     }
 }
