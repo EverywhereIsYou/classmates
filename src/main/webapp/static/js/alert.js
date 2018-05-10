@@ -14,29 +14,30 @@ var showAlert= function(msg){
             '    </div>\n' +
             '</div>';
 
-        $("body").append(alertHtml);
+        var body = window.top.$("body");
+        body.append(alertHtml);
     }
 
-    $(".alert-box").removeClass("hidden").removeClass("alert-box-out").addClass("show").addClass("alert-box-in");
-    $(".alert-content").removeClass("alert-content-out").addClass("alert-content-in");
+    window.top.$(".alert-box").removeClass("hidden").removeClass("alert-box-out").addClass("show").addClass("alert-box-in");
+    window.top.$(".alert-content").removeClass("alert-content-out").addClass("alert-content-in");
 
     //3s后弹框消失
     setTimeout(function () {
-        $(".alert-content").removeClass("alert-content-in").addClass("alert-content-out");
-        $(".alert-box").removeClass("alert-box-in").removeClass("show").addClass("alert-box-out");
+        window.top.$(".alert-content").removeClass("alert-content-in").addClass("alert-content-out");
+        window.top.$(".alert-box").removeClass("alert-box-in").removeClass("show").addClass("alert-box-out");
     },3000);
 
-    $(".alert-box").on("webkitAnimationEnd", function() {
-        if ($(".alert-box").hasClass("alert-box-out")){
-            $(".alert-box").addClass("hidden");
+    window.top.$(".alert-box").on("webkitAnimationEnd", function() {
+        if (window.top.$(".alert-box").hasClass("alert-box-out")){
+            window.top.$(".alert-box").addClass("hidden");
         }
     });
 
     //点击罩层后立即消失
-    $(".alert-box").click(function () {
+    window.top.$(".alert-box").click(function () {
         // 阻止事件冒泡到.alert-content上
         if (event.target === this) {
-            $(".alert-box").removeClass("alert-box-in").removeClass("show").addClass("hidden").addClass("alert-box-out");
+            window.top.$(".alert-box").removeClass("alert-box-in").removeClass("show").addClass("hidden").addClass("alert-box-out");
         }
     });
 
